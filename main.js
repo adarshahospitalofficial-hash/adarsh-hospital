@@ -15,6 +15,13 @@
         const src = img.getAttribute("src");
         if (src && (src.startsWith("/assets/") || src.startsWith("assets/") || src.includes("lovable.app/assets/"))) {
           const filename = src.split("/").pop();
+          
+          // Setup fallback to local assets directory in case of loading error
+          img.onerror = () => {
+            img.src = `assets/${filename}`;
+            img.onerror = null; // Avoid infinite loop if local asset also fails
+          };
+          
           img.src = `${SUPABASE_ASSETS_BUCKET_URL}/${filename}`;
         }
       });
@@ -53,52 +60,145 @@
   // Preload first frame immediately
   const firstImg = new Image();
   firstImg.src = getFrameUrl(1);
-  firstImg.onload = () => {
-    drawFrame(1);
-    handleScroll();
-  };
 
-  // Preload all frames sequentially
-  for (let i = 1; i <= frameCount; i++) {
-    const img = new Image();
-    img.src = getFrameUrl(i);
+  let firstFrameLoaded = false;
+  let progressAnimationComplete = false;
 
-    img.onload = () => {
-      loadedCount++;
-      updateLoaderProgress();
-
-      if (i === 1) {
-        drawFrame(1);
-        handleScroll();
-      }
-
-      // If the loaded frame is the one currently needed by the user's scroll position, draw it immediately
-      const currentScrollFrame = getCurrentScrollFrameIndex();
-      if (i === currentScrollFrame) {
-        drawFrame(i);
-      }
-
-      if (loadedCount === frameCount && loader) {
-        loader.classList.add('hidden');
-      }
-    };
-
-    img.onerror = () => {
-      loadedCount++;
-      updateLoaderProgress();
-    };
-
-    images.push(img);
+  function hideLoaderIfReady() {
+    if (firstFrameLoaded && progressAnimationComplete && loader) {
+      loader.classList.add('hidden');
+    }
   }
 
-  function updateLoaderProgress() {
-    if (loader && loadedCount < frameCount) {
-      const percentage = Math.round((loadedCount / frameCount) * 100);
+  // Smooth progress animation over exactly 0.5s (500ms)
+  const duration = 500;
+  const startProgressTime = performance.now();
+
+  function animateLoader() {
+    const now = performance.now();
+    const elapsed = now - startProgressTime;
+    const progress = Math.min(1, elapsed / duration);
+    const percentage = Math.round(progress * 100);
+
+    if (loader) {
       loader.textContent = `Loading animation (${percentage}%)...`;
-      if (percentage >= 99) {
-        loader.classList.add('hidden');
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(animateLoader);
+    } else {
+      progressAnimationComplete = true;
+      hideLoaderIfReady();
+    }
+  }
+  requestAnimationFrame(animateLoader);
+
+  firstImg.onload = () => {
+    firstFrameLoaded = true;
+    drawFrame(1);
+    handleScroll();
+    hideLoaderIfReady();
+    startBackgroundLoading();
+  };
+
+  firstImg.onerror = () => {
+    firstFrameLoaded = true;
+    hideLoaderIfReady();
+    startBackgroundLoading();
+  };
+
+  for (let i = 1; i <= frameCount; i++) {
+    if (i === 1) {
+      images.push(firstImg);
+    } else {
+      images.push(new Image());
+    }
+  }
+
+  function getClosestLoadedImage(index) {
+    const targetImg = images[index - 1];
+    if (targetImg && targetImg.complete && targetImg.naturalWidth > 0) {
+      return targetImg;
+    }
+
+    let left = index - 1;
+    let right = index + 1;
+    while (left >= 1 || right <= frameCount) {
+      if (left >= 1) {
+        const img = images[left - 1];
+        if (img && img.complete && img.naturalWidth > 0) {
+          return img;
+        }
+      }
+      if (right <= frameCount) {
+        const img = images[right - 1];
+        if (img && img.complete && img.naturalWidth > 0) {
+          return img;
+        }
+      }
+      left--;
+      right++;
+    }
+    return firstImg;
+  }
+
+  function startBackgroundLoading() {
+    const loadQueue = [];
+
+    // Step 1: Every 4th frame for quick low-res scan
+    for (let i = 5; i <= frameCount; i += 4) {
+      loadQueue.push(i);
+    }
+
+    // Step 2: Every 2nd frame for medium resolution
+    for (let i = 3; i <= frameCount; i += 4) {
+      loadQueue.push(i);
+    }
+
+    // Step 3: All remaining frames for full detail
+    for (let i = 2; i <= frameCount; i += 2) {
+      loadQueue.push(i);
+    }
+
+    // Ensure last frame is loaded early
+    if (!loadQueue.includes(frameCount) && frameCount > 1) {
+      loadQueue.push(frameCount);
+    }
+
+    const MAX_CONCURRENT_LOADS = 4;
+    let activeLoads = 0;
+    let queueIndex = 0;
+
+    function loadNextFromQueue() {
+      while (activeLoads < MAX_CONCURRENT_LOADS && queueIndex < loadQueue.length) {
+        const frameIdx = loadQueue[queueIndex++];
+        const img = images[frameIdx - 1];
+
+        if (img.src) {
+          continue; // Already loading/loaded via scroll priority
+        }
+
+        activeLoads++;
+        img.src = getFrameUrl(frameIdx);
+
+        img.onload = () => {
+          activeLoads--;
+          loadedCount++;
+          if (getCurrentScrollFrameIndex() === frameIdx) {
+            drawFrame(frameIdx);
+          }
+          loadNextFromQueue();
+        };
+
+        img.onerror = () => {
+          activeLoads--;
+          loadedCount++;
+          loadNextFromQueue();
+        };
       }
     }
+
+    loadNextFromQueue();
   }
 
   function resizeCanvas() {
@@ -118,7 +218,7 @@
   }
 
   function drawFrame(index) {
-    const img = images[index - 1] || firstImg;
+    const img = getClosestLoadedImage(index) || lastRenderedImage;
     if (img && img.complete && img.naturalWidth > 0) {
       resizeCanvas();
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -140,26 +240,6 @@
 
       ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
       lastRenderedImage = img;
-    } else if (lastRenderedImage) {
-      resizeCanvas();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      const imgRatio = lastRenderedImage.naturalWidth / lastRenderedImage.naturalHeight;
-      const canvasRatio = canvas.width / canvas.height;
-      let drawWidth = canvas.width;
-      let drawHeight = canvas.height;
-      let drawX = 0;
-      let drawY = 0;
-
-      if (canvasRatio > imgRatio) {
-        drawHeight = canvas.width / imgRatio;
-        drawY = (canvas.height - drawHeight) / 2;
-      } else {
-        drawWidth = canvas.height * imgRatio;
-        drawX = (canvas.width - drawWidth) / 2;
-      }
-
-      ctx.drawImage(lastRenderedImage, drawX, drawY, drawWidth, drawHeight);
     }
   }
 
@@ -188,6 +268,18 @@
     progress = Math.max(0, Math.min(1, progress));
 
     const targetFrame = Math.floor(progress * (frameCount - 1)) + 1;
+
+    // Prioritize loading the target frame if it hasn't started loading yet
+    const img = images[targetFrame - 1];
+    if (img && !img.src) {
+      img.src = getFrameUrl(targetFrame);
+      img.onload = () => {
+        if (getCurrentScrollFrameIndex() === targetFrame) {
+          drawFrame(targetFrame);
+        }
+      };
+    }
+
     drawFrame(targetFrame);
 
     // Fade out and translate the hero text as scroll increases
