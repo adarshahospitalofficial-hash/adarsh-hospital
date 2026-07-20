@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Adarsha Hospital — Trusted Multispecialty Care in Koppa, Chikkamagaluru</title>
+<meta name="description" content="Adarsha Hospital, Koppa (Chikkamagaluru, Karnataka) — advanced diagnostics, cardiology, radiology and multispecialty care with experienced doctors and modern facilities." />
+<link rel="stylesheet" href="style.css" />
+<!-- Supabase SDK & Config -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>08:00 AM – 08:00 PM</span>
+    <span>care@adarshahospitalkoppa.in</span>
+    <span>+91 98450 12345 | +91 82770 45678</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#home" class="logo">
+      <div class="logo-letter">A</div>
+      <div class="logo-text">
+        <div class="logo-name">Adarsha Hospital</div>
+        <div class="logo-sub">Koppa · Chikkamagaluru</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#services">Services</a>
+      <a href="#packages">Packages</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary">Get Appointment</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="home" class="hero">
+  <div class="hero-sticky">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Adarsha Hospital</p>
+        <h1>Compassionate Care.<br>Advanced Medicine in Koppa.</h1>
+        <p class="hero-tags">PRECISION · TRUST · CARE · DIAGNOSTICS · EXCELLENCE</p>
+        <p class="hero-desc">Adarsha Hospital delivers reliable multispecialty and diagnostic services with modern technology, experienced clinicians and a patient-first approach — right in the heart of Chikkamagaluru district.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Make an Appointment</a>
+          <a href="#contact" class="btn btn-outline">Reach Us</a>
+        </div>
+      </div>
+    </div>
+    <div id="animation-loader" class="animation-loader">Loading animation (0%)...</div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="about">
+  <div class="container about-inner">
+    <div class="about-image">
+      <img src="https://adarsha-hospital.lovable.app/assets/hospital-building-DLTYIl0m.jpg" alt="Adarsha Hospital building exterior in Koppa" />
+    </div>
+    <div class="about-text">
+      <p class="eyebrow">Defined by Our Excellence</p>
+      <h2>Welcome to Adarsha Hospital, Koppa</h2>
+      <p>Located in Koppa, Chikkamagaluru district of Karnataka, Adarsha Hospital is a trusted multispecialty healthcare centre committed to delivering accurate diagnosis, quality treatment and warm patient care. Our team of qualified doctors, radiologists and technologists work together with modern equipment to provide dependable clinical outcomes for the malnad community.</p>
+      <p>From advanced radiology and cardiology to 24×7 laboratory services and specialist consultations, patients now have access to comprehensive care without long journeys to larger cities.</p>
+      <a href="#services" class="btn btn-primary">Know More</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="services">
+  <div class="container">
+    <p class="eyebrow center">Expertise</p>
+    <h2 class="center">Our Medical Services</h2>
+    <p class="section-desc center">Comprehensive diagnostic and clinical services delivered with accuracy, safety and modern technology.</p>
+
+    <div class="grid grid-4">
+      <div class="card">
+        <img src="https://adarsha-hospital.lovable.app/assets/mother-baby-OYcXu05B.png" alt="Ultrasound" />
+        <h3>Ultrasound</h3>
+        <ul>
+          <li>3D / 4D Ultrasound</li>
+          <li>Doppler Studies</li>
+          <li>Fetal Echo</li>
+          <li>General Abdomen</li>
+        </ul>
+        <a href="#contact" class="link-arrow">Know More →</a>
+      </div>
+      <div class="card">
+        <img src="https://adarsha-hospital.lovable.app/assets/patient-room-Dyd4UBIZ.png" alt="Radiology & CT" />
+        <h3>Radiology & CT</h3>
+        <ul>
+          <li>Advanced CT Scan</li>
+          <li>Digital X-Ray</li>
+          <li>Barium Studies</li>
+          <li>HSG Imaging</li>
+        </ul>
+        <a href="#contact" class="link-arrow">Know More →</a>
+      </div>
+      <div class="card">
+        <img src="https://adarsha-hospital.lovable.app/assets/reception-D3Nx7TGh.png" alt="Cardiology" />
+        <h3>Cardiology</h3>
+        <ul>
+          <li>ECG</li>
+          <li>2D Echocardiography</li>
+          <li>TMT (Stress Test)</li>
+          <li>PFT</li>
+        </ul>
+        <a href="#contact" class="link-arrow">Know More →</a>
+      </div>
+      <div class="card">
+        <img src="https://adarsha-hospital.lovable.app/assets/staff-group-DA1z7c0b.png" alt="Dental Radiology" />
+        <h3>Dental Radiology</h3>
+        <ul>
+          <li>Dental CT Scan</li>
+          <li>OPG X-Ray</li>
+          <li>Maxillofacial Imaging</li>
+        </ul>
+        <a href="#contact" class="link-arrow">Know More →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><strong>95%</strong><span>Quality Rating</span></div>
+      <div class="stat"><strong>12,500+</strong><span>Patients a Year</span></div>
+      <div class="stat"><strong>24</strong><span>Team Members</span></div>
+      <div class="stat"><strong>11,900+</strong><span>Happy Smiles</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Departments & Doctors -->
+<section id="departments" class="departments">
+  <div class="container">
+    <p class="eyebrow center">Our Specialists</p>
+    <h2 class="center">Medical Departments & Doctors</h2>
+    <p class="section-desc center">Meet our highly qualified team of resident specialists and consultants committed to your health and well-being.</p>
+
+    <div class="grid grid-4">
+      <!-- Medicine -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Medicine</span>
+          <h3 class="dept-card-title">Dr. Ismail</h3>
+          <p class="dept-card-edu">MBBS, MD</p>
+          <p class="dept-card-desc">Specialized in internal medicine, comprehensive diagnosis, and treatment of chronic illnesses.</p>
+        </div>
+      </div>
+
+      <!-- Surgery -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Surgery</span>
+          <h3 class="dept-card-title">Dr. Shiva Kumar</h3>
+          <p class="dept-card-edu">MBBS, MS</p>
+          <p class="dept-card-desc">Expert in general, emergency, and advanced surgical procedures with a focus on patient safety.</p>
+        </div>
+      </div>
+
+      <!-- Obstetrics & Gynaecology -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Obstetrics & Gynaecology</span>
+          <h3 class="dept-card-title">Dr. Nataraj R. Rao</h3>
+          <p class="dept-card-edu">MBBS, MD, DNB</p>
+          <p class="dept-card-desc">Providing compassionate maternal care, pregnancy management, and comprehensive women's healthcare.</p>
+        </div>
+      </div>
+
+      <!-- Anesthesia -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Anesthesia</span>
+          <h3 class="dept-card-title">Dr. Anita N. Rao</h3>
+          <p class="dept-card-edu">MBBS, MD, DA, DNB</p>
+          <p class="dept-card-desc">Specialized in pain management, local and general anesthesia, and critical surgical support.</p>
+        </div>
+      </div>
+
+      <!-- Ophthalmology -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Ophthalmology</span>
+          <h3 class="dept-card-title">Dr. Sudha</h3>
+          <p class="dept-card-edu">MBBS, DOMS</p>
+          <p class="dept-card-desc">Dedicated eye care specialist providing advanced diagnostics, vision testing, and treatment of eye disorders.</p>
+        </div>
+      </div>
+
+      <!-- Dental -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Dental</span>
+          <h3 class="dept-card-title">Dr. Bhagwan B. K.</h3>
+          <p class="dept-card-edu">BDS, MDS (Maxillofacial Surgeon)</p>
+          <p class="dept-card-desc">Expert in dental implants, oral surgeries, corrective jaw treatments, and general dentistry.</p>
+        </div>
+      </div>
+
+      <!-- Laparoscopy -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Laparoscopy</span>
+          <h3 class="dept-card-title">Dr. Rajesh Bhakta</h3>
+          <p class="dept-card-edu">MBBS, MD</p>
+          <p class="dept-card-desc">Specialized in minimally invasive keyhole surgeries, ensuring faster healing and minimal discomfort.</p>
+        </div>
+      </div>
+
+      <!-- Radiology -->
+      <div class="dept-card">
+        <div class="dept-card-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Radiology</span>
+          <h3 class="dept-card-title">Dr. Sania Sabahi</h3>
+          <p class="dept-card-edu">MBBS, MD</p>
+          <p class="dept-card-desc">Radiologist specialized in ultrasound, advanced CT scans, digital x-ray reporting, and diagnostics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages -->
+<section id="packages" class="packages">
+  <div class="container">
+    <p class="eyebrow center">Packages</p>
+    <h2 class="center">Health Checkup Packages</h2>
+    <p class="section-desc center">Preventive checkup packages designed for early detection and peace of mind — under one roof at Adarsha Hospital, Koppa.</p>
+
+    <div class="grid grid-3">
+      <div class="pkg-card">
+        <p class="pkg-loc">Adarsha Hospital · Koppa 577126</p>
+        <h3>Executive Master Checkup</h3>
+        <p class="price">₹4,999/-</p>
+        <ul>
+          <li>Physician Consultation</li>
+          <li>Complete Hemogram & ESR</li>
+          <li>TSH, T3/T4</li>
+          <li>Lipid Profile & LFT</li>
+          <li>Chest X-Ray (PA view)</li>
+          <li>ECG</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+      </div>
+      <div class="pkg-card featured">
+        <p class="pkg-loc">Adarsha Hospital · Koppa 577126</p>
+        <h3>Master Health Checkup</h3>
+        <p class="price">₹2,999/-</p>
+        <ul>
+          <li>Complete Hemogram & ESR</li>
+          <li>TSH</li>
+          <li>TMT / ECHO</li>
+          <li>Urine & Stool Analysis</li>
+          <li>Blood Grouping & Rh</li>
+          <li>Lipid Profile & LFT</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+      </div>
+      <div class="pkg-card">
+        <p class="pkg-loc">Adarsha Hospital · Koppa 577126</p>
+        <h3>Mini Health Checkup</h3>
+        <p class="price">₹1,499/-</p>
+        <ul>
+          <li>Complete Hemogram</li>
+          <li>Blood Grouping & Rh</li>
+          <li>FBS / PPBS / HbA1C</li>
+          <li>Lipid Profile</li>
+          <li>Urine Analysis</li>
+          <li>ECG</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Highlights -->
+<section class="highlights">
+  <div class="container">
+    <p class="eyebrow center">Why Choose Us?</p>
+    <h2 class="center">Our Key Highlights</h2>
+
+    <div class="grid grid-3">
+      <div class="highlight"><h3>Advanced Radiology & Ultrasound</h3><p>Whole-body ultrasonography with Doppler, obstetric, small-parts and musculoskeletal imaging.</p></div>
+      <div class="highlight"><h3>High-Resolution CT Scan</h3><p>Accurate imaging for head & neck, thorax, abdomen, pelvis and joint studies.</p></div>
+      <div class="highlight"><h3>Comprehensive Cardiology</h3><p>Complete cardiac and pulmonary evaluation with ECG, 2D Echo, TMT and PFT.</p></div>
+      <div class="highlight"><h3>24×7 Laboratory Medicine</h3><p>Round-the-clock hematology, biochemistry, immunoassay, microbiology and histopathology.</p></div>
+      <div class="highlight"><h3>Specialized Procedures</h3><p>FNAC, biopsy assistance, endoscopy support, Doppler studies, Dental OPG and HSG imaging.</p></div>
+      <div class="highlight"><h3>Experienced Medical Team</h3><p>Qualified doctors, radiologists and trained support staff delivering compassionate care.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Doctors -->
+<section id="doctors" class="doctors">
+  <div class="container">
+    <p class="eyebrow center">Expert Specialists</p>
+    <h2 class="center">Visiting Doctors</h2>
+    <p class="section-desc center">Expert doctors visit Adarsha Hospital, Koppa only on scheduled dates. Instead of traveling to Shivamogga, Chikkamagaluru, Udupi, Mangaluru or Bengaluru, patients in and around Koppa can now consult senior specialists locally.</p>
+
+    <ul class="doctor-benefits">
+      <li>Doctors available only on mentioned dates</li>
+      <li>No need to travel to Shivamogga or other cities</li>
+      <li>Access to experienced specialists in Koppa</li>
+      <li>Saves time, money and physical strain</li>
+      <li>Ideal for elderly and chronic patients</li>
+    </ul>
+
+    <div class="grid grid-4">
+      <div class="doctor-card">
+        <div class="avatar">A</div>
+        <p class="visit-date">Visits on: 05/08/2026</p>
+        <h3>Dr. Anantha K.J</h3>
+        <p class="specialty">Cardiology</p>
+        <a href="#contact" class="btn btn-outline btn-block">Book Now</a>
+      </div>
+      <div class="doctor-card">
+        <div class="avatar">R</div>
+        <p class="visit-date">Visits on: 12/08/2026</p>
+        <h3>Dr. Ravi Halageri</h3>
+        <p class="specialty">Radiation Oncology</p>
+        <a href="#contact" class="btn btn-outline btn-block">Book Now</a>
+      </div>
+      <div class="doctor-card">
+        <div class="avatar">P</div>
+        <p class="visit-date">Visits on: 18/08/2026</p>
+        <h3>Dr. Prakash Mallavade</h3>
+        <p class="specialty">Nephrology</p>
+        <a href="#contact" class="btn btn-outline btn-block">Book Now</a>
+      </div>
+      <div class="doctor-card">
+        <div class="avatar">P</div>
+        <p class="visit-date">Visits on: 26/08/2026</p>
+        <h3>Dr. Pooja Krishnappa</h3>
+        <p class="specialty">Gastroenterology</p>
+        <a href="#contact" class="btn btn-outline btn-block">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="container">
+    <p class="eyebrow center">Testimonials</p>
+    <h2 class="center">What Our Patients Say</h2>
+    <p class="section-desc center">Excellent · Based on patient feedback</p>
+
+    <div class="grid grid-3">
+      <div class="testimonial"><p>"Very good staff and best service. Reports were shared on time and the doctors were patient with all our questions."</p><span>— Deepa K.</span></div>
+      <div class="testimonial"><p>"One of the best diagnostic and hospital facilities in the malnad region. Highly professional experience."</p><span>— Kiran Kumar</span></div>
+      <div class="testimonial"><p>"My consultation was professional and reassuring. Dedicated doctors and courteous, attentive staff."</p><span>— Bagavathi L.</span></div>
+      <div class="testimonial"><p>"Excellent facility. Friendly and professional staff. Would recommend to family and friends."</p><span>— Shivaprasad Rao</span></div>
+      <div class="testimonial"><p>"International-quality facility in a small town. No need to visit a large city for state-of-the-art care."</p><span>— Asha Bhat</span></div>
+      <div class="testimonial"><p>"Reliable results with the latest machines and the sweetest staff. Very happy Adarsha is here in Koppa."</p><span>— Krishna Bhat</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+  <div class="container contact-inner">
+    <div class="contact-info">
+      <p class="eyebrow">Get in Touch</p>
+      <h2>Book Your Appointment</h2>
+      <p>We're here to help. Reach us for appointments, reports or general enquiries.</p>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="info-text-wrapper">
+          <h4>Address</h4>
+          <p>Adarsha Hospital, Main Road, Koppa,<br>Chikkamagaluru District, Karnataka — 577126</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="info-text-wrapper">
+          <h4>Phone</h4>
+          <p>+91 98450 12345 · +91 82770 45678</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="info-text-wrapper">
+          <h4>Email</h4>
+          <p>care@adarshahospitalkoppa.in</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="info-text-wrapper">
+          <h4>Working Hours</h4>
+          <p>Mon – Sat: 08:00 AM – 08:00 PM · Sunday: 09:00 AM – 01:00 PM</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('This is a static demo form — connect it to a backend or form service to receive submissions.');">
+      <h3>Request a Callback</h3>
+      <input type="text" placeholder="Full name" required />
+      <input type="tel" placeholder="Phone number" required />
+      <input type="email" placeholder="Email address" required />
+      <select required>
+        <option value="" disabled selected>Select service</option>
+        <option>Ultrasound</option>
+        <option>CT Scan / Radiology</option>
+        <option>Cardiology</option>
+        <option>Dental Radiology</option>
+        <option>Health Checkup</option>
+      </select>
+      <textarea placeholder="Message" rows="4"></textarea>
+      <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="#home" class="logo">
+        <div class="logo-letter">A</div>
+        <div class="logo-text">
+          <div class="logo-name">Adarsha Hospital</div>
+        </div>
+      </a>
+      <p>Trusted multispecialty healthcare and diagnostics in Koppa, Chikkamagaluru — delivered with precision and compassion.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#doctors">Doctors</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Ultrasound</li>
+        <li>CT Scan & Radiology</li>
+        <li>Cardiology</li>
+        <li>Dental Radiology</li>
+        <li>Laboratory</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li>Koppa, Chikkamagaluru — 577126</li>
+        <li>+91 98450 12345</li>
+        <li>care@adarshahospitalkoppa.in</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© 2026 Adarsha Hospital, Koppa. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
