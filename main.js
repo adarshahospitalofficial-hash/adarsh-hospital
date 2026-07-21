@@ -490,7 +490,56 @@
     }
   }
 
-
+  // --- Mobile Navigation ---
+  function initMobileNav() {
+    const toggleBtn = document.getElementById('mobile-nav-toggle');
+    const navMenu = document.querySelector('.nav');
+    const overlay = document.getElementById('mobile-nav-overlay');
+    
+    if (!toggleBtn || !navMenu || !overlay) return;
+    
+    function toggleMenu() {
+      const isActive = navMenu.classList.toggle('active');
+      toggleBtn.classList.toggle('active');
+      overlay.classList.toggle('active');
+      
+      // Prevent body scroll when menu is active
+      if (isActive) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+    
+    function closeMenu() {
+      navMenu.classList.remove('active');
+      toggleBtn.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+    
+    overlay.addEventListener('click', closeMenu);
+    
+    // Close menu when clicking navigation links
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+    
+    // Close menu when clicking ESC key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
+    });
+  }
+  
+  // Initialize mobile navigation
+  initMobileNav();
 
   // Run Supabase initialization
   initSupabase();

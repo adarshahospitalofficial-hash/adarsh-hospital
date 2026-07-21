@@ -31,16 +31,30 @@
         <div class="logo-sub">Koppa · Chikkamagaluru</div>
       </div>
     </a>
+
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <nav class="nav">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#packages">Packages</a>
       <a href="#contact">Contact</a>
+      <!-- Mobile Only Appointment Button inside nav drawer -->
+      <a href="#contact" class="btn btn-primary mobile-only-cta">Get Appointment</a>
     </nav>
-    <a href="#contact" class="btn btn-primary">Get Appointment</a>
+
+    <!-- Desktop Only Appointment Button -->
+    <a href="#contact" class="btn btn-primary desktop-only-cta">Get Appointment</a>
   </div>
 </header>
+<!-- Mobile Nav Overlay Backdrop -->
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 
 <!-- Hero -->
 <section id="home" class="hero">
