@@ -302,6 +302,15 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   color: var(--accent);
   opacity: 1;
 }
+.dept-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.dept-card:hover .dept-card-img {
+  transform: scale(1.05);
+}
 .dept-card-content {
   padding: 24px;
   display: flex;
