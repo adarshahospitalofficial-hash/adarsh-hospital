@@ -23,11 +23,7 @@
             "emergency-care.png",
             "diagnostics.png",
             "womens-health.png",
-            "specialist-care.png",
-            "founder.jpg",
-            "founder.jpeg",
-            "cofounder.jpg",
-            "cofounder.jpeg"
+            "specialist-care.png"
           ];
           if (localOnlyFiles.includes(filename)) {
             img.src = `assets/${filename}`;
