@@ -15,13 +15,6 @@
         const src = img.getAttribute("src");
         if (src && (src.startsWith("/assets/") || src.startsWith("assets/") || src.includes("lovable.app/assets/"))) {
           const filename = src.split("/").pop();
-          
-          // Setup fallback to local assets directory in case of loading error
-          img.onerror = () => {
-            img.src = `assets/${filename}`;
-            img.onerror = null; // Avoid infinite loop if local asset also fails
-          };
-          
           img.src = `${SUPABASE_ASSETS_BUCKET_URL}/${filename}`;
         }
       });
