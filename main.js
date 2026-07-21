@@ -16,20 +16,6 @@
         if (src && (src.startsWith("/assets/") || src.startsWith("assets/") || src.includes("lovable.app/assets/"))) {
           const filename = src.split("/").pop();
           
-          // Skip remote rewriting for local-only files to avoid network 404 console errors
-          const localOnlyFiles = [
-            "hospital-exterior.jpeg",
-            "hospital-interior.jpeg",
-            "emergency-care.png",
-            "diagnostics.png",
-            "womens-health.png",
-            "specialist-care.png"
-          ];
-          if (localOnlyFiles.includes(filename)) {
-            img.src = `assets/${filename}`;
-            return;
-          }
-          
           // Setup fallback to local assets directory in case of loading error
           img.onerror = () => {
             img.src = `assets/${filename}`;
