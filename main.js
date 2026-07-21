@@ -24,8 +24,10 @@
             "diagnostics.png",
             "womens-health.png",
             "specialist-care.png",
-            "founder.png",
-            "cofounder.png"
+            "founder.jpg",
+            "founder.jpeg",
+            "cofounder.jpg",
+            "cofounder.jpeg"
           ];
           if (localOnlyFiles.includes(filename)) {
             img.src = `assets/${filename}`;
