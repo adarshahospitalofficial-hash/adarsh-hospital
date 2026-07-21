@@ -90,6 +90,11 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
 .site-header{border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:10;}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;flex-wrap:wrap;gap:16px;}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-img{
+  width:44px;
+  height:44px;
+  object-fit:contain;
+}
 .logo-letter{
   width:44px;
   height:44px;
@@ -655,7 +660,7 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
     padding: 12px 20px;
     gap: 0;
   }
-  .logo-letter {
+  .logo-letter, .logo-img {
     width: 38px;
     height: 38px;
     font-size: 1.1rem;

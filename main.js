@@ -425,6 +425,8 @@
           cardMedia = `<img src="${imgUrl}" alt="${doc.name}" class="dept-card-img" />`;
         } else if (nameLower.includes("sania sabahi")) {
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/sania-sabahi.jpeg" alt="${doc.name}" class="dept-card-img" />`;
+        } else if (nameLower.includes("rajesh bhakta")) {
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/rajesh%20bhakta.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         } else if (nameLower.includes("nataraj r. rao") || nameLower.includes("nataraj rao")) {
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         } else if (nameLower.includes("anita n. rao") || nameLower.includes("anitha n. rao") || nameLower.includes("anita rao") || nameLower.includes("anitha rao")) {
