@@ -340,7 +340,6 @@
       // Load data dynamically from Supabase
       loadDepartments();
       loadPackages();
-      loadVisitingDoctors();
       setupSupabaseForm();
     } catch (err) {
       console.error("Error initializing Supabase client:", err);
@@ -480,37 +479,7 @@
     }
   }
 
-  // Load visiting doctors from Supabase
-  async function loadVisitingDoctors() {
-    if (!supabaseClient) return;
 
-    try {
-      const { data: doctors, error } = await supabaseClient
-        .from('visiting_doctors')
-        .select('*');
-
-      if (error) throw error;
-      if (!doctors || doctors.length === 0) return;
-
-      const grid = document.querySelector('#doctors .grid');
-      if (!grid) return;
-
-      grid.innerHTML = ''; // Clear static HTML
-      doctors.forEach(doc => {
-        grid.innerHTML += `
-          <div class="doctor-card">
-            <div class="avatar">${doc.initial || doc.name.charAt(4)}</div>
-            <p class="visit-date">Visits on: ${doc.visit_date}</p>
-            <h3>${doc.name}</h3>
-            <p class="specialty">${doc.specialty}</p>
-            <a href="#contact" class="btn btn-outline btn-block">Book Now</a>
-          </div>
-        `;
-      });
-    } catch (err) {
-      console.warn("Failed to load visiting doctors from Supabase, keeping static html content:", err);
-    }
-  }
 
   // Run Supabase initialization
   initSupabase();
