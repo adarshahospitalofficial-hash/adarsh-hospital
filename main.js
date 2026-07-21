@@ -477,7 +477,7 @@
         
         grid.innerHTML += `
           <div class="pkg-card ${isFeatured ? 'featured' : ''}">
-            <p class="pkg-loc">${pkg.location || 'Adarsha Hospital · Koppa 577126'}</p>
+            <p class="pkg-loc">${pkg.location || 'ADARSH HOSPITAL · Koppa 577126'}</p>
             <h3>${pkg.name}</h3>
             <p class="price">${pkg.price}</p>
             <ul>
