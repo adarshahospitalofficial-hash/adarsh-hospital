@@ -409,14 +409,32 @@
 
       grid.innerHTML = ''; // Clear skeleton loader
       doctors.forEach(doc => {
-        grid.innerHTML += `
-          <div class="dept-card">
-            <div class="dept-card-icon-wrapper">
+        let cardMedia = `
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon">
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
                 <circle cx="12" cy="7" r="4"/>
                 <path d="M12 11v6M10 14h4"/>
               </svg>
+        `;
+
+        const nameLower = doc.name ? doc.name.toLowerCase() : "";
+        const hasCustomImage = doc.image_url || doc.image_path || doc.image;
+
+        if (hasCustomImage) {
+          const imgUrl = hasCustomImage.startsWith('http') ? hasCustomImage : `${SUPABASE_ASSETS_BUCKET_URL}/${hasCustomImage}`;
+          cardMedia = `<img src="${imgUrl}" alt="${doc.name}" class="dept-card-img" />`;
+        } else if (nameLower.includes("sania sabahi")) {
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/sania-sabahi.jpeg" alt="${doc.name}" class="dept-card-img" />`;
+        } else if (nameLower.includes("nataraj r. rao") || nameLower.includes("nataraj rao")) {
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
+        } else if (nameLower.includes("anita n. rao") || nameLower.includes("anitha n. rao") || nameLower.includes("anita rao") || nameLower.includes("anitha rao")) {
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/co-founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
+        }
+
+        grid.innerHTML += `
+          <div class="dept-card">
+            <div class="dept-card-icon-wrapper">
+              ${cardMedia}
             </div>
             <div class="dept-card-content">
               <span class="dept-badge">${doc.department}</span>
