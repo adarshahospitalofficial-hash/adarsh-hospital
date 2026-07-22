@@ -359,6 +359,57 @@
     form.onsubmit = async (e) => {
       e.preventDefault();
       
+      // 1. Honeypot check
+      const honeypot = form.querySelector('#form_website_url')?.value;
+      if (honeypot) {
+        console.warn("Spam submission detected via honeypot.");
+        alert('Callback request submitted successfully! We will get back to you shortly.');
+        form.reset();
+        return;
+      }
+
+      // Helper function to sanitize user inputs to prevent XSS
+      function sanitizeInput(str) {
+        if (!str) return '';
+        return str.replace(/<[^>]*>/g, '').trim();
+      }
+
+      // 2. Fetch and sanitize inputs
+      const rawName = form.querySelector('#form_full_name').value;
+      const rawPhone = form.querySelector('#form_phone_number').value;
+      const rawEmail = form.querySelector('#form_email_address').value;
+      const rawService = form.querySelector('select').value;
+      const rawMessage = form.querySelector('#form_message').value;
+
+      const fullName = sanitizeInput(rawName);
+      const phoneNumber = sanitizeInput(rawPhone);
+      const emailAddress = sanitizeInput(rawEmail);
+      const serviceRequested = sanitizeInput(rawService);
+      const message = sanitizeInput(rawMessage);
+
+      // 3. Client-side Validation Checks
+      if (fullName.length < 2 || fullName.length > 100) {
+        alert('Please enter a valid full name (2-100 characters).');
+        return;
+      }
+
+      const phoneRegex = /^\+?[0-9\s\-()]{7,20}$/;
+      if (!phoneRegex.test(phoneNumber)) {
+        alert('Please enter a valid phone number (7-20 digits).');
+        return;
+      }
+
+      const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+      if (!emailRegex.test(emailAddress)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      if (message.length > 1000) {
+        alert('Message is too long. Please restrict it to 1000 characters.');
+        return;
+      }
+
       const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -366,11 +417,11 @@
       }
 
       const payload = {
-        full_name: form.querySelector('input[placeholder="Full name"]').value,
-        phone_number: form.querySelector('input[placeholder="Phone number"]').value,
-        email_address: form.querySelector('input[placeholder="Email address"]').value,
-        service_requested: form.querySelector('select').value,
-        message: form.querySelector('textarea').value
+        full_name: fullName,
+        phone_number: phoneNumber,
+        email_address: emailAddress,
+        service_requested: serviceRequested,
+        message: message
       };
 
       try {

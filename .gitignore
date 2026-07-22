@@ -1,0 +1,14 @@
+# Dependency folders
+node_modules/
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.bak
+*.backup
+
+# Vercel folder
+.vercel/

@@ -826,9 +826,13 @@
 
     <form class="contact-form" onsubmit="event.preventDefault(); alert('This is a static demo form — connect it to a backend or form service to receive submissions.');">
       <h3>Request a Callback</h3>
-      <input type="text" placeholder="Full name" required />
-      <input type="tel" placeholder="Phone number" required />
-      <input type="email" placeholder="Email address" required />
+      <!-- Honeypot field for bot protection -->
+      <div class="hidden-field" style="display: none !important;">
+        <input type="text" id="form_website_url" name="website" tabindex="-1" autocomplete="off" placeholder="If you see this, do not fill it in" />
+      </div>
+      <input type="text" id="form_full_name" placeholder="Full name" maxlength="100" required />
+      <input type="tel" id="form_phone_number" placeholder="Phone number" maxlength="20" required />
+      <input type="email" id="form_email_address" placeholder="Email address" maxlength="255" required />
       <select required>
         <option value="" disabled selected>Select service/package</option>
         <option>Executive Master Health Checkup (₹5,000)</option>
@@ -845,7 +849,8 @@
         <option>Cardiology / ECG / ECHO / TMT</option>
         <option>Obstetrics & Gynaecology Care</option>
       </select>
-      <textarea placeholder="Message" rows="4"></textarea>
+      <textarea id="form_message" placeholder="Message" rows="4" maxlength="1000"></textarea>
+      <p class="privacy-disclaimer">We value your privacy. The information submitted above is processed securely and kept confidential in compliance with healthcare standards.</p>
       <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
       <a href="tel:6360993646" class="btn btn-outline btn-block btn-emergency" style="margin-top:12px; text-align:center;"><i data-lucide="phone"></i> 24x7 Emergency hotline</a>
     </form>

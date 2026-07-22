@@ -531,6 +531,14 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   box-shadow:0 0 0 3px oklch(63% .24 350 / 0.15);
 }
 
+.privacy-disclaimer {
+  font-size: 0.76rem;
+  color: var(--muted-foreground);
+  margin: -4px 0 2px 0;
+  line-height: 1.35;
+  text-align: left;
+}
+
 /* Footer */
 .site-footer{background:var(--primary);color:rgba(255,255,255,0.8);padding:60px 0 0;}
 .footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.1);}
