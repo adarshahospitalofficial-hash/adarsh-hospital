@@ -4,20 +4,22 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ADARSH HOSPITAL — Trusted Multispecialty Care in Koppa, Chikkamagaluru</title>
-<meta name="description" content="ADARSH HOSPITAL, Koppa (Chikkamagaluru, Karnataka) — advanced diagnostics, cardiology, radiology and multispecialty care with experienced doctors and modern facilities." />
+<meta name="description" content="ADARSH HOSPITAL, Koppa (Chikkamagaluru, Karnataka) — NABH Accredited Multi Specialty Hospital. Caring with Compassion. Advanced diagnostics, radiology, cardiology, and maternal care." />
 <link rel="stylesheet" href="style.css" />
 <!-- Supabase SDK & Config -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
+<!-- Lucide Icons CDN -->
+<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
 <!-- Top bar -->
 <div class="topbar">
   <div class="container topbar-inner">
-    <span>08:00 AM – 08:00 PM</span>
-    <span>care@adarshahospitalkoppa.in</span>
-    <span>+91 98450 12345 | +91 82770 45678</span>
+    <span>Mon - Sat: 9:00 AM - 2:00 PM, 5:00 PM - 8:00 PM | Sun: 9:00 AM - 1:00 PM</span>
+    <span>adarshhospkoppa@gmail.com</span>
+    <span>+91 63609 93646 | +91 70199 48944</span>
   </div>
 </div>
 
@@ -42,8 +44,23 @@
     <nav class="nav">
       <a href="#home">Home</a>
       <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#packages">Packages</a>
+      <a href="#doctors">Doctors</a>
+      
+      <!-- Dropdown for Departments -->
+      <div class="nav-item-dropdown">
+        <a href="#departments" class="dropdown-trigger">Departments ▾</a>
+        <div class="dropdown-menu">
+          <a href="#laboratory">Laboratory</a>
+          <a href="#radiology">Radiology</a>
+          <a href="#cardiology">Cardiology</a>
+          <a href="#womens-health">Women's Health</a>
+          <a href="#emergency">Emergency Care</a>
+        </div>
+      </div>
+      
+      <a href="packages.html">Packages</a>
+      <a href="#diagnostics">Diagnostics</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
       <!-- Mobile Only Appointment Button inside nav drawer -->
       <a href="#contact" class="btn btn-primary mobile-only-cta">Get Appointment</a>
@@ -63,30 +80,30 @@
     <div class="hero-overlay"></div>
     <div class="container hero-inner">
       <div class="hero-text">
-        <p class="eyebrow">ADARSH HOSPITAL</p>
-        <h1>Compassionate Care.<br>Advanced Medicine in Koppa.</h1>
+        <p class="eyebrow"><span class="nabh-badge">NABH Accredited Multi Specialty Hospital</span></p>
+        <h1>Caring with Compassion</h1>
         <p class="hero-tags">PRECISION · TRUST · CARE · DIAGNOSTICS · EXCELLENCE</p>
         <p class="hero-desc">ADARSH HOSPITAL delivers reliable multispecialty and diagnostic services with modern technology, experienced clinicians and a patient-first approach — right in the heart of Chikkamagaluru district.</p>
         <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">Make an Appointment</a>
-          <a href="#contact" class="btn btn-outline">Reach Us</a>
+          <a href="#contact" class="btn btn-primary">Book Appointment</a>
+          <a href="tel:6360993646" class="btn btn-outline">Call Now</a>
+          <a href="tel:7019948944" class="btn btn-emergency"><i data-lucide="ambulance" class="emergency-icon"></i> Emergency Ambulance</a>
         </div>
       </div>
     </div>
-    <div id="animation-loader" class="animation-loader">Loading animation (0%)...</div>
   </div>
 </section>
 
 <!-- About -->
 <section id="about" class="about">
   <div class="container about-inner">
-    <div class="about-image">
+    <div class="about-image animate-on-scroll">
       <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/hospital-exterior.jpeg" alt="ADARSH HOSPITAL building exterior in Koppa" />
     </div>
-    <div class="about-text">
-      <p class="eyebrow">Defined by Our Excellence</p>
+    <div class="about-content animate-on-scroll">
+      <p class="eyebrow">About Hospital</p>
       <h2>Welcome to ADARSH HOSPITAL, Koppa</h2>
-      <p>Located in Koppa, Chikkamagaluru district of Karnataka, ADARSH HOSPITAL is a trusted multispecialty healthcare centre committed to delivering accurate diagnosis, quality treatment and warm patient care. Our team of qualified doctors, radiologists and technologists work together with modern equipment to provide dependable clinical outcomes for the malnad community.</p>
+      <p>Located in Koppa, Chikkamagaluru district of Karnataka, ADARSH HOSPITAL is a trusted, NABH-accredited multispecialty healthcare centre committed to delivering accurate diagnosis, quality treatment and warm patient care. Our team of qualified doctors, radiologists and technologists work together with modern equipment to provide dependable clinical outcomes for the malnad community.</p>
       <p>From advanced radiology and cardiology to 24×7 laboratory services and specialist consultations, patients now have access to comprehensive care without long journeys to larger cities.</p>
       <a href="#services" class="btn btn-primary">Know More</a>
     </div>
@@ -102,37 +119,37 @@
 
     <div class="grid grid-2 founders-grid">
       <!-- Founder -->
-      <div class="founder-card">
+      <div class="founder-card animate-on-scroll">
         <div class="founder-image-wrapper">
           <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/founder.jpeg" alt="Dr. Nataraj R. Rao - Founder of ADARSH HOSPITAL Koppa" class="founder-img" />
         </div>
         <div class="founder-info">
           <span class="founder-badge">Founder & Director</span>
           <h3>Dr. Nataraj R. Rao</h3>
-          <p class="founder-edu">M.B.B.S., MD, DNB</p>
-          <p class="founder-spec">Consultant Gynaecologist</p>
-          <p class="founder-reg">Reg. No: 31,199</p>
+          <p class="founder-edu">MBBS, MD, DNB</p>
+          <p class="founder-spec">Consultant Obstetrician & Gynaecologist</p>
+          <p class="founder-reg">KMC Reg. No: 31199</p>
         </div>
       </div>
 
       <!-- Co-Founder -->
-      <div class="founder-card">
+      <div class="founder-card animate-on-scroll">
         <div class="founder-image-wrapper">
-          <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/co-founder.jpeg" alt="Dr. Anitha N. Rao - Co-Founder of ADARSH HOSPITAL Koppa" class="founder-img" />
+          <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/co-founder.png" alt="Dr. Anitha N. Rao - Co-Founder of ADARSH HOSPITAL Koppa" class="founder-img" />
         </div>
         <div class="founder-info">
           <span class="founder-badge">Co-Founder & Director</span>
           <h3>Dr. Anitha N. Rao</h3>
-          <p class="founder-edu">M.B.B.S., MD, DA, DNB</p>
+          <p class="founder-edu">MBBS, MD, DA, DNB</p>
           <p class="founder-spec">Consultant Anaesthesiologist</p>
-          <p class="founder-reg">Reg. No. :35,287</p>
+          <p class="founder-reg">KMC Reg. No: 35287</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Services -->
+<!-- Services overview cards -->
 <section id="services" class="services">
   <div class="container">
     <p class="eyebrow center">Expertise</p>
@@ -140,50 +157,45 @@
     <p class="section-desc center">Comprehensive diagnostic and clinical services delivered with accuracy, safety and modern technology.</p>
 
     <div class="grid grid-4">
-      <div class="card">
+      <div class="card animate-on-scroll">
         <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/emergency-care.png" alt="Emergency & Critical Care at ADARSH HOSPITAL Koppa" />
         <h3>Emergency & Critical Care</h3>
         <ul>
           <li><strong>Emergency Services:</strong> 24x7 emergency care</li>
-          <li><strong>I.C.U & N.I.C.U:</strong> Well-equipped Intensive & Neonatal units</li>
-          <li><strong>Ambulance:</strong> Mini I.C.U model with ventilator</li>
-          <li><strong>Inpatient:</strong> General, Special & Deluxe rooms</li>
+          <li><strong>Ambulance Support:</strong> Rapid trauma transit</li>
+          <li><strong>Fully Equipped:</strong> Ventilators & monitor systems</li>
         </ul>
-        <a href="#contact" class="link-arrow">Book Now →</a>
+        <a href="#emergency" class="link-arrow">Read Details →</a>
       </div>
-      <div class="card">
+      <div class="card animate-on-scroll">
         <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/diagnostics.png" alt="Advanced Diagnostics at ADARSH HOSPITAL Koppa" />
         <h3>Advanced Diagnostics</h3>
         <ul>
-          <li><strong>Laboratory:</strong> N.A.B.L accredited (S-DACC) lab</li>
-          <li><strong>Radiology:</strong> Digital X-RAY & NST (Non-Stress Test)</li>
-          <li><strong>Ultrasound:</strong> Advanced scanning services</li>
-          <li><strong>Cardiology:</strong> ECG, ECHO, TMT & consultations</li>
+          <li><strong>Laboratory:</strong> Fully automated Pathology & biochemistry</li>
+          <li><strong>Radiology:</strong> High-resolution ultrasound & CT</li>
+          <li><strong>Accreditation:</strong> NABH accredited clinical workflows</li>
         </ul>
-        <a href="#contact" class="link-arrow">Book Now →</a>
+        <a href="#laboratory" class="link-arrow">Read Details →</a>
       </div>
-      <div class="card">
+      <div class="card animate-on-scroll">
         <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/womens-health.png" alt="Maternal & Women's Health at ADARSH HOSPITAL Koppa" />
         <h3>Maternal & Women's Health</h3>
         <ul>
-          <li><strong>Maternity & OT:</strong> Well-equipped theatres</li>
-          <li><strong>Women's Health:</strong> Infertility & pregnancy clinics</li>
-          <li><strong>Vaccinations:</strong> Typhoid, Hep-B, HPV, Flu, Pneumonia</li>
+          <li><strong>Maternity & OT:</strong> Safe birth monitoring</li>
+          <li><strong>Obstetric Support:</strong> Prenatal care panels</li>
+          <li><strong>Gynaecologist:</strong> Specialized consultations</li>
         </ul>
-        <a href="#contact" class="link-arrow">Book Now →</a>
+        <a href="#womens-health" class="link-arrow">Read Details →</a>
       </div>
-      <div class="card">
+      <div class="card animate-on-scroll">
         <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/specialist-care.png" alt="Specialist & Surgical Care at ADARSH HOSPITAL Koppa" />
         <h3>Specialist & Surgical Care</h3>
         <ul>
-          <li><strong>Outpatient:</strong> Consults from 9 AM to 7 PM</li>
-          <li><strong>Laparoscopy:</strong> Abdominal endoscopic surgery</li>
-          <li><strong>Specialists:</strong> Diabetes, BP, Heart, Stroke, Asthma</li>
-          <li><strong>Other consults:</strong> Eye, Lung, Kidney & Urology</li>
-          <li><strong>Health Check-up:</strong> Master check-up (&gt;40 years)</li>
-          <li><strong>Pharmacy:</strong> 24x7 in-house pharmacy</li>
+          <li><strong>Outpatient:</strong> Consults from 9 AM to 8 PM</li>
+          <li><strong>OT Modalities:</strong> General & keyhole surgeries</li>
+          <li><strong>Cardiology:</strong> ECG, Echo, and TMT testing</li>
         </ul>
-        <a href="#contact" class="link-arrow">Book Now →</a>
+        <a href="#cardiology" class="link-arrow">Read Details →</a>
       </div>
     </div>
 
@@ -193,288 +205,123 @@
 
     <div class="services-grid">
       <!-- 1. Outpatient Consultation -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <circle cx="18" cy="12" r="4"></circle>
-            <polyline points="18 10 18 12 19.5 13.5"></polyline>
-          </svg>
-        </div>
-        <h3>Outpatient Consultation</h3>
-        <p>Available from 9:00 AM to 7:00 PM.</p>
+      <div class="service-item">
+        <h4>1. Outpatient Consultation</h4>
+        <p>Expert medical opinions and follow-ups across primary, medicine, surgery, and maternal health specialties.</p>
       </div>
 
       <!-- 2. Emergency Services -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="6" width="20" height="14" rx="2"></rect>
-            <path d="M6 6V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"></path>
-            <line x1="12" y1="10" x2="12" y2="16"></line>
-            <line x1="9" y1="13" x2="15" y2="13"></line>
-          </svg>
-        </div>
-        <h3>Emergency Services</h3>
-        <p>24x7 emergency care is available.</p>
+      <div class="service-item">
+        <h4>2. Emergency Services</h4>
+        <p>24x7 trauma care, accident response, acute cardiac stabilization, and urgent surgical treatments.</p>
       </div>
 
       <!-- 3. Inpatient Department -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 4v16"></path>
-            <path d="M2 11h20"></path>
-            <path d="M22 4v16"></path>
-            <path d="M6 8h4v3H6z"></path>
-            <path d="M14 8h4v3h-4z"></path>
-          </svg>
-        </div>
-        <h3>Inpatient Department</h3>
-        <p>Clean and infection-free wards (General, Special, and Deluxe rooms).</p>
+      <div class="service-item">
+        <h4>3. Inpatient Department (IPD)</h4>
+        <p>Comfortable recovery wards with round-the-clock nursing supervision and bedside medical monitoring.</p>
       </div>
 
       <!-- 4. I.C.U -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-          </svg>
-        </div>
-        <h3>I.C.U</h3>
-        <p>Well-equipped Intensive Care Unit.</p>
+      <div class="service-item">
+        <h4>4. Intensive Care Unit (ICU)</h4>
+        <p>Critical care support equipped with ventilators, defibrillators, multi-para monitors, and specialized staff.</p>
       </div>
 
       <!-- 5. N.I.C.U -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="6" cy="19" r="2"></circle>
-            <circle cx="18" cy="19" r="2"></circle>
-            <path d="M9 19h6"></path>
-            <path d="M16 12a6 6 0 0 0-12 0v3h12v-3Z"></path>
-            <path d="M21 8h-3v11"></path>
-            <path d="M3 12h14"></path>
-          </svg>
-        </div>
-        <h3>N.I.C.U</h3>
-        <p>Neonatal Intensive Care Unit.</p>
+      <div class="service-item">
+        <h4>5. Neonatal ICU (NICU)</h4>
+        <p>Dedicated clinical environment with phototherapy and warming pods for premature and high-risk newborns.</p>
       </div>
 
       <!-- 6. Maternity and OT -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 12h.01"></path>
-            <path d="M15 12h.01"></path>
-            <path d="M10 16c.5 1 1.5 1 2 1s1.5 0 2-1"></path>
-            <path d="M19 6.3C17.5 5 15.6 4.2 13.5 4.1a8.5 8.5 0 1 0 0 15.8c2.1-.1 4-1 5.5-2.2l1.2 1.2c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4l-1.2-1.2A8.5 8.5 0 0 0 19 6.3z"></path>
-          </svg>
-        </div>
-        <h3>Maternity and OT</h3>
-        <p>Well-equipped maternity and operation theatre.</p>
+      <div class="service-item">
+        <h4>6. Maternity Ward & OT</h4>
+        <p>Labor suites and modern operation theatres configured for safe Caesarean and standard deliveries.</p>
       </div>
 
       <!-- 7. Laboratory -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 3h12"></path>
-            <path d="M9 3v8.5a5 5 0 0 1-2 4l-1.5 2.5A2 2 0 0 0 7.2 21h9.6a2 2 0 0 0 1.7-3L17 15.5a5 5 0 0 1-2-4V3"></path>
-            <path d="M8.5 12h7"></path>
-          </svg>
-        </div>
-        <h3>Laboratory</h3>
-        <p>N.A.B.L accredited (S-DACC) laboratory.</p>
+      <div class="service-item">
+        <h4>7. Clinical Laboratory</h4>
+        <p>NABH-compliant automated biochemistry, hematology, immunology, and hormone assays.</p>
       </div>
 
       <!-- 8. Pharmacy -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path>
-            <path d="m8.5 8.5 7 7"></path>
-          </svg>
-        </div>
-        <h3>Pharmacy</h3>
-        <p>24x7 Pharmacy.</p>
+      <div class="service-item">
+        <h4>8. In-House Pharmacy</h4>
+        <p>Stocked with genuine drugs, critical medicines, surgical supplies, and patient healthcare products.</p>
       </div>
 
       <!-- 9. Radiology -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <path d="M8 7h8"></path>
-            <path d="M8 12h8"></path>
-            <path d="M8 17h8"></path>
-            <circle cx="12" cy="7" r="1.5"></circle>
-            <path d="M12 8.5v7"></path>
-            <circle cx="12" cy="17" r="1.5"></circle>
-          </svg>
-        </div>
-        <h3>Radiology</h3>
-        <p>Digital X-RAY and N.S.T (Non-Stress Test).</p>
+      <div class="service-item">
+        <h4>9. Radiology & Imaging</h4>
+        <p>Diagnostics including multi-slice CT scanning, digital X-rays, and multi-dimensional ultrasound studies.</p>
       </div>
 
       <!-- 10. Cardiology Services -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-            <path d="M3.5 12h2.5l2-3 2.5 6 1.5-4.5 2 1.5h2.5"></path>
-          </svg>
-        </div>
-        <h3>Cardiology Services</h3>
-        <p>ECG, ECHO, TMT & Cardiologist’s Consultation.</p>
+      <div class="service-item">
+        <h4>10. Cardiology Services</h4>
+        <p>Advanced non-invasive cardiac checkups including ECG, Treadmill Stress Testing (TMT), and 2D Echocardiograms.</p>
       </div>
 
       <!-- 11. Ultrasound -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 10a10 10 0 0 1 20 0"></path>
-            <path d="M6 12a6 6 0 0 1 12 0"></path>
-            <path d="M10 14a2 2 0 0 1 4 0"></path>
-            <circle cx="12" cy="15" r="1"></circle>
-            <path d="M12 16v4"></path>
-            <path d="M9 20h6"></path>
-          </svg>
-        </div>
-        <h3>Glance / Ultrasound</h3>
-        <p>Ultrasound scanning available.</p>
+      <div class="service-item">
+        <h4>11. Ultrasound Scan (USG)</h4>
+        <p>Highly detailed anomaly scans, follicular monitoring, pelvic, and abdominal ultrasonography.</p>
       </div>
 
       <!-- 12. Ambulance -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="4" width="13" height="12" rx="2"></rect>
-            <polygon points="15 6 22 9 22 16 15 16"></polygon>
-            <circle cx="6.5" cy="17.5" r="2.5"></circle>
-            <circle cx="16.5" cy="17.5" r="2.5"></circle>
-            <path d="M6 10h4"></path>
-            <path d="M8 8v4"></path>
-          </svg>
-        </div>
-        <h3>Ambulance</h3>
-        <p>Well-equipped mini I.C.U model ambulance service with a ventilator.</p>
+      <div class="service-item">
+        <h4>12. Ambulance Service</h4>
+        <p>Round-the-clock clinical transit ambulance equipped with oxygen cylinders and emergency medical kits.</p>
       </div>
 
       <!-- 13. Women's Health -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="9" r="6"></circle>
-            <path d="M12 15v6"></path>
-            <path d="M9 18h6"></path>
-            <path d="M12 11c-.5-.5-1.25-.5-1.75 0a1.2 1.2 0 0 0 0 1.7l1.75 1.8 1.75-1.8a1.2 1.2 0 0 0 0-1.7c-.5-.5-1.25-.5-1.75 0z" fill="currentColor"></path>
-          </svg>
-        </div>
-        <h3>Women's Health</h3>
-        <p>Infertility / Complicated pregnancy / well women's clinic.</p>
+      <div class="service-item">
+        <h4>13. Maternal & Women's Health</h4>
+        <p>Specialized treatments for menstrual problems, infertility, PCOD, hormonal imbalances, and menopause.</p>
       </div>
 
       <!-- 14. Laparoscopy -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="22" y1="12" x2="18" y2="12"></line>
-            <line x1="6" y1="12" x2="2" y2="12"></line>
-            <line x1="12" y1="6" x2="12" y2="2"></line>
-            <line x1="12" y1="22" x2="12" y2="18"></line>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-        </div>
-        <h3>Laparoscopy</h3>
-        <p>Laparoscopic (abdominal endoscopy) surgery.</p>
+      <div class="service-item">
+        <h4>14. Laparoscopy Surgery</h4>
+        <p>Minimally invasive keyhole surgeries for appendix, gall bladder, hernia, and reproductive organs.</p>
       </div>
 
       <!-- 15. Specialist Consultations -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4.5 2.5C4.5 1.5 5.5 1 6.5 1H10c1 0 2 1 2 2v10a4 4 0 0 1-8 0V7.5"></path>
-            <path d="M12 5h6.5a2.5 2.5 0 0 1 2.5 2.5v4a6 6 0 0 1-12 0"></path>
-            <circle cx="9" cy="18" r="3"></circle>
-          </svg>
-        </div>
-        <h3>Specialist Consultations</h3>
-        <p>Specialist Consultations for: Diabetes / Blood Pressure / Heart-related conditions / Asthma / Paralysis (Stroke) / Thyroid / Snakebite / Poisoning / De-addiction.</p>
+      <div class="service-item">
+        <h4>15. Visiting Senior Consultants</h4>
+        <p>Convenient local consultations from visiting senior specialists in orthopedics, urology, and neurology.</p>
       </div>
 
       <!-- 16. Ophthalmology -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-            <circle cx="12" cy="12" r="3"></circle>
-          </svg>
-        </div>
-        <h3>Ophthalmology</h3>
-        <p>Eye surgery.</p>
+      <div class="service-item">
+        <h4>16. Ophthalmology Clinic</h4>
+        <p>Detailed eye examinations, vision testing, glaucoma screening, and management of diabetic retinopathy.</p>
       </div>
 
       <!-- 17. Pulmonology -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v7"></path>
-            <path d="M12 10C9.5 8 5 9.5 5 13.5c0 3.5 3 5.5 7 6.5"></path>
-            <path d="M12 10c2.5-2 7-.5 7 3.5 0 3.5-3 5.5-7 6.5"></path>
-            <path d="M8 14h2"></path>
-            <path d="M14 14h2"></path>
-          </svg>
-        </div>
-        <h3>Pulmonology</h3>
-        <p>Lung specialist consultation available.</p>
+      <div class="service-item">
+        <h4>17. Pulmonary Care</h4>
+        <p>Asthma management, chronic bronchitis care, and diagnostic Pulmonary Function Tests (PFT).</p>
       </div>
 
       <!-- 18. Nephrology & Urology -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 8C5.5 8 5 11 5 13s.5 5 3 5c1.5 0 2-1.5 2-4V9c0-1 0-1-2-1Z"></path>
-            <path d="M16 8c2.5 0 3 3 3 5s-.5 5-3 5c-1.5 0-2-1.5-2-4V9c0-1 0-1 2-1Z"></path>
-            <path d="M9.5 13.5c.5.5.5 1.5 1 2.5l1.5 2"></path>
-            <path d="M14.5 13.5c-.5.5-.5 1.5-1 2.5l-1.5 2"></path>
-          </svg>
-        </div>
-        <h3>Nephrology & Urology</h3>
-        <p>Kidney and bladder specialist consultation available.</p>
+      <div class="service-item">
+        <h4>18. Kidney & Urinary Care</h4>
+        <p>Diagnosis of kidney stones, urinary tract infections (UTI), and metabolic renal disorders.</p>
       </div>
 
       <!-- 19. Health Check-up -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-            <line x1="9" y1="12" x2="10" y2="13"></line>
-            <line x1="12" y1="11" x2="16" y2="11"></line>
-            <line x1="9" y1="16" x2="10" y2="17"></line>
-            <line x1="12" y1="15" x2="16" y2="15"></line>
-          </svg>
-        </div>
-        <h3>Health Check-up</h3>
-        <p>Master Health check-up for men and women (above 40 years of age).</p>
+      <div class="service-item">
+        <h4>19. Preventive Health Checkups</h4>
+        <p>Structured medical packages designed for early detection of systemic disorders and cardiac checkups.</p>
       </div>
 
       <!-- 20. Vaccinations -->
-      <div class="service-item-card">
-        <div class="service-icon-box">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m18 2 4 4"></path>
-            <path d="m17 7 3-3"></path>
-            <path d="M19 9 9 19H5v-4L15 5Z"></path>
-            <path d="m3 21 3-3"></path>
-            <path d="m9 15-4-4"></path>
-          </svg>
-        </div>
-        <h3>Vaccinations</h3>
-        <p>Vaccinations for children and adults (Vaccines available for the prevention of Typhoid / Hepatitis-B (Jaundice) / Cervical Cancer / Flu / Pneumonia).</p>
+      <div class="service-item">
+        <h4>20. Vaccination Services</h4>
+        <p>Essential childhood immunizations, pediatric vaccines, and adult protective vaccinations.</p>
       </div>
     </div>
 
@@ -485,24 +332,25 @@
 <section class="stats-section">
   <div class="container">
     <div class="stats">
-      <div class="stat"><strong>95%</strong><span>Quality Rating</span></div>
-      <div class="stat"><strong>12,500+</strong><span>Patients a Year</span></div>
-      <div class="stat"><strong>24</strong><span>Team Members</span></div>
-      <div class="stat"><strong>11,900+</strong><span>Happy Smiles</span></div>
+      <div class="stat"><strong>15+</strong><span>Years of Service</span></div>
+      <div class="stat"><strong>15,000+</strong><span>Happy Patients</span></div>
+      <div class="stat"><strong>10+</strong><span>Qualified Doctors</span></div>
+      <div class="stat"><strong>9</strong><span>Health Packages</span></div>
+      <div class="stat"><strong>24×7</strong><span>Emergency Available</span></div>
     </div>
   </div>
 </section>
 
-<!-- Departments & Doctors -->
-<section id="departments" class="departments">
+<!-- Our Doctors -->
+<section id="doctors" class="departments">
   <div class="container">
     <p class="eyebrow center">Our Specialists</p>
-    <h2 class="center">Medical Departments & Doctors</h2>
+    <h2 class="center">Medical Team & Doctors</h2>
     <p class="section-desc center">Meet our highly qualified team of resident specialists and consultants committed to your health and well-being.</p>
 
     <div class="grid grid-4">
       <!-- Medicine -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
         </div>
@@ -515,7 +363,7 @@
       </div>
 
       <!-- Surgery -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
         </div>
@@ -528,7 +376,7 @@
       </div>
 
       <!-- Obstetrics & Gynaecology -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/founder.jpeg" alt="Dr. Nataraj R. Rao" class="dept-card-img" />
         </div>
@@ -536,25 +384,25 @@
           <span class="dept-badge">Obstetrics & Gynaecology</span>
           <h3 class="dept-card-title">Dr. Nataraj R. Rao</h3>
           <p class="dept-card-edu">MBBS, MD, DNB</p>
-          <p class="dept-card-desc">Providing compassionate maternal care, pregnancy management, and comprehensive women's healthcare.</p>
+          <p class="dept-card-desc">Consultant Obstetrician & Gynaecologist (KMC Reg. No: 31199). Compassionate pregnancy care and women's health treatments.</p>
         </div>
       </div>
 
       <!-- Anesthesia -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/co-founder.jpeg" alt="Dr. Anita N. Rao" class="dept-card-img" />
+          <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/co-founder.png" alt="Dr. Anita N. Rao" class="dept-card-img" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Anesthesia</span>
-          <h3 class="dept-card-title">Dr. Anita N. Rao</h3>
+          <h3 class="dept-card-title">Dr. Anitha N. Rao</h3>
           <p class="dept-card-edu">MBBS, MD, DA, DNB</p>
-          <p class="dept-card-desc">Specialized in pain management, local and general anesthesia, and critical surgical support.</p>
+          <p class="dept-card-desc">Consultant Anaesthesiologist (KMC Reg. No: 35287). Pain management, critical care, and anesthesia for general surgery.</p>
         </div>
       </div>
 
       <!-- Ophthalmology -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
         </div>
@@ -567,7 +415,7 @@
       </div>
 
       <!-- Dental -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/bhagwan.jpeg" alt="Dr. Bhagwan B. K." class="dept-card-img" />
         </div>
@@ -580,7 +428,7 @@
       </div>
 
       <!-- Laparoscopy -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/rajesh%20bhakta.jpeg" alt="Dr. Rajesh Bhakta" class="dept-card-img" />
         </div>
@@ -593,7 +441,7 @@
       </div>
 
       <!-- Radiology -->
-      <div class="dept-card">
+      <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/sania-sabahi.jpeg" alt="Dr. Sania Sabahi" class="dept-card-img" />
         </div>
@@ -608,7 +456,237 @@
   </div>
 </section>
 
-<!-- Packages -->
+<!-- =====================================================
+     NEW CLINICAL DEPARTMENT SECTIONS
+     ===================================================== -->
+
+<!-- Laboratory Department -->
+<section id="laboratory" class="dept-detail-section">
+  <div class="container">
+    <div class="dept-detail-grid">
+      <div class="dept-detail-content animate-on-scroll">
+        <p class="eyebrow">Diagnostic Excellence</p>
+        <h2>Laboratory Department</h2>
+        <p>Our state-of-the-art laboratory provides comprehensive clinical testing under stringent quality control. We cover a complete spectrum of pathological investigations to assist in precise diagnosis and therapeutic monitoring.</p>
+        <div class="features-bullet-grid">
+          <div class="bullet-item"><i data-lucide="microscope"></i> Hematology</div>
+          <div class="bullet-item"><i data-lucide="flask-conical"></i> Biochemistry</div>
+          <div class="bullet-item"><i data-lucide="dna"></i> Histopathology</div>
+          <div class="bullet-item"><i data-lucide="shield-check"></i> Microbiology</div>
+          <div class="bullet-item"><i data-lucide="activity"></i> Hormone Studies</div>
+          <div class="bullet-item"><i data-lucide="test-tube-2"></i> Special Lab Assays</div>
+        </div>
+        <a href="#contact" class="btn btn-primary">Request a Test</a>
+      </div>
+      <div class="dept-detail-image animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/diagnostics.png" alt="Pathology Laboratory Diagnostics" class="img-responsive rounded shadow-card" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Radiology Department -->
+<section id="radiology" class="dept-detail-section">
+  <div class="container">
+    <div class="dept-detail-grid reverse">
+      <div class="dept-detail-image animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/hospital-exterior.jpeg" alt="Radiology Imaging Suite" class="img-responsive rounded shadow-card" />
+      </div>
+      <div class="dept-detail-content animate-on-scroll">
+        <p class="eyebrow">Advanced Imaging</p>
+        <h2>Radiology Department</h2>
+        <p>Equipped with modern high-resolution imaging modalities, our radiology department offers rapid and highly accurate anatomical diagnostic services, supporting clinicians in critical medical decisions.</p>
+        <div class="features-bullet-grid">
+          <div class="bullet-item"><i data-lucide="scan"></i> Ultrasound Scanning</div>
+          <div class="bullet-item"><i data-lucide="box"></i> High-Slice CT Scan</div>
+          <div class="bullet-item"><i data-lucide="binary"></i> Digital X-Ray</div>
+          <div class="bullet-item"><i data-lucide="eye"></i> Doppler Imaging</div>
+        </div>
+        <a href="#contact" class="btn btn-primary">Schedule a Scan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Women's Health Section -->
+<section id="womens-health" class="dept-detail-section">
+  <div class="container">
+    <div class="dept-detail-grid">
+      <div class="dept-detail-content animate-on-scroll">
+        <p class="eyebrow">Comprehensive Gynaecology</p>
+        <h2>Maternal & Women's Health</h2>
+        <p>Led by senior obstetrician Dr. Nataraj R. Rao, our obstetrics and gynaecology service provides dedicated maternal supervision, pelvic scanning, hormonal profile audits, infertility workups, and cancer screens.</p>
+        <div class="features-bullet-grid">
+          <div class="bullet-item"><i data-lucide="baby"></i> Maternal Care</div>
+          <div class="bullet-item"><i data-lucide="heart"></i> Obstetrics Care</div>
+          <div class="bullet-item"><i data-lucide="sparkles"></i> Gynaecology Care</div>
+          <div class="bullet-item"><i data-lucide="users-2"></i> Infertility Panels</div>
+          <div class="bullet-item"><i data-lucide="activity"></i> PCOD/PCOS support</div>
+          <div class="bullet-item"><i data-lucide="stethoscope"></i> Women's Wellness</div>
+        </div>
+        <a href="#contact" class="btn btn-primary">Consult Gynecologist</a>
+      </div>
+      <div class="dept-detail-image animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/ultrasound-scanning.png" alt="Doctor performing ultrasound scanning on maternal patient" class="img-responsive rounded shadow-card" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cardiology Section -->
+<section id="cardiology" class="dept-detail-section">
+  <div class="container">
+    <div class="dept-detail-grid reverse">
+      <div class="dept-detail-image animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/specialist-care.png" alt="Cardiology Lab Testing" class="img-responsive rounded shadow-card" />
+      </div>
+      <div class="dept-detail-content animate-on-scroll">
+        <p class="eyebrow">Cardiovascular Health</p>
+        <h2>Cardiology Services</h2>
+        <p>We provide full-spectrum non-invasive cardiology investigations to monitor and diagnose coronary artery disease, structural heart problems, and rhythm abnormalities.</p>
+        <div class="features-bullet-grid">
+          <div class="bullet-item"><i data-lucide="heart-pulse"></i> ECG (Electrocardiogram)</div>
+          <div class="bullet-item"><i data-lucide="heart-handshake"></i> 2D Echo (Echocardiography)</div>
+          <div class="bullet-item"><i data-lucide="activity-square"></i> TMT (Treadmill Test)</div>
+          <div class="bullet-item"><i data-lucide="stethoscope"></i> Cardiology Consultation</div>
+        </div>
+        <a href="#contact" class="btn btn-primary">Book Cardiac Exam</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Shalini Diagnostics Section -->
+<section id="diagnostics" class="dept-detail-section">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <p class="eyebrow center">Diagnostic Division</p>
+      <h2 class="center">Shalini Diagnostics & Health Centre</h2>
+      <p class="section-desc center">A premium medical diagnostic division of ADARSH HOSPITAL. Operating with top-tier automation and clinical supervision.</p>
+    </div>
+    
+    <div class="diagnostics-box animate-on-scroll">
+      <div class="text-center">
+        <h3>Shalini Diagnostics & Health Centre</h3>
+        <p class="diag-sub">A Division of ADARSH HOSPITAL</p>
+      </div>
+      <div class="diag-info-grid">
+        <div class="diag-col">
+          <h4><i data-lucide="phone" style="display:inline; width:14px; margin-right:4px;"></i> Call Contacts</h4>
+          <p><strong>7019470522</strong></p>
+          <p><strong>8088984574</strong></p>
+        </div>
+        <div class="diag-col">
+          <h4><i data-lucide="mail" style="display:inline; width:14px; margin-right:4px;"></i> Email Address</h4>
+          <p>shalinidiagnostics@gmail.com</p>
+        </div>
+        <div class="diag-col">
+          <h4><i data-lucide="clock" style="display:inline; width:14px; margin-right:4px;"></i> Diagnostics Hours</h4>
+          <p><strong>Mon – Sat:</strong> 9:00 AM – 5:00 PM</p>
+          <p><strong>Sunday:</strong> 9:00 AM – 1:00 PM</p>
+        </div>
+        <div class="diag-col">
+          <h4><i data-lucide="microscope" style="display:inline; width:14px; margin-right:4px;"></i> Laboratory timing</h4>
+          <p><strong>Daily Operations:</strong> 7:00 AM – 7:00 PM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Emergency Services Detail -->
+<section id="emergency" class="dept-detail-section">
+  <div class="container">
+    <div class="dept-detail-grid">
+      <div class="dept-detail-content animate-on-scroll">
+        <p class="eyebrow">Critical Response</p>
+        <h2>24x7 Emergency Services</h2>
+        <p>Our emergency department is staffed with acute-care specialists and equipped with advanced resuscitation systems, critical care beds, and round-the-clock ambulance dispatch to manage clinical emergencies.</p>
+        <div class="features-bullet-grid">
+          <div class="bullet-item"><i data-lucide="clock"></i> 24x7 Emergency Room</div>
+          <div class="bullet-item"><i data-lucide="ambulance"></i> Ambulance Dispatch</div>
+          <div class="bullet-item"><i data-lucide="activity-square"></i> Trauma Care</div>
+          <div class="bullet-item"><i data-lucide="shield-alert"></i> ICU Resuscitation</div>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:20px;">
+          <a href="tel:6360993646" class="btn btn-primary"><i data-lucide="phone"></i> Call Emergency (63609 93646)</a>
+          <a href="tel:7019948944" class="btn btn-outline"><i data-lucide="ambulance"></i> Ambulance Hotline (70199 48944)</a>
+        </div>
+      </div>
+      <div class="dept-detail-image animate-on-scroll">
+        <div class="ambulance-gallery">
+          <div class="carousel-container">
+            <div class="carousel-slide active">
+              <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/ambulance-straight.jpeg" alt="ADARSH HOSPITAL Ambulance - Front View" />
+              <span class="carousel-caption">Front View</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/ambulance-left.jpeg" alt="ADARSH HOSPITAL Ambulance - Left View" />
+              <span class="carousel-caption">Left Side View</span>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/ambulance-right.jpeg" alt="ADARSH HOSPITAL Ambulance - Right View" />
+              <span class="carousel-caption">Right Side View</span>
+            </div>
+          </div>
+          <div class="carousel-nav">
+            <button class="carousel-prev" aria-label="Previous image">◀</button>
+            <button class="carousel-next" aria-label="Next image">▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="gallery-section">
+  <div class="container">
+    <p class="eyebrow center">Facilities</p>
+    <h2 class="center">Hospital Gallery</h2>
+    <p class="section-desc center">Take a virtual tour of our modern clinical infrastructure, testing laboratories, and patient environment.</p>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/hospital-exterior.jpeg" alt="ADARSH HOSPITAL Exterior" />
+        <div class="gallery-overlay">
+          <h4>Hospital Exterior</h4>
+          <p>Our facility located on Ambedkar Road, Upperpet, Koppa.</p>
+        </div>
+      </div>
+      <div class="gallery-item animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/emergency-care.png" alt="Emergency Services Wing" />
+        <div class="gallery-overlay">
+          <h4>Emergency Services</h4>
+          <p>Equipped for 24x7 trauma, critical support, and resuscitation.</p>
+        </div>
+      </div>
+      <div class="gallery-item animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/diagnostics.png" alt="Advanced Pathology Lab" />
+        <div class="gallery-overlay">
+          <h4>Pathology Laboratory</h4>
+          <p>High-precision biochemistry, hematology, and hormone assays.</p>
+        </div>
+      </div>
+      <div class="gallery-item animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/womens-health.png" alt="Maternal Ward" />
+        <div class="gallery-overlay">
+          <h4>Women's Health & Maternity</h4>
+          <p>Private, hygienic monitoring wards and delivery suites.</p>
+        </div>
+      </div>
+      <div class="gallery-item animate-on-scroll">
+        <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/specialist-care.png" alt="Consultation Rooms" />
+        <div class="gallery-overlay">
+          <h4>Specialist Consulting Suite</h4>
+          <p>Comfortable outpatient consulting chambers for clinical evaluations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Packages Summary on Home Page -->
 <section id="packages" class="packages">
   <div class="container">
     <p class="eyebrow center">Packages</p>
@@ -616,48 +694,52 @@
     <p class="section-desc center">Preventive checkup packages designed for early detection and peace of mind — under one roof at ADARSH HOSPITAL, Koppa.</p>
 
     <div class="grid grid-3">
-      <div class="pkg-card">
+      <div class="pkg-card animate-on-scroll">
         <p class="pkg-loc">ADARSH HOSPITAL · Koppa 577126</p>
-        <h3>Executive Master Checkup</h3>
-        <p class="price">₹4,999/-</p>
+        <h3>Executive Master Health Checkup</h3>
+        <p class="price">₹5,000/-</p>
         <ul>
           <li>Physician Consultation</li>
           <li>Complete Hemogram & ESR</li>
-          <li>TSH, T3/T4</li>
+          <li>Thyroid Profile (T3, T4, TSH)</li>
           <li>Lipid Profile & LFT</li>
-          <li>Chest X-Ray (PA view)</li>
-          <li>ECG</li>
+          <li>Chest X-Ray, TMT, ECHO</li>
+          <li>Abdominal Ultrasound Scanning</li>
         </ul>
-        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+        <a href="packages.html" class="btn btn-primary btn-block">Details & Booking</a>
       </div>
-      <div class="pkg-card featured">
+      <div class="pkg-card featured animate-on-scroll">
         <p class="pkg-loc">ADARSH HOSPITAL · Koppa 577126</p>
         <h3>Master Health Checkup</h3>
-        <p class="price">₹2,999/-</p>
+        <p class="price">₹3,000/-</p>
         <ul>
           <li>Complete Hemogram & ESR</li>
-          <li>TSH</li>
+          <li>TSH & Lipid Profile & LFT</li>
           <li>TMT / ECHO</li>
           <li>Urine & Stool Analysis</li>
-          <li>Blood Grouping & Rh</li>
-          <li>Lipid Profile & LFT</li>
+          <li>ECG & Chest X-Ray</li>
+          <li>Abdominal Ultrasound & Phys. Consult</li>
         </ul>
-        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+        <a href="packages.html" class="btn btn-primary btn-block">Details & Booking</a>
       </div>
-      <div class="pkg-card">
+      <div class="pkg-card animate-on-scroll">
         <p class="pkg-loc">ADARSH HOSPITAL · Koppa 577126</p>
         <h3>Mini Health Checkup</h3>
-        <p class="price">₹1,499/-</p>
+        <p class="price">₹1,500/-</p>
         <ul>
-          <li>Complete Hemogram</li>
-          <li>Blood Grouping & Rh</li>
+          <li>Complete Hemogram & ESR</li>
+          <li>Blood Grouping & Rh Typing</li>
           <li>FBS / PPBS / HbA1C</li>
           <li>Lipid Profile</li>
-          <li>Urine Analysis</li>
-          <li>ECG</li>
+          <li>Serum Creatinine & Urine Analysis</li>
+          <li>ECG (Electrocardiogram)</li>
         </ul>
-        <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+        <a href="packages.html" class="btn btn-primary btn-block">Details & Booking</a>
       </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 48px;" class="animate-on-scroll">
+      <a href="packages.html" class="btn btn-outline" style="min-width: 250px;"><i data-lucide="sparkles"></i> View All 9 Health Packages</a>
     </div>
   </div>
 </section>
@@ -679,8 +761,6 @@
   </div>
 </section>
 
-
-
 <!-- Testimonials -->
 <section class="testimonials">
   <div class="container">
@@ -693,8 +773,61 @@
       <div class="testimonial"><p>"One of the best diagnostic and hospital facilities in the malnad region. Highly professional experience."</p><span>— Kiran Kumar</span></div>
       <div class="testimonial"><p>"My consultation was professional and reassuring. Dedicated doctors and courteous, attentive staff."</p><span>— Bagavathi L.</span></div>
       <div class="testimonial"><p>"Excellent facility. Friendly and professional staff. Would recommend to family and friends."</p><span>— Shivaprasad Rao</span></div>
-      <div class="testimonial"><p>"International-quality facility in a small town. No need to visit a large city for state-of-the-art care."</p><span>— Asha Bhat</span></div>
-      <div class="testimonial"><p>"Reliable results with the latest machines and the sweetest staff. Very happy Adarsha is here in Koppa."</p><span>— Krishna Bhat</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="faq-section">
+  <div class="container">
+    <p class="eyebrow center">FAQ</p>
+    <h2 class="center">Frequently Asked Questions</h2>
+    <p class="section-desc center">Find quick answers to common questions about appointments, laboratory reporting, and clinical services.</p>
+    
+    <div class="faq-container">
+      <div class="faq-item animate-on-scroll">
+        <details>
+          <summary>What are the hospital working hours?</summary>
+          <div class="faq-content">
+            Our general outpatient consultations and diagnostic services run:
+            <br><strong>Monday - Saturday:</strong> 9:00 AM – 2:00 PM and 5:00 PM – 8:00 PM
+            <br><strong>Sunday:</strong> 9:00 AM – 1:00 PM.
+            <br>Note that emergency care and critical ambulance dispatch operate 24x7.
+          </div>
+        </details>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <details>
+          <summary>How can I book a health checkup package?</summary>
+          <div class="faq-content">
+            You can book any of our 9 health checkup packages by calling our hotlines directly (+91 63609 93646 / +91 70199 48944) or by filling out the "Request a Callback" form in the Contact section of our website.
+          </div>
+        </details>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <details>
+          <summary>Are emergency services available 24 hours a day?</summary>
+          <div class="faq-content">
+            Yes, ADARSH HOSPITAL provides round-the-clock (24/7) emergency care, trauma management, critical care support, and medical ambulance services.
+          </div>
+        </details>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <details>
+          <summary>Where is Shalini Diagnostics located?</summary>
+          <div class="faq-content">
+            Shalini Diagnostics & Health Centre is a division of ADARSH HOSPITAL and operates within the same medical campus at Ambedkar Road, Upperpet, Koppa. Its laboratory services open early from 7:00 AM to 7:00 PM daily.
+          </div>
+        </details>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <details>
+          <summary>Is ADARSH HOSPITAL accredited?</summary>
+          <div class="faq-content">
+            Yes, ADARSH HOSPITAL is a proud <strong>NABH Accredited Hospital</strong>, upholding supreme standards of patient safety, clinical quality, hygiene, and ethical medical care.
+          </div>
+        </details>
+      </div>
     </div>
   </div>
 </section>
@@ -713,7 +846,7 @@
         </div>
         <div class="info-text-wrapper">
           <h4>Address</h4>
-          <p>ADARSH HOSPITAL, Main Road, Koppa,<br>Chikkamagaluru District, Karnataka — 577126</p>
+          <p>ADARSH HOSPITAL, Ambedkar Road,<br>Upperpet, Koppa – 577126, Karnataka</p>
         </div>
       </div>
       <div class="info-item">
@@ -721,8 +854,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
         <div class="info-text-wrapper">
-          <h4>Phone</h4>
-          <p>+91 98450 12345 · +91 82770 45678</p>
+          <h4>Phone Numbers</h4>
+          <p>+91 63609 93646 · +91 70199 48944</p>
         </div>
       </div>
       <div class="info-item">
@@ -730,8 +863,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
         <div class="info-text-wrapper">
-          <h4>Email</h4>
-          <p>care@adarshahospitalkoppa.in</p>
+          <h4>Email Address</h4>
+          <p>adarshhospkoppa@gmail.com</p>
         </div>
       </div>
       <div class="info-item">
@@ -740,8 +873,13 @@
         </div>
         <div class="info-text-wrapper">
           <h4>Working Hours</h4>
-          <p>Mon – Sat: 08:00 AM – 08:00 PM · Sunday: 09:00 AM – 01:00 PM</p>
+          <p>Mon – Sat: 9:00 AM – 2:00 PM, 5:00 PM – 8:00 PM<br>Sunday: 9:00 AM – 1:00 PM</p>
         </div>
+      </div>
+      
+      <!-- Google Map Frame -->
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.3262624391217!2d75.35338787565757!3d13.518606102604627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbad5c0a1a5b825%3A0xeab3a693c12fcdff!2sAmbedkar%20Rd%2C%20Koppa%2C%20Karnataka%20577126!5e0!3m2!1sen!2sin!4v1780000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
 
@@ -751,15 +889,24 @@
       <input type="tel" placeholder="Phone number" required />
       <input type="email" placeholder="Email address" required />
       <select required>
-        <option value="" disabled selected>Select service</option>
-        <option>Ultrasound</option>
-        <option>CT Scan / Radiology</option>
-        <option>Cardiology</option>
-        <option>Dental Radiology</option>
-        <option>Health Checkup</option>
+        <option value="" disabled selected>Select service/package</option>
+        <option>Executive Master Health Checkup (₹5,000)</option>
+        <option>Master Health Checkup (₹3,000)</option>
+        <option>Mini Health Checkup (₹1,500)</option>
+        <option>Complete Cardiac Package (₹3,000)</option>
+        <option>Kidney Stone Screening (₹1,500)</option>
+        <option>Diabetes Screening (₹1,500)</option>
+        <option>Well Women Checkup (₹4,000)</option>
+        <option>Infertility Package (Couple)</option>
+        <option>PCOD Package (₹2,000)</option>
+        <option>Laboratory / Diagnostics</option>
+        <option>Radiology / Ultrasound / CT Scan</option>
+        <option>Cardiology / ECG / ECHO / TMT</option>
+        <option>Obstetrics & Gynaecology Care</option>
       </select>
       <textarea placeholder="Message" rows="4"></textarea>
       <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+      <a href="tel:6360993646" class="btn btn-outline btn-block btn-emergency" style="margin-top:12px; text-align:center;"><i data-lucide="phone"></i> 24x7 Emergency hotline</a>
     </form>
   </div>
 </section>
@@ -781,27 +928,31 @@
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#packages">Packages</a></li>
+        <li><a href="#doctors">Doctors</a></li>
+        <li><a href="#laboratory">Laboratory</a></li>
+        <li><a href="packages.html">Packages</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
-        <li>Ultrasound</li>
-        <li>CT Scan & Radiology</li>
-        <li>Cardiology</li>
-        <li>Dental Radiology</li>
-        <li>Laboratory</li>
+        <li><a href="#laboratory">Laboratory</a></li>
+        <li><a href="#radiology">Radiology</a></li>
+        <li><a href="#cardiology">Cardiology</a></li>
+        <li><a href="#womens-health">Women's Health</a></li>
+        <li><a href="#emergency">Emergency Care</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li>Koppa, Chikkamagaluru — 577126</li>
-        <li>+91 98450 12345</li>
-        <li>care@adarshahospitalkoppa.in</li>
+      <h4>Contact Info</h4>
+      <ul class="footer-contact">
+        <li><strong>ADARSH HOSPITAL</strong></li>
+        <li>Ambedkar Road, Upperpet,</li>
+        <li>Koppa – 577126, Karnataka</li>
+        <li>Phone: +91 63609 93646</li>
+        <li>Phone: +91 70199 48944</li>
+        <li>Email: adarshhospkoppa@gmail.com</li>
       </ul>
     </div>
   </div>
@@ -810,6 +961,57 @@
   </div>
 </footer>
 
+<!-- Floating Call & WhatsApp Buttons -->
+<div class="floating-contact">
+  <a href="https://wa.me/916360993646" class="float-btn whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </a>
+  <a href="tel:6360993646" class="float-btn phone-float" aria-label="Call Hospital">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+</div>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to Top">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
 <script src="main.js"></script>
+<script>
+  // Add Back to Top functionality
+  const btt = document.getElementById('back-to-top');
+  if (btt) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        btt.classList.add('active');
+      } else {
+        btt.classList.remove('active');
+      }
+    });
+    btt.onclick = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  }
+
+  // Smooth hash scrolling with offset for sticky header
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        const headerOffset = 80;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>

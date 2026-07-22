@@ -432,7 +432,7 @@
         } else if (nameLower.includes("nataraj r. rao") || nameLower.includes("nataraj rao")) {
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         } else if (nameLower.includes("anita n. rao") || nameLower.includes("anitha n. rao") || nameLower.includes("anita rao") || nameLower.includes("anitha rao")) {
-          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/co-founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/co-founder.png" alt="${doc.name}" class="dept-card-img" />`;
         }
 
         grid.innerHTML += `
@@ -476,16 +476,18 @@
       packages.forEach((pkg, index) => {
         const isFeatured = index === 1; // Middle item of 3
         const listItems = (pkg.features || []).map(f => `<li>${f}</li>`).join('');
+        const displayPrice = pkg.price ? pkg.price.replace('?', '₹') : '';
+        const displayLocation = pkg.location ? pkg.location.replace(/[^\x00-\x7F]+/g, ' · ').replace('Adarsha Hospital', 'ADARSH HOSPITAL') : 'ADARSH HOSPITAL · Koppa 577126';
         
         grid.innerHTML += `
           <div class="pkg-card ${isFeatured ? 'featured' : ''}">
-            <p class="pkg-loc">${pkg.location || 'ADARSH HOSPITAL · Koppa 577126'}</p>
+            <p class="pkg-loc">${displayLocation}</p>
             <h3>${pkg.name}</h3>
-            <p class="price">${pkg.price}</p>
+            <p class="price">${displayPrice}</p>
             <ul>
               ${listItems}
             </ul>
-            <a href="#contact" class="btn btn-primary btn-block">Book Now</a>
+            <a href="packages.html" class="btn btn-primary btn-block">Details & Booking</a>
           </div>
         `;
       });
@@ -542,9 +544,62 @@
     });
   }
   
+  // --- Scroll-Triggered Animations ---
+  function initScrollAnimations() {
+    const animItems = document.querySelectorAll('.animate-on-scroll');
+    if (animItems.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    animItems.forEach(item => {
+      observer.observe(item);
+    });
+  }
+  
+  // --- Ambulance Carousel ---
+  function initAmbulanceCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (slides.length === 0) return;
+    let currentSlide = 0;
+    
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      currentSlide = (index + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    
+    if (prevBtn && nextBtn) {
+      prevBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide - 1); };
+      nextBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide + 1); };
+    }
+    
+    // Auto-slide every 5 seconds
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 5000);
+  }
+
   // Initialize mobile navigation
   initMobileNav();
 
   // Run Supabase initialization
-  initSupabase();
+  initSupabase().finally(() => {
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+    initScrollAnimations();
+    initAmbulanceCarousel();
+  });
 })();
