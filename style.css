@@ -1467,7 +1467,17 @@ body::after {
   background-color: var(--secondary);
   color: var(--accent) !important;
 }
-.nav-item-dropdown:hover .dropdown-menu {
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: transparent;
+}
+.nav-item-dropdown:hover .dropdown-menu,
+.nav-item-dropdown.active .dropdown-menu {
   display: block;
 }
 @media (max-width: 768px) {

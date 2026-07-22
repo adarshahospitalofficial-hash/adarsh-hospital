@@ -591,6 +591,25 @@
     }, 5000);
   }
 
+  // --- Dropdown Click Toggle for Mobile & Desktop Touch ---
+  function initDropdown() {
+    const dropdown = document.querySelector('.nav-item-dropdown');
+    const trigger = document.querySelector('.dropdown-trigger');
+    
+    if (!dropdown || !trigger) return;
+    
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+    });
+    
+    // Close dropdown when clicking anywhere else
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('active');
+    });
+  }
+
   // Initialize mobile navigation
   initMobileNav();
 
@@ -601,5 +620,6 @@
     }
     initScrollAnimations();
     initAmbulanceCarousel();
+    initDropdown();
   });
 })();
