@@ -157,12 +157,12 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   line-height: 1.1;
   text-transform: uppercase;
   letter-spacing: -1.5px;
-  background: linear-gradient(135deg, oklch(28% .11 260) 0%, oklch(63% .24 350) 50%, oklch(50% .2 200) 100%);
+  background: linear-gradient(135deg, #0052d4 0%, #4364f7 35%, #e92a9d 70%, #ff6b6b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 2px 8px rgba(2, 36, 94, 0.15));
+  filter: drop-shadow(0 2px 10px rgba(67, 100, 247, 0.2));
 }
 .hero-tags {
   color: var(--gold);
