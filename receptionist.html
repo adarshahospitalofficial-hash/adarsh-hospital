@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receptionist Portal — Adarsha Hospital</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="receptionist-body">
+
+  <!-- Header -->
+  <header class="portal-header">
+    <div class="brand">
+      <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/logo.png" alt="Adarsha Hospital Logo" style="height: 36px;">
+      <h1>Adarsha Hospital Portal</h1>
+    </div>
+    
+    <!-- Tab Controls (Only shown when logged in) -->
+    <div id="portal-nav" class="portal-nav-tabs" style="display: none;">
+      <button class="portal-tab-btn active" onclick="switchTab('bookings')">Bookings</button>
+      <button class="portal-tab-btn" onclick="switchTab('doctors')">Doctor Availability</button>
+    </div>
+
+    <!-- User Controls -->
+    <div id="user-controls" style="display: none;">
+      <button class="btn btn-outline btn-sm" onclick="handleLogout()" style="color: #fff; border-color: rgba(255,255,255,0.4);"><i data-lucide="log-out" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i>Logout</button>
+    </div>
+  </header>
+
+  <!-- Login Section -->
+  <div id="login-section" class="login-wrapper">
+    <div class="login-card">
+      <h2>Reception Login</h2>
+      <p>Secure access for Adarsha Hospital staff</p>
+      
+      <form id="login-form">
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+          <input type="email" id="login-email" class="form-input" placeholder="receptionist@adarshahospital.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 24px;">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard Section (Hidden by default) -->
+  <main id="dashboard-section" class="dashboard-container" style="display: none;">
+    
+    <!-- Summary Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span>Pending Requests</span>
+        <h3 id="stat-pending">0</h3>
+      </div>
+      <div class="stat-card">
+        <span>Confirmed (Today)</span>
+        <h3 id="stat-confirmed" style="color: #059669;">0</h3>
+      </div>
+      <div class="stat-card">
+        <span>Cancelled</span>
+        <h3 id="stat-cancelled" style="color: #dc2626;">0</h3>
+      </div>
+    </div>
+
+    <!-- Tab 1: Bookings Queue -->
+    <div id="tab-bookings" class="dashboard-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">Appointments Queue</h2>
+        <div class="panel-actions">
+          <select id="filter-status" class="form-input" style="padding: 8px 12px; width: auto;" onchange="loadBookings()">
+            <option value="all">All Statuses</option>
+            <option value="pending" selected>Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="loadBookings()"><i data-lucide="refresh-cw" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Refresh</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Phone</th>
+              <th>Requested Service</th>
+              <th>Preferred Doctor</th>
+              <th>Booking Date</th>
+              <th>Status</th>
+              <th>Token</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookings-table-body">
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+        <div id="bookings-loading" class="loading-spinner"></div>
+        <div id="bookings-empty" style="display: none; text-align: center; padding: 40px; color: var(--muted-foreground);">
+          No bookings found matching this filter.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Doctor Availability Management -->
+    <div id="tab-doctors" class="dashboard-panel" style="display: none;">
+      <div class="panel-header">
+        <h2 class="panel-title">Manage Doctor Schedules</h2>
+        <button class="btn btn-primary btn-sm" onclick="loadDoctors()"><i data-lucide="refresh-cw" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Refresh</button>
+      </div>
+
+      <p style="color: var(--muted-foreground); margin-bottom: 24px; font-size: 0.9rem;">
+        Use these toggles to control doctor availability. Doctors marked as **Unavailable** will be dynamically hidden from the patient booking dropdown.
+      </p>
+
+      <div class="table-responsive">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>Doctor Name</th>
+              <th>Department</th>
+              <th>Education</th>
+              <th>Current Availability</th>
+            </tr>
+          </thead>
+          <tbody id="doctors-table-body">
+            <!-- Dynamically populated rows -->
+          </tbody>
+        </table>
+        <div id="doctors-loading" class="loading-spinner"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal: Issue Token / Edit Appointment -->
+  <div id="token-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h2 id="modal-patient-name" class="modal-title">Patient Name</h2>
+      <p id="modal-patient-meta" class="modal-subtitle">Service / Doctor Details</p>
+      
+      <form id="token-form">
+        <input type="hidden" id="modal-appointment-id">
+        
+        <div class="form-group">
+          <label for="modal-token-input">Assign Token Number</label>
+          <input type="text" id="modal-token-input" class="form-input" placeholder="e.g. OPD-05, Dr. Prasad-12" required autofocus>
+        </div>
+
+        <div style="background-color: var(--secondary); padding: 12px; border-radius: 8px; margin-top: 16px;">
+          <p style="font-size: 0.85rem; color: var(--navy-dark); font-weight: 600;">
+            <i data-lucide="info" style="display: inline-block; width: 14px; vertical-align: middle; margin-right: 4px;"></i> 
+            Next Steps:
+          </p>
+          <p style="font-size: 0.8rem; color: var(--muted-foreground); margin-top: 4px;">
+            Saving this will mark the appointment as **Confirmed**. Contact the patient at <strong id="modal-patient-phone"></strong> to communicate this token.
+          </p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeTokenModal()">Close</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="cancelAppointment()">Cancel Appt.</button>
+          <button type="submit" class="btn btn-primary btn-sm">Confirm & Save Token</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Global State
+    let currentUser = null;
+    let appointmentsList = [];
+    let doctorsList = [];
+    
+    // Select Elements
+    const loginSection = document.getElementById('login-section');
+    const dashboardSection = document.getElementById('dashboard-section');
+    const portalNav = document.getElementById('portal-nav');
+    const userControls = document.getElementById('user-controls');
+    const loginForm = document.getElementById('login-form');
+    
+    // Supabase Initialization
+    let supabaseClient = null;
+    if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL) {
+      supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } else {
+      alert("Supabase client is not loaded. Please verify configuration.");
+    }
+
+    // Page Load Setup
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      checkSession();
+      
+      // Setup Login Form submission
+      loginForm.addEventListener('submit', handleLogin);
+      
+      // Setup Token Form submission
+      document.getElementById('token-form').addEventListener('submit', handleSaveToken);
+    });
+
+    // Check Auth Session
+    async function checkSession() {
+      if (!supabaseClient) return;
+      try {
+        const { data: { session }, error } = await supabaseClient.auth.getSession();
+        if (session) {
+          currentUser = session.user;
+          showDashboard();
+        } else {
+          showLogin();
+        }
+      } catch (err) {
+        console.error("Auth check error:", err);
+        showLogin();
+      }
+    }
+
+    // Show Login screen
+    function showLogin() {
+      loginSection.style.display = 'flex';
+      dashboardSection.style.display = 'none';
+      portalNav.style.display = 'none';
+      userControls.style.display = 'none';
+    }
+
+    // Show Dashboard screen
+    function showDashboard() {
+      loginSection.style.display = 'none';
+      dashboardSection.style.display = 'block';
+      portalNav.style.display = 'flex';
+      userControls.style.display = 'block';
+      
+      // Load tables
+      loadBookings();
+      loadDoctors();
+    }
+
+    // Handle Login
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      const submitBtn = loginForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Logging in...';
+
+      try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        
+        currentUser = data.user;
+        showDashboard();
+      } catch (err) {
+        alert("Login failed: " + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Log In';
+      }
+    }
+
+    // Handle Logout
+    async function handleLogout() {
+      if (confirm("Are you sure you want to log out?")) {
+        await supabaseClient.auth.signOut();
+        showLogin();
+      }
+    }
+
+    // Navigation Tabs Switch
+    function switchTab(tabId) {
+      const btnBookings = document.querySelector('.portal-tab-btn[onclick="switchTab(\'bookings\')"]');
+      const btnDoctors = document.querySelector('.portal-tab-btn[onclick="switchTab(\'doctors\')"]');
+      const tabBookings = document.getElementById('tab-bookings');
+      const tabDoctors = document.getElementById('tab-doctors');
+      
+      if (tabId === 'bookings') {
+        btnBookings.classList.add('active');
+        btnDoctors.classList.remove('active');
+        tabBookings.style.display = 'block';
+        tabDoctors.style.display = 'none';
+        loadBookings();
+      } else {
+        btnBookings.classList.remove('active');
+        btnDoctors.classList.add('active');
+        tabBookings.style.display = 'none';
+        tabDoctors.style.display = 'block';
+        loadDoctors();
+      }
+    }
+
+    // Load Bookings Queue
+    async function loadBookings() {
+      if (!supabaseClient) return;
+      
+      const tableBody = document.getElementById('bookings-table-body');
+      const loading = document.getElementById('bookings-loading');
+      const emptyState = document.getElementById('bookings-empty');
+      const filter = document.getElementById('filter-status').value;
+      
+      tableBody.innerHTML = '';
+      loading.style.display = 'block';
+      emptyState.style.display = 'none';
+      
+      try {
+        let query = supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
+        
+        if (filter !== 'all') {
+          if (filter === 'pending') {
+            // handle cases where status is null or explicitly 'pending'
+            query = query.or('status.eq.pending,status.is.null');
+          } else {
+            query = query.eq('status', filter);
+          }
+        }
+        
+        const { data, error } = await query;
+        if (error) throw error;
+        
+        appointmentsList = data || [];
+        
+        // Calculate Stat numbers for summary cards
+        updateStatsSummary();
+
+        if (appointmentsList.length === 0) {
+          emptyState.style.display = 'block';
+        } else {
+          appointmentsList.forEach(appt => {
+            const status = appt.status || 'pending';
+            const statusBadge = `<span class="badge badge-${status}">${status}</span>`;
+            const formattedDate = appt.created_at ? new Date(appt.created_at).toLocaleString() : 'N/A';
+            const doctor = appt.preferred_doctor || 'Not Selected / OPD';
+            const token = appt.token_number || '—';
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><strong>${appt.full_name}</strong></td>
+              <td><a href="tel:${appt.phone_number}">${appt.phone_number}</a></td>
+              <td>${appt.service_requested}</td>
+              <td>${doctor}</td>
+              <td>${formattedDate}</td>
+              <td>${statusBadge}</td>
+              <td><strong>${token}</strong></td>
+              <td>
+                <button class="btn btn-outline btn-sm" onclick="openTokenModal('${appt.id}')">
+                  ${status === 'pending' ? 'Issue Token' : 'Edit Token'}
+                </button>
+              </td>
+            `;
+            tableBody.appendChild(tr);
+          });
+        }
+      } catch (err) {
+        console.error("Error loading appointments:", err);
+        tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: red;">Error loading bookings: ${err.message}</td></tr>`;
+      } finally {
+        loading.style.display = 'none';
+      }
+    }
+
+    // Update statistics on top of page
+    async function updateStatsSummary() {
+      try {
+        // Fetch stats counts
+        const { data, error } = await supabaseClient.from('appointments').select('status');
+        if (error) throw error;
+
+        let pendingCount = 0;
+        let confirmedCount = 0;
+        let cancelledCount = 0;
+
+        data.forEach(item => {
+          const status = item.status || 'pending';
+          if (status === 'pending') pendingCount++;
+          else if (status === 'confirmed') confirmedCount++;
+          else if (status === 'cancelled') cancelledCount++;
+        });
+
+        document.getElementById('stat-pending').textContent = pendingCount;
+        document.getElementById('stat-confirmed').textContent = confirmedCount;
+        document.getElementById('stat-cancelled').textContent = cancelledCount;
+      } catch (err) {
+        console.warn("Unable to fetch status metrics summary:", err);
+      }
+    }
+
+    // Load Doctors List and Availability
+    async function loadDoctors() {
+      if (!supabaseClient) return;
+
+      const tableBody = document.getElementById('doctors-table-body');
+      const loading = document.getElementById('doctors-loading');
+      
+      tableBody.innerHTML = '';
+      loading.style.display = 'block';
+      
+      try {
+        const { data, error } = await supabaseClient
+          .from('doctors')
+          .select('*')
+          .order('display_order', { ascending: true });
+          
+        if (error) throw error;
+        
+        doctorsList = data || [];
+        
+        if (doctorsList.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center;">No doctors found. Please populate the 'doctors' table.</td></tr>`;
+        } else {
+          doctorsList.forEach(doc => {
+            const isAvail = doc.is_available !== false; // Default to true if null/undefined
+            const statusText = isAvail ? 'Available' : 'Unavailable';
+            const switchChecked = isAvail ? 'checked' : '';
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><strong>${doc.name}</strong></td>
+              <td><span class="badge" style="background: var(--secondary); color: var(--primary);">${doc.department}</span></td>
+              <td>${doc.education}</td>
+              <td>
+                <label class="switch-container">
+                  <input type="checkbox" class="switch-input" ${switchChecked} onchange="toggleDoctorAvailability('${doc.id}', this.checked)">
+                  <span class="switch-slider"></span>
+                  <span class="switch-status-text ${isAvail ? '' : 'off'}">${statusText}</span>
+                </label>
+              </td>
+            `;
+            tableBody.appendChild(tr);
+          });
+        }
+      } catch (err) {
+        console.error("Error loading doctors:", err);
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: red;">Failed to retrieve doctors list. Please check if 'is_available' column is added to 'doctors' table.</td></tr>`;
+      } finally {
+        loading.style.display = 'none';
+      }
+    }
+
+    // Toggle Doctor Availability in Database
+    async function toggleDoctorAvailability(docId, checked) {
+      if (!supabaseClient) return;
+
+      try {
+        const { error } = await supabaseClient
+          .from('doctors')
+          .update({ is_available: checked })
+          .eq('id', docId);
+
+        if (error) throw error;
+        
+        // Refresh doctors page to reflect labels properly
+        loadDoctors();
+      } catch (err) {
+        alert("Failed to update availability. Details: " + err.message + "\n\nMake sure the 'is_available' column (type: boolean) exists in your 'doctors' table in Supabase.");
+        loadDoctors(); // Reset checkboxes
+      }
+    }
+
+    // Token Modal Operations
+    const tokenModal = document.getElementById('token-modal');
+    
+    function openTokenModal(apptId) {
+      const appt = appointmentsList.find(a => a.id === apptId);
+      if (!appt) return;
+      
+      document.getElementById('modal-appointment-id').value = appt.id;
+      document.getElementById('modal-patient-name').textContent = appt.full_name;
+      document.getElementById('modal-patient-phone').textContent = appt.phone_number;
+      document.getElementById('modal-token-input').value = appt.token_number || '';
+      
+      const doctor = appt.preferred_doctor || 'Not Selected / OPD';
+      document.getElementById('modal-patient-meta').textContent = `${appt.service_requested} | Preferred Doctor: ${doctor}`;
+      
+      tokenModal.style.display = 'flex';
+      document.getElementById('modal-token-input').focus();
+    }
+
+    function closeTokenModal() {
+      tokenModal.style.display = 'none';
+    }
+
+    // Save Token & Confirm Booking
+    async function handleSaveToken(e) {
+      e.preventDefault();
+      
+      const apptId = document.getElementById('modal-appointment-id').value;
+      const tokenVal = document.getElementById('modal-token-input').value.trim();
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Saving...';
+      
+      try {
+        const { error } = await supabaseClient
+          .from('appointments')
+          .update({
+            token_number: tokenVal,
+            status: 'confirmed'
+          })
+          .eq('id', apptId);
+          
+        if (error) throw error;
+        
+        alert("Token assigned and booking confirmed!");
+        closeTokenModal();
+        loadBookings();
+      } catch (err) {
+        alert("Error saving token: " + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirm & Save Token';
+      }
+    }
+
+    // Cancel Appointment in Database
+    async function cancelAppointment() {
+      const apptId = document.getElementById('modal-appointment-id').value;
+      
+      if (confirm("Are you sure you want to cancel this booking request?")) {
+        try {
+          const { error } = await supabaseClient
+            .from('appointments')
+            .update({ status: 'cancelled' })
+            .eq('id', apptId);
+            
+          if (error) throw error;
+          
+          alert("Appointment cancelled.");
+          closeTokenModal();
+          loadBookings();
+        } catch (err) {
+          alert("Error cancelling appointment: " + err.message);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -334,6 +334,7 @@
       loadDepartments();
       loadPackages();
       setupSupabaseForm();
+      loadAvailableDoctors();
     } catch (err) {
       console.error("Error initializing Supabase client:", err);
       setupLocalFormFallback();
@@ -349,6 +350,7 @@
         alert('This is a static demo form — connect it to a backend or form service (or configure Supabase in config.js) to receive submissions.');
       };
     }
+    populateStaticDoctors();
   }
 
   // Handle form submission to Supabase
@@ -378,13 +380,15 @@
       const rawName = form.querySelector('#form_full_name').value;
       const rawPhone = form.querySelector('#form_phone_number').value;
       const rawEmail = form.querySelector('#form_email_address').value;
-      const rawService = form.querySelector('select').value;
+      const rawService = form.querySelector('#form_service_requested').value;
+      const rawDoctor = form.querySelector('#form_preferred_doctor').value;
       const rawMessage = form.querySelector('#form_message').value;
 
       const fullName = sanitizeInput(rawName);
       const phoneNumber = sanitizeInput(rawPhone);
       const emailAddress = sanitizeInput(rawEmail);
       const serviceRequested = sanitizeInput(rawService);
+      const preferredDoctor = sanitizeInput(rawDoctor);
       const message = sanitizeInput(rawMessage);
 
       // 3. Client-side Validation Checks
@@ -421,6 +425,7 @@
         phone_number: phoneNumber,
         email_address: emailAddress,
         service_requested: serviceRequested,
+        preferred_doctor: preferredDoctor,
         message: message
       };
 
@@ -440,6 +445,60 @@
         }
       }
     };
+  }
+
+  // Load available doctors for selection
+  async function loadAvailableDoctors() {
+    if (!supabaseClient) {
+      populateStaticDoctors();
+      return;
+    }
+
+    try {
+      const { data: doctors, error } = await supabaseClient
+        .from('doctors')
+        .select('name, is_available')
+        .eq('is_available', true)
+        .order('name', { ascending: true });
+
+      if (error) throw error;
+
+      const doctorSelect = document.querySelector('#form_preferred_doctor');
+      if (!doctorSelect) return;
+
+      doctorSelect.innerHTML = '<option value="" disabled selected>Select preferred doctor</option>';
+
+      if (doctors && doctors.length > 0) {
+        doctors.forEach(doc => {
+          const opt = document.createElement('option');
+          opt.value = doc.name;
+          opt.textContent = doc.name;
+          doctorSelect.appendChild(opt);
+        });
+      } else {
+        const opt = document.createElement('option');
+        opt.value = "General Hospital Staff";
+        opt.textContent = "General Hospital Staff (No specific doctor available)";
+        doctorSelect.appendChild(opt);
+      }
+    } catch (err) {
+      console.warn("Failed to load available doctors from Supabase, loading fallback list:", err);
+      populateStaticDoctors();
+    }
+  }
+
+  // Populate static fallback doctors in dropdown
+  function populateStaticDoctors() {
+    const doctorSelect = document.querySelector('#form_preferred_doctor');
+    if (!doctorSelect) return;
+    doctorSelect.innerHTML = `
+      <option value="" disabled selected>Select preferred doctor</option>
+      <option value="Dr. Nataraj R. Rao">Dr. Nataraj R. Rao (Medicine)</option>
+      <option value="Dr. Anitha N. Rao">Dr. Anitha N. Rao (Gynaecology)</option>
+      <option value="Dr. Bhagwan B. K.">Dr. Bhagwan B. K. (Paediatrics)</option>
+      <option value="Dr. Rajesh Bhakta">Dr. Rajesh Bhakta (General Surgery)</option>
+      <option value="Dr. Sania Sabahi">Dr. Sania Sabahi (Dentistry)</option>
+    `;
   }
 
   // Load Departments and Doctors from Supabase

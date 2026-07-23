@@ -833,8 +833,9 @@
       <input type="text" id="form_full_name" placeholder="Full name" maxlength="100" required />
       <input type="tel" id="form_phone_number" placeholder="Phone number" maxlength="20" required />
       <input type="email" id="form_email_address" placeholder="Email address" maxlength="255" required />
-      <select required>
+      <select id="form_service_requested" required>
         <option value="" disabled selected>Select service/package</option>
+        <option>General OPD</option>
         <option>Executive Master Health Checkup (₹5,000)</option>
         <option>Master Health Checkup (₹3,000)</option>
         <option>Mini Health Checkup (₹1,500)</option>
@@ -848,6 +849,10 @@
         <option>Radiology / Ultrasound / CT Scan</option>
         <option>Cardiology / ECG / ECHO / TMT</option>
         <option>Obstetrics & Gynaecology Care</option>
+      </select>
+      <select id="form_preferred_doctor" required>
+        <option value="" disabled selected>Select preferred doctor</option>
+        <!-- Available doctors will be dynamically loaded here -->
       </select>
       <textarea id="form_message" placeholder="Message" rows="4" maxlength="1000"></textarea>
       <p class="privacy-disclaimer">We value your privacy. The information submitted above is processed securely and kept confidential in compliance with healthcare standards.</p>
