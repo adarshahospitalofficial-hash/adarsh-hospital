@@ -89,7 +89,8 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
 .topbar-inner{display:flex;justify-content:flex-end;gap:24px;padding:8px 24px;flex-wrap:wrap;}
 
 /* Header */
-.site-header{border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:1000;}
+.site-header{border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:1000;transition:transform 0.3s ease-in-out;}
+.site-header.header-hidden{transform:translateY(-100%);}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;flex-wrap:wrap;gap:16px;}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
 .logo-img{

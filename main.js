@@ -735,8 +735,41 @@
     });
   }
 
+  // --- Smart Header (Show on scroll up, hide on scroll down) ---
+  function initSmartHeader() {
+    const header = document.querySelector('.site-header');
+    if (!header) return;
+
+    let lastScrollY = window.scrollY;
+    const threshold = 10; // minimum scroll amount to trigger action
+    const headerHeight = header.offsetHeight || 80;
+
+    window.addEventListener('scroll', () => {
+      // Don't hide header if mobile menu is open
+      const navMenu = document.querySelector('.nav');
+      if (navMenu && navMenu.classList.contains('active')) {
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      const scrollDiff = currentScrollY - lastScrollY;
+
+      // Hiding on scroll down past header height
+      if (scrollDiff > threshold && currentScrollY > headerHeight) {
+        header.classList.add('header-hidden');
+      } 
+      // Showing on scroll up or at the very top of page
+      else if (scrollDiff < -threshold || currentScrollY <= headerHeight) {
+        header.classList.remove('header-hidden');
+      }
+
+      lastScrollY = Math.max(0, currentScrollY);
+    }, { passive: true });
+  }
+
   // Initialize mobile navigation
   initMobileNav();
+  initSmartHeader();
 
   // Run Supabase initialization
   initSupabase().finally(() => {
