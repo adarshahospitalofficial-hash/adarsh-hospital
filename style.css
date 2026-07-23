@@ -1352,6 +1352,7 @@ body::after {
   box-shadow: var(--shadow-soft);
   margin-top: 40px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
 }
 .diagnostics-box h3 {
   font-size: 1.8rem;
@@ -1983,4 +1984,66 @@ body::after {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Custom Division and Department Logos */
+.diagnostics-logo-wrapper {
+  background-color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
+}
+
+.diagnostics-logo-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.diagnostics-logo {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .diagnostics-logo-wrapper {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 767px) {
+  .diagnostics-logo-wrapper {
+    display: block;
+    width: max-content;
+    margin: 0 auto 20px auto;
+  }
+}
+
+.maternal-logo-wrapper {
+  display: block;
+  width: max-content;
+  background-color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.maternal-logo-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.maternal-logo {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
 
