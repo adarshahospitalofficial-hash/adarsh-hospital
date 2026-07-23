@@ -2002,6 +2002,49 @@ body::after {
 }
 
 /* Custom Division and Department Logos */
+.diagnostics-header-flex {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 40px;
+}
+.diagnostics-header-text {
+  flex: 1;
+}
+.diagnostics-header-text .eyebrow {
+  margin-bottom: 4px;
+  text-align: left;
+}
+.diagnostics-header-text h2 {
+  margin: 6px 0 12px;
+  text-align: left;
+}
+.diagnostics-header-text .section-desc {
+  text-align: left;
+  margin: 0;
+  max-width: 720px;
+}
+.diagnostics-header-flex .diagnostics-logo-wrapper {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .diagnostics-header-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .diagnostics-header-text .eyebrow,
+  .diagnostics-header-text h2,
+  .diagnostics-header-text .section-desc {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .diagnostics-logo-wrapper {
   background-color: #ffffff;
   padding: 10px 20px;
