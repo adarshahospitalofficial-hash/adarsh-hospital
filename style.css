@@ -1988,40 +1988,26 @@ body::after {
 /* Custom Division and Department Logos */
 .diagnostics-logo-wrapper {
   background-color: #ffffff;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 10;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 .diagnostics-logo-wrapper:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .diagnostics-logo {
-  height: 50px;
+  height: 60px;
   width: auto;
   display: block;
 }
 
-@media (min-width: 768px) {
-  .diagnostics-logo-wrapper {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    margin-bottom: 0;
-  }
-}
-@media (max-width: 767px) {
-  .diagnostics-logo-wrapper {
-    display: block;
-    width: max-content;
-    margin: 0 auto 20px auto;
-  }
-}
 
 .maternal-logo-wrapper {
   display: block;
