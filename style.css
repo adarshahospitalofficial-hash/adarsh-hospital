@@ -533,11 +533,25 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   stroke: #ff9800;
   stroke-width: 1.5px;
 }
+.star-unfilled {
+  color: #ccc;
+  width: 18px;
+  height: 18px;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
 .star-filled-sm {
   fill: #ff9800;
   width: 14px;
   height: 14px;
   stroke: #ff9800;
+  stroke-width: 1.5px;
+}
+.star-unfilled-sm {
+  color: #ccc;
+  width: 14px;
+  height: 14px;
+  stroke: #ccc;
   stroke-width: 1.5px;
 }
 .reviews-count {
