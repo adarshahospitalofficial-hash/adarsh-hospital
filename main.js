@@ -454,36 +454,51 @@
       return;
     }
 
+    let doctors = null;
     try {
-      const { data: doctors, error } = await supabaseClient
+      const { data, error } = await supabaseClient
         .from('doctors')
         .select('name, is_available')
         .eq('is_available', true)
         .order('name', { ascending: true });
 
       if (error) throw error;
-
-      const doctorSelect = document.querySelector('#form_preferred_doctor');
-      if (!doctorSelect) return;
-
-      doctorSelect.innerHTML = '<option value="" disabled selected>Select preferred doctor</option>';
-
-      if (doctors && doctors.length > 0) {
-        doctors.forEach(doc => {
-          const opt = document.createElement('option');
-          opt.value = doc.name;
-          opt.textContent = doc.name;
-          doctorSelect.appendChild(opt);
-        });
-      } else {
-        const opt = document.createElement('option');
-        opt.value = "General Hospital Staff";
-        opt.textContent = "General Hospital Staff (No specific doctor available)";
-        doctorSelect.appendChild(opt);
-      }
+      doctors = data;
     } catch (err) {
-      console.warn("Failed to load available doctors from Supabase, loading fallback list:", err);
-      populateStaticDoctors();
+      console.warn("Failed to query 'is_available' from doctors table, falling back to all doctors. Error:", err);
+      // Fallback: Query all doctors regardless of availability
+      try {
+        const { data, error } = await supabaseClient
+          .from('doctors')
+          .select('name')
+          .order('name', { ascending: true });
+        
+        if (error) throw error;
+        doctors = data;
+      } catch (fallbackErr) {
+        console.warn("Failed to load doctors entirely from Supabase, loading fallback list:", fallbackErr);
+        populateStaticDoctors();
+        return;
+      }
+    }
+
+    const doctorSelect = document.querySelector('#form_preferred_doctor');
+    if (!doctorSelect) return;
+
+    doctorSelect.innerHTML = '<option value="" disabled selected>Select preferred doctor</option>';
+
+    if (doctors && doctors.length > 0) {
+      doctors.forEach(doc => {
+        const opt = document.createElement('option');
+        opt.value = doc.name;
+        opt.textContent = doc.name;
+        doctorSelect.appendChild(opt);
+      });
+    } else {
+      const opt = document.createElement('option');
+      opt.value = "General Hospital Staff";
+      opt.textContent = "General Hospital Staff (No specific doctor available)";
+      doctorSelect.appendChild(opt);
     }
   }
 
