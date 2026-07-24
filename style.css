@@ -831,6 +831,9 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
 }
 
 @media (max-width: 768px) {
+  .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
   /* Section Spacings & Typography */
   section, .leadership, .packages, .about, .departments, .testimonials, .contact {
     padding: 50px 0 !important;
@@ -886,7 +889,8 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
     position: fixed;
     top: 0;
     right: 0;
-    width: 300px;
+    width: 85%;
+    max-width: 300px;
     height: 100vh;
     background: var(--navy-dark);
     z-index: 100;
