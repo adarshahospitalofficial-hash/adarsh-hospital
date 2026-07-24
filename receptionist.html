@@ -120,7 +120,10 @@
     <div id="tab-doctors" class="dashboard-panel" style="display: none;">
       <div class="panel-header">
         <h2 class="panel-title">Manage Doctor Schedules</h2>
-        <button class="btn btn-primary btn-sm" onclick="loadDoctors()"><i data-lucide="refresh-cw" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Refresh</button>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary btn-sm" onclick="openAddDoctorModal()"><i data-lucide="plus" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Add New Doctor</button>
+          <button class="btn btn-secondary btn-sm" onclick="loadDoctors()"><i data-lucide="refresh-cw" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Refresh</button>
+        </div>
       </div>
 
       <p style="color: var(--muted-foreground); margin-bottom: 24px; font-size: 0.9rem;">
@@ -208,6 +211,42 @@
         <button type="button" class="btn btn-secondary btn-sm" onclick="closeDeleteModal()">Cancel</button>
         <button type="button" class="btn btn-danger btn-sm" onclick="handleBulkDelete()">Confirm Delete</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add New Doctor -->
+  <div id="doctor-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 500px;">
+      <h2 class="modal-title"><i data-lucide="user-plus" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; color: var(--primary);"></i> Add New Doctor</h2>
+      <p class="modal-subtitle">Enter doctor details to add to the registry and booking selection.</p>
+      
+      <form id="doctor-form" onsubmit="handleAddDoctor(event)">
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="doc-name-input" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Doctor Name</label>
+          <input type="text" id="doc-name-input" class="form-input" placeholder="e.g. Dr. Ramesh Kumar" style="width: 100%;" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="doc-dept-input" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Department</label>
+          <input type="text" id="doc-dept-input" class="form-input" placeholder="e.g. Cardiology, Paediatrics" style="width: 100%;" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="doc-edu-input" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Education Qualification</label>
+          <input type="text" id="doc-edu-input" class="form-input" placeholder="e.g. MBBS, MD, DNB" style="width: 100%;" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="doc-desc-input" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Description / Profile Info</label>
+          <textarea id="doc-desc-input" class="form-input" placeholder="Brief doctor profile description..." style="width: 100%; height: 60px; resize: vertical; padding: 8px 12px;" required></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="doc-order-input" style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px;">Display Order (Number)</label>
+          <input type="number" id="doc-order-input" class="form-input" placeholder="e.g. 9" style="width: 100%;" value="9" required>
+        </div>
+        
+        <div class="modal-footer" style="margin-top: 20px;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeAddDoctorModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Add Doctor</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -484,15 +523,22 @@
               <td><span class="badge" style="background: var(--secondary); color: var(--primary);">${doc.department}</span></td>
               <td>${doc.education}</td>
               <td>
-                <label class="switch-container">
-                  <input type="checkbox" class="switch-input" ${switchChecked} onchange="toggleDoctorAvailability('${doc.id}', this.checked)">
-                  <span class="switch-slider"></span>
-                  <span class="switch-status-text ${isAvail ? '' : 'off'}">${statusText}</span>
-                </label>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                  <label class="switch-container">
+                    <input type="checkbox" class="switch-input" ${switchChecked} onchange="toggleDoctorAvailability('${doc.id}', this.checked)">
+                    <span class="switch-slider"></span>
+                    <span class="switch-status-text ${isAvail ? '' : 'off'}">${statusText}</span>
+                  </label>
+                  <button class="btn btn-danger btn-sm btn-icon-only" onclick="deleteDoctor('${doc.id}')" title="Delete Doctor from Registry">
+                    <i data-lucide="trash-2"></i>
+                  </button>
+                </div>
               </td>
             `;
             tableBody.appendChild(tr);
           });
+          // Re-create icons since we injected dynamic lucide classes
+          lucide.createIcons();
         }
       } catch (err) {
         console.error("Error loading doctors:", err);
@@ -685,6 +731,80 @@
           } catch (err) {
             alert("Error deleting bookings: " + err.message);
           }
+        }
+      }
+    }
+
+    // Add Doctor Modal operations
+    const doctorModal = document.getElementById('doctor-modal');
+    const doctorForm = document.getElementById('doctor-form');
+    
+    function openAddDoctorModal() {
+      doctorForm.reset();
+      doctorModal.style.display = 'flex';
+    }
+    
+    function closeAddDoctorModal() {
+      doctorModal.style.display = 'none';
+    }
+
+    // Add Doctor Submit logic
+    async function handleAddDoctor(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('doc-name-input').value.trim();
+      const dept = document.getElementById('doc-dept-input').value.trim();
+      const edu = document.getElementById('doc-edu-input').value.trim();
+      const desc = document.getElementById('doc-desc-input').value.trim();
+      const order = document.getElementById('doc-order-input').value;
+      
+      const submitBtn = doctorForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Adding...';
+      
+      try {
+        const { error } = await supabaseClient
+          .from('doctors')
+          .insert([{
+            name: name,
+            department: dept,
+            education: edu,
+            description: desc,
+            display_order: parseInt(order) || 99,
+            is_available: true
+          }]);
+          
+        if (error) throw error;
+        
+        alert(`Successfully added ${name} to the doctor registry!`);
+        closeAddDoctorModal();
+        loadDoctors();
+      } catch (err) {
+        alert("Failed to add doctor: " + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Add Doctor';
+      }
+    }
+
+    // Delete Doctor Registry record
+    async function deleteDoctor(docId) {
+      const doc = doctorsList.find(d => d.id === docId);
+      const name = doc ? doc.name : "this doctor";
+      
+      if (confirm(`Are you sure you want to permanently delete ${name} from the registry?\n\nThis will remove them from the website booking selectors immediately!`)) {
+        try {
+          const { error } = await supabaseClient
+            .from('doctors')
+            .delete()
+            .eq('id', docId);
+            
+          if (error) throw error;
+          
+          alert("Doctor successfully deleted from the registry.");
+          loadDoctors();
+        } catch (err) {
+          alert("Failed to delete doctor: " + err.message);
         }
       }
     }
