@@ -426,7 +426,7 @@
         email_address: emailAddress,
         service_requested: serviceRequested,
         preferred_doctor: preferredDoctor,
-        message: message
+        message: message || null
       };
 
       try {
