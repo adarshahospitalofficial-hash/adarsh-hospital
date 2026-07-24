@@ -165,7 +165,11 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   letter-spacing: -2px;
   word-spacing: 0.3em;
   white-space: nowrap;
-  color: #ffffff;
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 25%, #e92a9d 60%, #ff007f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
   filter: drop-shadow(1px 1px 0px #000000) 
           drop-shadow(2px 2px 0px #000000) 
           drop-shadow(3px 3px 0px #000000) 
