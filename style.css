@@ -170,10 +170,10 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(1px 1px 0px #0b1d3d) 
-          drop-shadow(2px 2px 0px #0b1d3d) 
-          drop-shadow(3px 3px 0px #e92a9d) 
-          drop-shadow(4px 4px 15px rgba(0, 242, 254, 0.45));
+  filter: drop-shadow(1px 1px 0px #050a14) 
+          drop-shadow(2px 2px 0px #050a14) 
+          drop-shadow(3px 3px 0px #050a14) 
+          drop-shadow(4px 4px 12px rgba(0, 0, 0, 0.65));
 }
 .hero-tags {
   color: #ff9f1c;
@@ -181,14 +181,14 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   letter-spacing: 2px;
   font-size: 0.82rem;
   margin-bottom: 16px;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
 }
 .hero-desc {
-  color: #0f2d59;
+  color: #fffdf0;
   font-weight: 600;
   margin-bottom: 28px;
   max-width: 520px;
-  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8), 0 0 1px rgba(0, 0, 0, 0.9);
 }
 .hero-cta {
   display: flex;
