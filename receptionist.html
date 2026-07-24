@@ -255,6 +255,8 @@
     let currentUser = null;
     let appointmentsList = [];
     let doctorsList = [];
+    let bookingsInterval = null;
+    let doctorsInterval = null;
     
     // Select Elements
     const loginSection = document.getElementById('login-section');
@@ -306,6 +308,15 @@
       dashboardSection.style.display = 'none';
       portalNav.style.display = 'none';
       userControls.style.display = 'none';
+      
+      if (bookingsInterval) {
+        clearInterval(bookingsInterval);
+        bookingsInterval = null;
+      }
+      if (doctorsInterval) {
+        clearInterval(doctorsInterval);
+        doctorsInterval = null;
+      }
     }
 
     // Show Dashboard screen
@@ -315,9 +326,17 @@
       portalNav.style.display = 'flex';
       userControls.style.display = 'block';
       
-      // Load tables
+      // Load tables immediately
       loadBookings();
       loadDoctors();
+
+      // Clear any existing intervals to prevent duplicates
+      if (bookingsInterval) clearInterval(bookingsInterval);
+      if (doctorsInterval) clearInterval(doctorsInterval);
+
+      // Start background polling (passing true to avoid UI flickering)
+      bookingsInterval = setInterval(() => loadBookings(true), 10000);
+      doctorsInterval = setInterval(() => loadDoctors(true), 15000);
     }
 
     // Handle Login
@@ -375,7 +394,7 @@
     }
 
     // Load Bookings Queue
-    async function loadBookings() {
+    async function loadBookings(isBackground = false) {
       if (!supabaseClient) return;
       
       const tableBody = document.getElementById('bookings-table-body');
@@ -383,9 +402,11 @@
       const emptyState = document.getElementById('bookings-empty');
       const filter = document.getElementById('filter-status').value;
       
-      tableBody.innerHTML = '';
-      loading.style.display = 'block';
-      emptyState.style.display = 'none';
+      if (!isBackground) {
+        tableBody.innerHTML = '';
+        loading.style.display = 'block';
+        emptyState.style.display = 'none';
+      }
       
       try {
         let query = supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
@@ -490,14 +511,16 @@
     }
 
     // Load Doctors List and Availability
-    async function loadDoctors() {
+    async function loadDoctors(isBackground = false) {
       if (!supabaseClient) return;
 
       const tableBody = document.getElementById('doctors-table-body');
       const loading = document.getElementById('doctors-loading');
       
-      tableBody.innerHTML = '';
-      loading.style.display = 'block';
+      if (!isBackground) {
+        tableBody.innerHTML = '';
+        loading.style.display = 'block';
+      }
       
       try {
         const { data, error } = await supabaseClient

@@ -1108,7 +1108,13 @@
         <!-- Available doctors will be dynamically loaded here -->
       </select>
       <textarea id="form_message" placeholder="Message (Optional)" rows="4" maxlength="1000"></textarea>
-      <p class="privacy-disclaimer">We value your privacy. The information submitted above is processed securely and kept confidential in compliance with healthcare standards.</p>
+      <div class="form-consent" style="margin: 14px 0 8px 0; display: flex; align-items: flex-start; gap: 8px; text-align: left;">
+        <input type="checkbox" id="form_consent" required style="width: auto !important; height: auto !important; margin-top: 4px; flex-shrink: 0;" />
+        <label for="form_consent" style="font-size: 0.8rem; color: var(--muted-foreground); line-height: 1.4; cursor: pointer; user-select: none;">
+          I consent to Adarsha Hospital processing my contact details and health package selections confidentially to coordinate my callback.
+        </label>
+      </div>
+      <p class="privacy-disclaimer" style="margin-top: 4px;">We value your privacy. The information submitted above is processed securely and kept confidential in compliance with healthcare standards.</p>
       <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
       <a href="tel:9448586099" class="btn btn-outline btn-block btn-emergency" style="margin-top:12px; text-align:center;"><i data-lucide="phone"></i> 24x7 Emergency hotline</a>
     </form>

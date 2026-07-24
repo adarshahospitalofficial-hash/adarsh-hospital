@@ -335,6 +335,9 @@
       loadPackages();
       setupSupabaseForm();
       loadAvailableDoctors();
+      
+      // Auto-update available doctors list every 15 seconds in the background
+      setInterval(loadAvailableDoctors, 15000);
     } catch (err) {
       console.error("Error initializing Supabase client:", err);
       setupLocalFormFallback();
@@ -426,18 +429,29 @@
         email_address: emailAddress,
         service_requested: serviceRequested,
         preferred_doctor: preferredDoctor,
-        message: message || null
+        message: message || null,
+        website: form.querySelector('#form_website_url')?.value || ''
       };
 
       try {
-        const { error } = await supabaseClient.from('appointments').insert([payload]);
-        if (error) throw error;
+        const response = await fetch('/api/callback', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
 
-        alert('Callback request submitted successfully! We will get back to you shortly.');
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to submit callback request.');
+        }
+
+        alert(result.message || 'Callback request submitted successfully! We will get back to you shortly.');
         form.reset();
       } catch (err) {
         console.error("Error submitting appointment:", err);
-        alert('Failed to submit request. Please try again later.');
+        alert(err.message || 'Failed to submit request. Please try again later.');
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -453,6 +467,12 @@
       populateStaticDoctors();
       return;
     }
+
+    const doctorSelect = document.querySelector('#form_preferred_doctor');
+    if (!doctorSelect) return;
+
+    // Save current user selection so it doesn't get wiped out during update
+    const currentSelection = doctorSelect.value;
 
     let doctors = null;
     try {
@@ -482,9 +502,6 @@
       }
     }
 
-    const doctorSelect = document.querySelector('#form_preferred_doctor');
-    if (!doctorSelect) return;
-
     doctorSelect.innerHTML = '<option value="" disabled selected>Select preferred doctor</option>';
 
     if (doctors && doctors.length > 0) {
@@ -494,6 +511,11 @@
         opt.textContent = doc.name;
         doctorSelect.appendChild(opt);
       });
+      
+      // Restore previous selection if it's still available in the list
+      if (currentSelection && Array.from(doctorSelect.options).some(opt => opt.value === currentSelection)) {
+        doctorSelect.value = currentSelection;
+      }
     } else {
       const opt = document.createElement('option');
       opt.value = "General Hospital Staff";
