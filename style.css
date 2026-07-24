@@ -158,6 +158,7 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   line-height: 1.1;
   text-transform: uppercase;
   letter-spacing: -1.5px;
+  white-space: nowrap;
   background: linear-gradient(135deg, #0052d4 0%, #4364f7 35%, #e92a9d 70%, #ff6b6b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -174,10 +175,11 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 .hero-desc {
-  color: var(--foreground);
+  color: #1e3a8a;
+  font-weight: 500;
   margin-bottom: 28px;
   max-width: 520px;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
 }
 .hero-cta {
   display: flex;
@@ -816,9 +818,10 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   }
   
   .hero h1 {
-    font-size: 3.8rem !important;
+    font-size: clamp(1.8rem, 8vw, 3.8rem) !important;
     line-height: 1.15 !important;
     letter-spacing: -1px !important;
+    white-space: nowrap !important;
   }
   h2 {
     font-size: 1.8rem !important;
