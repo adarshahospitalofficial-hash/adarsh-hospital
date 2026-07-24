@@ -2266,4 +2266,83 @@ body::after {
   display: block;
 }
 
+/* Printing Report Styles */
+@media print {
+  /* Hide all elements by default */
+  body * {
+    visibility: hidden;
+  }
+  /* Hide interactive components */
+  .portal-header, 
+  .portal-nav-tabs, 
+  #user-controls, 
+  .stats-grid, 
+  .panel-header, 
+  .modal-overlay, 
+  .floating-contact, 
+  .back-to-top,
+  .dashboard-panel p {
+    display: none !important;
+  }
+  
+  /* Make only the bookings dashboard panel and its contents visible */
+  #dashboard-section, 
+  #tab-bookings, 
+  .table-responsive, 
+  .dashboard-table, 
+  .dashboard-table * {
+    visibility: visible;
+  }
+  
+  /* Position the table flat on the page */
+  #dashboard-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .dashboard-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  
+  .dashboard-table th, .dashboard-table td {
+    border: 1px solid #000 !important;
+    padding: 10px 8px !important;
+    font-size: 11pt !important;
+    color: #000 !important;
+  }
+  
+  /* Hide action buttons (e.g. Issue Token, Delete) from printing */
+  .dashboard-table button, 
+  .dashboard-table .btn,
+  .dashboard-table td:last-child {
+    display: none !important;
+  }
+}
+
+/* Style individual delete action buttons */
+.btn-danger {
+  background-color: var(--danger, #dc2626);
+  color: #ffffff;
+  border: none;
+}
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+.btn-icon-only {
+  padding: 6px 8px;
+  line-height: 1;
+}
+.btn-icon-only i, .btn-icon-only svg {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+
 

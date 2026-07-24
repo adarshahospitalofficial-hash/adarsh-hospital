@@ -73,7 +73,12 @@
     <div id="tab-bookings" class="dashboard-panel">
       <div class="panel-header">
         <h2 class="panel-title">Appointments Queue</h2>
-        <div class="panel-actions">
+        <div class="panel-actions" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <select id="filter-date" class="form-input" style="padding: 8px 12px; width: auto;" onchange="loadBookings()">
+            <option value="all">All Dates</option>
+            <option value="today">Today (Daily)</option>
+            <option value="month">This Month (Monthly)</option>
+          </select>
           <select id="filter-status" class="form-input" style="padding: 8px 12px; width: auto;" onchange="loadBookings()">
             <option value="all">All Statuses</option>
             <option value="pending" selected>Pending</option>
@@ -81,6 +86,8 @@
             <option value="cancelled">Cancelled</option>
           </select>
           <button class="btn btn-primary btn-sm" onclick="loadBookings()"><i data-lucide="refresh-cw" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Refresh</button>
+          <button class="btn btn-secondary btn-sm" onclick="printBookings()"><i data-lucide="printer" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Print / PDF</button>
+          <button class="btn btn-danger btn-sm" onclick="openDeleteModal()"><i data-lucide="trash-2" style="display: inline-block; width: 14px; margin-right: 4px; vertical-align: middle;"></i> Delete Bookings</button>
         </div>
       </div>
 
@@ -170,6 +177,37 @@
           <button type="submit" class="btn btn-primary btn-sm">Confirm & Save Token</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal: Bulk Delete Bookings -->
+  <div id="delete-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 450px;">
+      <h2 class="modal-title" style="color: #dc2626;"><i data-lucide="alert-triangle" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 6px;"></i> Delete Bookings</h2>
+      <p class="modal-subtitle">Permanently delete booking records from the database storage.</p>
+      
+      <div class="form-group" style="margin-top: 20px;">
+        <label for="delete-period-select" style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 8px;">Select Period to Clear</label>
+        <select id="delete-period-select" class="form-input" style="width: 100%;">
+          <option value="today">Today's Bookings (Clear Daily)</option>
+          <option value="month">This Month's Bookings (Clear Monthly)</option>
+          <option value="all">All Bookings (Clear All)</option>
+        </select>
+      </div>
+
+      <div style="background-color: #fee2e2; padding: 12px; border-radius: 8px; margin-top: 16px; border: 1px solid #fca5a5;">
+        <p style="font-size: 0.85rem; color: #991b1b; font-weight: 600;">
+          Attention:
+        </p>
+        <p style="font-size: 0.8rem; color: #b91c1c; margin-top: 4px; line-height: 1.4;">
+          This operation is permanent. The selected booking records will be **permanently deleted from Supabase database storage** to save space. This action is irreversible.
+        </p>
+      </div>
+
+      <div class="modal-footer" style="margin-top: 24px;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeDeleteModal()">Cancel</button>
+        <button type="button" class="btn btn-danger btn-sm" onclick="handleBulkDelete()">Confirm Delete</button>
+      </div>
     </div>
   </div>
 
@@ -313,6 +351,19 @@
       try {
         let query = supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
         
+        // Apply Date Filter
+        const dateFilter = document.getElementById('filter-date').value;
+        if (dateFilter === 'today') {
+          const startOfToday = new Date();
+          startOfToday.setHours(0, 0, 0, 0);
+          query = query.gte('created_at', startOfToday.toISOString());
+        } else if (dateFilter === 'month') {
+          const startOfMonth = new Date();
+          startOfMonth.setDate(1);
+          startOfMonth.setHours(0, 0, 0, 0);
+          query = query.gte('created_at', startOfMonth.toISOString());
+        }
+
         if (filter !== 'all') {
           if (filter === 'pending') {
             // handle cases where status is null or explicitly 'pending'
@@ -350,13 +401,20 @@
               <td>${statusBadge}</td>
               <td><strong>${token}</strong></td>
               <td>
-                <button class="btn btn-outline btn-sm" onclick="openTokenModal('${appt.id}')">
-                  ${status === 'pending' ? 'Issue Token' : 'Edit Token'}
-                </button>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <button class="btn btn-outline btn-sm" onclick="openTokenModal('${appt.id}')">
+                    ${status === 'pending' ? 'Issue Token' : 'Edit Token'}
+                  </button>
+                  <button class="btn btn-danger btn-sm btn-icon-only" onclick="deleteSingleAppointment('${appt.id}')" title="Delete Patient Record">
+                    <i data-lucide="trash-2"></i>
+                  </button>
+                </div>
               </td>
             `;
             tableBody.appendChild(tr);
           });
+          // Re-create icons since we injected dynamic lucide classes
+          lucide.createIcons();
         }
       } catch (err) {
         console.error("Error loading appointments:", err);
@@ -538,6 +596,95 @@
           loadBookings();
         } catch (err) {
           alert("Error cancelling appointment: " + err.message);
+        }
+      }
+    }
+
+    // Print / Save PDF Reporting Function
+    function printBookings() {
+      const dateFilter = document.getElementById('filter-date').value;
+      const statusFilter = document.getElementById('filter-status').value;
+      
+      let titleStr = "Adarsha Hospital — Bookings Report";
+      if (dateFilter === 'today') titleStr += " (Daily)";
+      else if (dateFilter === 'month') titleStr += " (Monthly)";
+      
+      titleStr += ` - Status: ${statusFilter.toUpperCase()}`;
+      
+      const originalTitle = document.title;
+      document.title = titleStr;
+      
+      window.print();
+      
+      document.title = originalTitle;
+    }
+
+    // Individual Patient Record Deletion
+    async function deleteSingleAppointment(apptId) {
+      if (confirm("Are you sure you want to permanently delete this patient booking record from database storage? This action cannot be undone.")) {
+        try {
+          const { error } = await supabaseClient
+            .from('appointments')
+            .delete()
+            .eq('id', apptId);
+            
+          if (error) throw error;
+          
+          alert("Patient booking deleted from database storage.");
+          loadBookings();
+        } catch (err) {
+          alert("Failed to delete record: " + err.message);
+        }
+      }
+    }
+
+    // Bulk Delete Modal operations
+    const deleteModal = document.getElementById('delete-modal');
+    
+    function openDeleteModal() {
+      deleteModal.style.display = 'flex';
+    }
+    
+    function closeDeleteModal() {
+      deleteModal.style.display = 'none';
+    }
+
+    // Bulk delete based on selected daily/monthly period
+    async function handleBulkDelete() {
+      const period = document.getElementById('delete-period-select').value;
+      let confirmMsg = "";
+      let query = supabaseClient.from('appointments').delete();
+      
+      if (period === 'today') {
+        confirmMsg = "Are you sure you want to delete ALL of today's bookings?";
+        const startOfToday = new Date();
+        startOfToday.setHours(0, 0, 0, 0);
+        query = query.gte('created_at', startOfToday.toISOString());
+      } else if (period === 'month') {
+        confirmMsg = "Are you sure you want to delete ALL of this month's bookings?";
+        const startOfMonth = new Date();
+        startOfMonth.setDate(1);
+        startOfMonth.setHours(0, 0, 0, 0);
+        query = query.gte('created_at', startOfMonth.toISOString());
+      } else {
+        confirmMsg = "Are you sure you want to delete ALL booking records in the entire database?";
+        // A direct delete query needs a condition to be executed, we target everything
+        query = query.neq('id', '00000000-0000-0000-0000-000000000000');
+      }
+      
+      if (confirm(confirmMsg + "\n\nThis will permanently delete these records from database storage. This action is irreversible!")) {
+        const confirmSecond = confirm("FINAL WARNING: Click OK to execute permanent data removal.");
+        if (confirmSecond) {
+          try {
+            const { error } = await query;
+            if (error) throw error;
+            
+            alert("Selected booking records successfully deleted from database storage.");
+            closeDeleteModal();
+            loadBookings();
+          } catch (err) {
+            alert("Error deleting bookings: " + err.message);
+          }
         }
       }
     }
