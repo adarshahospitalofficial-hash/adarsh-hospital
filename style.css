@@ -141,9 +141,12 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   position: relative;
   z-index: 3;
   pointer-events: none;
+  max-width: 100% !important;
+  padding: 0 40px !important;
 }
 .hero-text {
-  max-width: 580px;
+  max-width: 100%;
+  width: 100%;
   pointer-events: auto;
   transition: opacity 0.15s ease-out, transform 0.15s ease-out;
 }
@@ -152,12 +155,12 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
 }
 .hero h1 {
   font-family: 'Poppins', sans-serif;
-  font-size: 5.5rem;
+  font-size: clamp(2rem, 9.2vw, 10rem);
   font-weight: 900;
   margin: 12px 0 20px;
   line-height: 1.1;
   text-transform: uppercase;
-  letter-spacing: -1.5px;
+  letter-spacing: -2px;
   white-space: nowrap;
   background: linear-gradient(135deg, #0052d4 0%, #4364f7 35%, #e92a9d 70%, #ff6b6b 100%);
   -webkit-background-clip: text;
@@ -787,6 +790,9 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
 /* Responsive Styles */
 @media(max-width:960px){
   .hero-inner,.about-inner,.contact-inner{grid-template-columns:1fr;}
+  .hero-inner {
+    padding: 0 20px !important;
+  }
   .hero-overlay {
     background: transparent;
   }
@@ -818,7 +824,7 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   }
   
   .hero h1 {
-    font-size: clamp(1.8rem, 8vw, 3.8rem) !important;
+    font-size: clamp(1.8rem, 9.2vw, 4.5rem) !important;
     line-height: 1.15 !important;
     letter-spacing: -1px !important;
     white-space: nowrap !important;
