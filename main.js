@@ -289,6 +289,17 @@
       text.style.opacity = textOpacity;
       text.style.transform = `translateY(${textTranslateY}px)`;
     }
+
+    // Fade out canvas animation as scroll increases
+    if (canvas) {
+      let canvasOpacity = 1;
+      if (progress > 0.05) {
+        // Linear fade out canvas between 5% and 40% scroll progress
+        canvasOpacity = 1 - (progress - 0.05) / 0.35;
+        canvasOpacity = Math.max(0, canvasOpacity);
+      }
+      canvas.style.opacity = canvasOpacity;
+    }
   }
 
   // Smooth scroll scrubbing loop using requestAnimationFrame decoupling
