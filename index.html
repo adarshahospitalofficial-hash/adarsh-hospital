@@ -26,48 +26,58 @@
 <!-- Header -->
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#home" class="logo">
-      <img src="/db/storage/v1/object/public/assets/logo.png" alt="ADARSH HOSPITAL Logo" class="logo-img" />
-      <div class="logo-text">
-        <div class="logo-name">ADARSH HOSPITAL</div>
-        <div class="logo-sub">Koppa · Chikkamagaluru</div>
-      </div>
-    </a>
-
-    <!-- Mobile Navigation Toggle -->
-    <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <nav class="nav">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#doctors">Doctors</a>
-      
-      <!-- Dropdown for Departments -->
-      <div class="nav-item-dropdown">
-        <a href="#departments" class="dropdown-trigger">Departments ▾</a>
-        <div class="dropdown-menu">
-          <a href="#laboratory">Laboratory</a>
-          <a href="#radiology">Radiology</a>
-          <a href="#cardiology">Cardiology</a>
-          <a href="#womens-health">Women's Health</a>
-          <a href="#emergency">Emergency Care</a>
+    <div class="header-top">
+      <div class="header-left">
+        <a href="#home" class="logo">
+          <img src="/db/storage/v1/object/public/assets/logo.png" alt="ADARSH HOSPITAL Logo" class="logo-img" />
+          <div class="logo-text">
+            <div class="logo-name"><span class="hero-brand-blue">ADARSH</span> <span class="hero-brand-green">HOSPITAL</span></div>
+            <div class="logo-sub">Koppa · Chikkamagaluru</div>
+          </div>
+        </a>
+        <div class="header-accreditation">
+          <img src="/db/storage/v1/object/public/assets/nabh-logo.jpeg" alt="NABH Logo" class="nabh-logo-img-header" />
+          <span class="nabh-badge-header">NABH Accredited</span>
         </div>
       </div>
-      
-      <a href="packages.html">Packages</a>
-      <a href="#diagnostics">Diagnostics</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <!-- Mobile Only Appointment Button inside nav drawer -->
-      <a href="#contact" class="btn btn-primary mobile-only-cta">Get Appointment</a>
-    </nav>
 
-    <!-- Desktop Only Appointment Button -->
-    <a href="#contact" class="btn btn-primary desktop-only-cta">Get Appointment</a>
+      <!-- Mobile Navigation Toggle -->
+      <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Desktop Only Appointment Button -->
+      <a href="#contact" class="btn btn-primary desktop-only-cta">Get Appointment</a>
+    </div>
+
+    <div class="header-bottom">
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#doctors">Doctors</a>
+        
+        <!-- Dropdown for Departments -->
+        <div class="nav-item-dropdown">
+          <a href="#departments" class="dropdown-trigger">Departments ▾</a>
+          <div class="dropdown-menu">
+            <a href="#laboratory">Laboratory</a>
+            <a href="#radiology">Radiology</a>
+            <a href="#cardiology">Cardiology</a>
+            <a href="#womens-health">Women's Health</a>
+            <a href="#emergency">Emergency Care</a>
+          </div>
+        </div>
+        
+        <a href="packages.html">Packages</a>
+        <a href="#diagnostics">Diagnostics</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <!-- Mobile Only Appointment Button inside nav drawer -->
+        <a href="#contact" class="btn btn-primary mobile-only-cta">Get Appointment</a>
+      </nav>
+    </div>
   </div>
 </header>
 <!-- Mobile Nav Overlay Backdrop -->
@@ -80,11 +90,6 @@
     <div class="hero-overlay"></div>
     <div class="container hero-inner">
       <div class="hero-text">
-        <div class="hero-accreditation">
-          <img src="/db/storage/v1/object/public/assets/nabh-logo.jpeg" alt="NABH Logo" class="nabh-logo-img-hero" />
-          <span class="nabh-badge">NABH Accredited</span>
-        </div>
-        <h1><span class="hero-brand-blue">ADARSH</span> <span class="hero-brand-green">HOSPITAL</span></h1>
         <p class="hero-tags">PRECISION · TRUST · CARE · DIAGNOSTICS · EXCELLENCE</p>
         <p class="hero-desc">ADARSH HOSPITAL delivers reliable multispecialty and diagnostic services with modern technology, experienced clinicians and a patient-first approach — right in the heart of Chikkamagaluru district.</p>
         <div class="hero-cta">
