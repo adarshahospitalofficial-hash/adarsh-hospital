@@ -1772,6 +1772,16 @@ body::after {
   background: linear-gradient(90deg, #b91c1c, #991b1b);
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
 }
+.btn-emergency-outline {
+  border: 2px solid #dc2626;
+  color: #dc2626 !important;
+  background: transparent;
+}
+.btn-emergency-outline:hover {
+  background: linear-gradient(90deg, #dc2626, #b91c1c);
+  color: #fff !important;
+  border-color: transparent;
+}
 .emergency-icon {
   animation: pulse 1.5s infinite;
 }
