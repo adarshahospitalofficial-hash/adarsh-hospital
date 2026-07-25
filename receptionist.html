@@ -14,7 +14,7 @@
   <!-- Header -->
   <header class="portal-header">
     <div class="brand">
-      <img src="https://itzjqlznihnnfdshwcoz.supabase.co/storage/v1/object/public/assets/logo.png" alt="Adarsha Hospital Logo" style="height: 36px;">
+      <img src="/db/storage/v1/object/public/assets/logo.png" alt="Adarsha Hospital Logo" style="height: 36px;">
       <h1>Adarsha Hospital Portal</h1>
     </div>
     
@@ -267,15 +267,26 @@
     
     // Supabase Initialization
     let supabaseClient = null;
-    if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined' && SUPABASE_URL) {
-      supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    } else {
-      alert("Supabase client is not loaded. Please verify configuration.");
-    }
 
     // Page Load Setup
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
       lucide.createIcons();
+      
+      try {
+        const configRes = await fetch('/api/config');
+        const config = await configRes.json();
+        if (config.SUPABASE_URL && config.SUPABASE_ANON_KEY && typeof supabase !== 'undefined') {
+          supabaseClient = supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
+        }
+      } catch (err) {
+        console.error("Failed to load Supabase config:", err);
+      }
+
+      if (!supabaseClient) {
+        alert("Supabase client is not initialized. Please verify configuration.");
+        return;
+      }
+      
       checkSession();
       
       // Setup Login Form submission

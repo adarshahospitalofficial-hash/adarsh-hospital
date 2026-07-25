@@ -368,25 +368,26 @@
   // --- Supabase Integration ---
   let supabaseClient = null;
 
-  function isSupabaseConfigured() {
-    return (
-      typeof supabase !== 'undefined' &&
-      typeof SUPABASE_URL !== 'undefined' &&
-      typeof SUPABASE_ANON_KEY !== 'undefined' &&
-      !SUPABASE_URL.includes("your-project-id") &&
-      !SUPABASE_ANON_KEY.includes("your-anon-public-key")
-    );
-  }
-
   async function initSupabase() {
-    if (!isSupabaseConfigured()) {
-      console.log("Supabase is not configured yet. Using local fallback data.");
+    if (typeof supabase === 'undefined') {
+      console.log("Supabase library not loaded. Using local fallback data.");
       setupLocalFormFallback();
       return;
     }
 
     try {
-      supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const configRes = await fetch('/api/config');
+      const config = await configRes.json();
+      const supabaseUrl = config.SUPABASE_URL;
+      const supabaseKey = config.SUPABASE_ANON_KEY;
+
+      if (!supabaseUrl || !supabaseKey) {
+        console.log("Supabase settings not configured in environment. Using local fallback data.");
+        setupLocalFormFallback();
+        return;
+      }
+
+      supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
       console.log("Supabase client initialized successfully!");
       
       // Load data dynamically from Supabase
