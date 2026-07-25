@@ -457,37 +457,42 @@
         updateStatsSummary();
 
         if (appointmentsList.length === 0) {
+          tableBody.innerHTML = '';
           emptyState.style.display = 'block';
         } else {
-          appointmentsList.forEach(appt => {
+          emptyState.style.display = 'none';
+          
+          const rowsHtml = appointmentsList.map(appt => {
             const status = appt.status || 'pending';
             const statusBadge = `<span class="badge badge-${status}">${status}</span>`;
             const formattedDate = appt.created_at ? new Date(appt.created_at).toLocaleString() : 'N/A';
             const doctor = appt.preferred_doctor || 'Not Selected / OPD';
             const token = appt.token_number || '—';
             
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td><strong>${appt.full_name}</strong></td>
-              <td><a href="tel:${appt.phone_number}">${appt.phone_number}</a></td>
-              <td>${appt.service_requested}</td>
-              <td>${doctor}</td>
-              <td>${formattedDate}</td>
-              <td>${statusBadge}</td>
-              <td><strong>${token}</strong></td>
-              <td>
-                <div style="display: flex; gap: 6px; align-items: center;">
-                  <button class="btn btn-outline btn-sm" onclick="openTokenModal('${appt.id}')">
-                    ${status === 'pending' ? 'Issue Token' : 'Edit Token'}
-                  </button>
-                  <button class="btn btn-danger btn-sm btn-icon-only" onclick="deleteSingleAppointment('${appt.id}')" title="Delete Patient Record">
-                    <i data-lucide="trash-2"></i>
-                  </button>
-                </div>
-              </td>
+            return `
+              <tr>
+                <td><strong>${appt.full_name}</strong></td>
+                <td><a href="tel:${appt.phone_number}">${appt.phone_number}</a></td>
+                <td>${appt.service_requested}</td>
+                <td>${doctor}</td>
+                <td>${formattedDate}</td>
+                <td>${statusBadge}</td>
+                <td><strong>${token}</strong></td>
+                <td>
+                  <div style="display: flex; gap: 6px; align-items: center;">
+                    <button class="btn btn-outline btn-sm" onclick="openTokenModal('${appt.id}')">
+                      ${status === 'pending' ? 'Issue Token' : 'Edit Token'}
+                    </button>
+                    <button class="btn btn-danger btn-sm btn-icon-only" onclick="deleteSingleAppointment('${appt.id}')" title="Delete Patient Record">
+                      <i data-lucide="trash-2"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
             `;
-            tableBody.appendChild(tr);
-          });
+          }).join('');
+          
+          tableBody.innerHTML = rowsHtml;
           // Re-create icons since we injected dynamic lucide classes
           lucide.createIcons();
         }
@@ -528,7 +533,7 @@
     // Load Doctors List and Availability
     async function loadDoctors(isBackground = false) {
       if (!supabaseClient) return;
-
+ 
       const tableBody = document.getElementById('doctors-table-body');
       const loading = document.getElementById('doctors-loading');
       
@@ -550,31 +555,33 @@
         if (doctorsList.length === 0) {
           tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center;">No doctors found. Please populate the 'doctors' table.</td></tr>`;
         } else {
-          doctorsList.forEach(doc => {
+          const rowsHtml = doctorsList.map(doc => {
             const isAvail = doc.is_available !== false; // Default to true if null/undefined
             const statusText = isAvail ? 'Available' : 'Unavailable';
             const switchChecked = isAvail ? 'checked' : '';
             
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td><strong>${doc.name}</strong></td>
-              <td><span class="badge" style="background: var(--secondary); color: var(--primary);">${doc.department}</span></td>
-              <td>${doc.education}</td>
-              <td>
-                <div style="display: flex; gap: 12px; align-items: center;">
-                  <label class="switch-container">
-                    <input type="checkbox" class="switch-input" ${switchChecked} onchange="toggleDoctorAvailability('${doc.id}', this.checked)">
-                    <span class="switch-slider"></span>
-                    <span class="switch-status-text ${isAvail ? '' : 'off'}">${statusText}</span>
-                  </label>
-                  <button class="btn btn-danger btn-sm btn-icon-only" onclick="deleteDoctor('${doc.id}')" title="Delete Doctor from Registry">
-                    <i data-lucide="trash-2"></i>
-                  </button>
-                </div>
-              </td>
+            return `
+              <tr>
+                <td><strong>${doc.name}</strong></td>
+                <td><span class="badge" style="background: var(--secondary); color: var(--primary);">${doc.department}</span></td>
+                <td>${doc.education}</td>
+                <td>
+                  <div style="display: flex; gap: 12px; align-items: center;">
+                    <label class="switch-container">
+                      <input type="checkbox" class="switch-input" ${switchChecked} onchange="toggleDoctorAvailability('${doc.id}', this.checked)">
+                      <span class="switch-slider"></span>
+                      <span class="switch-status-text ${isAvail ? '' : 'off'}">${statusText}</span>
+                    </label>
+                    <button class="btn btn-danger btn-sm btn-icon-only" onclick="deleteDoctor('${doc.id}')" title="Delete Doctor from Registry">
+                      <i data-lucide="trash-2"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
             `;
-            tableBody.appendChild(tr);
-          });
+          }).join('');
+          
+          tableBody.innerHTML = rowsHtml;
           // Re-create icons since we injected dynamic lucide classes
           lucide.createIcons();
         }
