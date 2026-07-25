@@ -7,6 +7,7 @@
   ctx.imageSmoothingQuality = 'high';
   const loader = document.getElementById('animation-loader');
   const heroSection = document.getElementById('home');
+  const isMobile = () => window.innerWidth <= 768;
 
   // Rewrite image assets if USE_SUPABASE_ASSETS is enabled
   function rewriteAssetUrls() {
@@ -137,20 +138,23 @@
 
   function startBackgroundLoading() {
     const loadQueue = [];
+    const mobile = isMobile();
 
-    // Step 1: Every 4th frame for quick low-res scan
+    // Step 1: Every 4th frame for quick low-res scan (or mobile playback)
     for (let i = 5; i <= frameCount; i += 4) {
       loadQueue.push(i);
     }
 
-    // Step 2: Every 2nd frame for medium resolution
-    for (let i = 3; i <= frameCount; i += 4) {
-      loadQueue.push(i);
-    }
+    if (!mobile) {
+      // Step 2: Every 2nd frame for medium resolution
+      for (let i = 3; i <= frameCount; i += 4) {
+        loadQueue.push(i);
+      }
 
-    // Step 3: All remaining frames for full detail
-    for (let i = 2; i <= frameCount; i += 2) {
-      loadQueue.push(i);
+      // Step 3: All remaining frames for full detail
+      for (let i = 2; i <= frameCount; i += 2) {
+        loadQueue.push(i);
+      }
     }
 
     // Ensure last frame is loaded early
@@ -177,7 +181,7 @@
         img.onload = () => {
           activeLoads--;
           loadedCount++;
-          if (getCurrentScrollFrameIndex() === frameIdx) {
+          if (!isMobile() && getCurrentScrollFrameIndex() === frameIdx) {
             drawFrame(frameIdx);
           }
           loadNextFromQueue();
@@ -260,20 +264,22 @@
     let progress = scrollOffset / scrollRange;
     progress = Math.max(0, Math.min(1, progress));
 
-    const targetFrame = Math.floor(progress * (frameCount - 1)) + 1;
+    if (!isMobile()) {
+      const targetFrame = Math.floor(progress * (frameCount - 1)) + 1;
 
-    // Prioritize loading the target frame if it hasn't started loading yet
-    const img = images[targetFrame - 1];
-    if (img && !img.src) {
-      img.src = getFrameUrl(targetFrame);
-      img.onload = () => {
-        if (getCurrentScrollFrameIndex() === targetFrame) {
-          drawFrame(targetFrame);
-        }
-      };
+      // Prioritize loading the target frame if it hasn't started loading yet
+      const img = images[targetFrame - 1];
+      if (img && !img.src) {
+        img.src = getFrameUrl(targetFrame);
+        img.onload = () => {
+          if (getCurrentScrollFrameIndex() === targetFrame) {
+            drawFrame(targetFrame);
+          }
+        };
+      }
+
+      drawFrame(targetFrame);
     }
-
-    drawFrame(targetFrame);
 
     // Fade out and translate the hero text as scroll increases
     const text = document.querySelector('.hero-text');
@@ -305,6 +311,59 @@
 
   // Initial draw
   handleScroll();
+
+  // Mobile Autoplay loop setup
+  const getMobileFrames = () => {
+    const list = [1];
+    for (let i = 5; i <= frameCount; i += 4) {
+      list.push(i);
+    }
+    if (!list.includes(frameCount)) {
+      list.push(frameCount);
+    }
+    return list;
+  };
+
+  const mobileFramesList = getMobileFrames();
+  let mobileFrameIdx = 0;
+  let lastAutoplayTime = 0;
+  const fps = 30;
+  const fpsInterval = 1000 / fps;
+
+  function animateMobile(timestamp) {
+    if (!isMobile()) {
+      requestAnimationFrame(animateMobile);
+      return;
+    }
+
+    if (!lastAutoplayTime) lastAutoplayTime = timestamp;
+    const elapsed = timestamp - lastAutoplayTime;
+
+    if (elapsed > fpsInterval) {
+      lastAutoplayTime = timestamp - (elapsed % fpsInterval);
+
+      // Check if hero is in view
+      const rect = heroSection.getBoundingClientRect();
+      const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+      if (inView) {
+        mobileFrameIdx = (mobileFrameIdx + 1) % mobileFramesList.length;
+        const currentFrame = mobileFramesList[mobileFrameIdx];
+
+        // Ensure the current frame is loaded (or loading)
+        const img = images[currentFrame - 1];
+        if (img && !img.src) {
+          img.src = getFrameUrl(currentFrame);
+        }
+
+        drawFrame(currentFrame);
+      }
+    }
+
+    requestAnimationFrame(animateMobile);
+  }
+
+  // Start mobile autoplay loop
+  requestAnimationFrame(animateMobile);
 
   // --- Supabase Integration ---
   let supabaseClient = null;
