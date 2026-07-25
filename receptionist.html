@@ -257,6 +257,8 @@
     let doctorsList = [];
     let bookingsInterval = null;
     let doctorsInterval = null;
+    let inactivityTimer = null;
+    const INACTIVITY_LIMIT = 5 * 60 * 1000; // 5 minutes in milliseconds
     
     // Select Elements
     const loginSection = document.getElementById('login-section');
@@ -268,9 +270,38 @@
     // Supabase Initialization
     let supabaseClient = null;
 
+    // Inactivity Auto-Logout Timer Resets
+    function resetInactivityTimer() {
+      if (inactivityTimer) {
+        clearTimeout(inactivityTimer);
+      }
+      if (currentUser) {
+        inactivityTimer = setTimeout(autoLogout, INACTIVITY_LIMIT);
+      }
+    }
+
+    async function autoLogout() {
+      if (!supabaseClient || !currentUser) return;
+      
+      console.log("Inactivity limit reached. Logging out automatically.");
+      try {
+        await supabaseClient.auth.signOut();
+      } catch (err) {
+        console.error("Auto logout error:", err);
+      }
+      showLogin();
+      alert("You have been logged out automatically due to 5 minutes of inactivity.");
+    }
+
     // Page Load Setup
     window.addEventListener('DOMContentLoaded', async () => {
       lucide.createIcons();
+      
+      // Setup activity listeners for inactivity timeout
+      const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+      activityEvents.forEach(name => {
+        document.addEventListener(name, resetInactivityTimer, { passive: true });
+      });
       
       try {
         const configRes = await fetch('/api/config');
@@ -280,7 +311,12 @@
           if (supabaseUrl.startsWith('/')) {
             supabaseUrl = window.location.origin + supabaseUrl;
           }
-          supabaseClient = supabase.createClient(supabaseUrl, config.SUPABASE_ANON_KEY);
+          supabaseClient = supabase.createClient(supabaseUrl, config.SUPABASE_ANON_KEY, {
+            auth: {
+              storage: window.sessionStorage,
+              persistSession: true
+            }
+          });
         }
       } catch (err) {
         console.error("Failed to load Supabase config:", err);
@@ -324,6 +360,12 @@
       portalNav.style.display = 'none';
       userControls.style.display = 'none';
       
+      currentUser = null;
+      if (inactivityTimer) {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = null;
+      }
+
       if (bookingsInterval) {
         clearInterval(bookingsInterval);
         bookingsInterval = null;
@@ -341,6 +383,9 @@
       portalNav.style.display = 'flex';
       userControls.style.display = 'block';
       
+      // Initialize inactivity tracking timer
+      resetInactivityTimer();
+
       // Load tables immediately
       loadBookings();
       loadDoctors();
