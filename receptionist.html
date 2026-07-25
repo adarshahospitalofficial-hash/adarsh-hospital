@@ -276,7 +276,11 @@
         const configRes = await fetch('/api/config');
         const config = await configRes.json();
         if (config.SUPABASE_URL && config.SUPABASE_ANON_KEY && typeof supabase !== 'undefined') {
-          supabaseClient = supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
+          let supabaseUrl = config.SUPABASE_URL;
+          if (supabaseUrl.startsWith('/')) {
+            supabaseUrl = window.location.origin + supabaseUrl;
+          }
+          supabaseClient = supabase.createClient(supabaseUrl, config.SUPABASE_ANON_KEY);
         }
       } catch (err) {
         console.error("Failed to load Supabase config:", err);

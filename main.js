@@ -378,13 +378,17 @@
     try {
       const configRes = await fetch('/api/config');
       const config = await configRes.json();
-      const supabaseUrl = config.SUPABASE_URL;
+      let supabaseUrl = config.SUPABASE_URL;
       const supabaseKey = config.SUPABASE_ANON_KEY;
 
       if (!supabaseUrl || !supabaseKey) {
         console.log("Supabase settings not configured in environment. Using local fallback data.");
         setupLocalFormFallback();
         return;
+      }
+
+      if (supabaseUrl.startsWith('/')) {
+        supabaseUrl = window.location.origin + supabaseUrl;
       }
 
       supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
