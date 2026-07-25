@@ -232,7 +232,12 @@ module.exports = async (req, res) => {
       res.status(200).json({ success: true, message: 'Callback request submitted successfully! We will get back to you shortly.' });
     } else {
       console.error('Supabase write error:', insertRes.statusCode, insertRes.body);
-      res.status(500).json({ error: 'Failed to process request on database. Please try again later.' });
+      const dbDetails = (insertRes.body && typeof insertRes.body === 'object') 
+        ? (insertRes.body.message || JSON.stringify(insertRes.body)) 
+        : String(insertRes.body || '');
+      res.status(500).json({ 
+        error: `Failed to process request on database. Reason: ${dbDetails || 'Status ' + insertRes.statusCode}. Please try again later.` 
+      });
     }
   } catch (err) {
     console.error('Callback function error:', err);
