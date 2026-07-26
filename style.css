@@ -39,7 +39,7 @@ body{
   line-height:1.6;
   background:#fff;
 }
-img{max-width:100%;display:block;}
+img{max-width:100%;height:auto;display:block;}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
 .container{max-width:1180px;margin:0 auto;padding:0 24px;}
@@ -1657,6 +1657,7 @@ body::after {
 }
 .dept-detail-image img {
   width: 100%;
+  height: auto;
   border-radius: 16px;
   box-shadow: var(--shadow-card);
 }

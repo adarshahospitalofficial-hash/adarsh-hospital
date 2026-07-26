@@ -267,8 +267,12 @@
     const userControls = document.getElementById('user-controls');
     const loginForm = document.getElementById('login-form');
     
-    // Supabase Initialization
-    let supabaseClient = null;
+    // Session State
+    let sessionToken = sessionStorage.getItem('admin-token') || null;
+    let currentUser = null;
+    try {
+      currentUser = JSON.parse(sessionStorage.getItem('admin-user')) || null;
+    } catch(e) {}
 
     // Inactivity Auto-Logout Timer Resets
     function resetInactivityTimer() {
@@ -281,15 +285,10 @@
     }
 
     async function autoLogout() {
-      if (!supabaseClient || !currentUser) return;
+      if (!sessionToken || !currentUser) return;
       
       console.log("Inactivity limit reached. Logging out automatically.");
-      try {
-        await supabaseClient.auth.signOut();
-      } catch (err) {
-        console.error("Auto logout error:", err);
-      }
-      showLogin();
+      handleLogout(true);
       alert("You have been logged out automatically due to 5 minutes of inactivity.");
     }
 
@@ -303,30 +302,6 @@
         document.addEventListener(name, resetInactivityTimer, { passive: true });
       });
       
-      try {
-        const configRes = await fetch('/api/config');
-        const config = await configRes.json();
-        if (config.SUPABASE_URL && config.SUPABASE_ANON_KEY && typeof supabase !== 'undefined') {
-          let supabaseUrl = config.SUPABASE_URL;
-          if (supabaseUrl.startsWith('/')) {
-            supabaseUrl = window.location.origin + supabaseUrl;
-          }
-          supabaseClient = supabase.createClient(supabaseUrl, config.SUPABASE_ANON_KEY, {
-            auth: {
-              storage: window.sessionStorage,
-              persistSession: true
-            }
-          });
-        }
-      } catch (err) {
-        console.error("Failed to load Supabase config:", err);
-      }
-
-      if (!supabaseClient) {
-        alert("Supabase client is not initialized. Please verify configuration.");
-        return;
-      }
-      
       checkSession();
       
       // Setup Login Form submission
@@ -334,17 +309,32 @@
       
       // Setup Token Form submission
       document.getElementById('token-form').addEventListener('submit', handleSaveToken);
+      // Setup Doctor Form submission
+      document.getElementById('doctor-form').addEventListener('submit', handleAddDoctor);
     });
 
     // Check Auth Session
     async function checkSession() {
-      if (!supabaseClient) return;
+      if (!sessionToken) {
+        showLogin();
+        return;
+      }
       try {
-        const { data: { session }, error } = await supabaseClient.auth.getSession();
-        if (session) {
-          currentUser = session.user;
+        const res = await fetch('/api/admin/auth', {
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`
+          }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          currentUser = data.user;
+          sessionStorage.setItem('admin-user', JSON.stringify(currentUser));
           showDashboard();
         } else {
+          sessionToken = null;
+          currentUser = null;
+          sessionStorage.removeItem('admin-token');
+          sessionStorage.removeItem('admin-user');
           showLogin();
         }
       } catch (err) {
@@ -410,10 +400,22 @@
       submitBtn.textContent = 'Logging in...';
 
       try {
-        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        const res = await fetch('/api/admin/auth', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || 'Login failed.');
+        }
         
+        sessionToken = data.access_token;
         currentUser = data.user;
+        sessionStorage.setItem('admin-token', sessionToken);
+        sessionStorage.setItem('admin-user', JSON.stringify(currentUser));
         showDashboard();
       } catch (err) {
         alert("Login failed: " + err.message);
@@ -424,9 +426,12 @@
     }
 
     // Handle Logout
-    async function handleLogout() {
-      if (confirm("Are you sure you want to log out?")) {
-        await supabaseClient.auth.signOut();
+    async function handleLogout(silent = false) {
+      if (silent || confirm("Are you sure you want to log out?")) {
+        sessionToken = null;
+        currentUser = null;
+        sessionStorage.removeItem('admin-token');
+        sessionStorage.removeItem('admin-user');
         showLogin();
       }
     }
@@ -455,12 +460,13 @@
 
     // Load Bookings Queue
     async function loadBookings(isBackground = false) {
-      if (!supabaseClient) return;
+      if (!sessionToken) return;
       
       const tableBody = document.getElementById('bookings-table-body');
       const loading = document.getElementById('bookings-loading');
       const emptyState = document.getElementById('bookings-empty');
       const filter = document.getElementById('filter-status').value;
+      const dateFilter = document.getElementById('filter-date').value;
       
       if (!isBackground) {
         tableBody.innerHTML = '';
@@ -469,33 +475,16 @@
       }
       
       try {
-        let query = supabaseClient.from('appointments').select('*').order('created_at', { ascending: false });
-        
-        // Apply Date Filter
-        const dateFilter = document.getElementById('filter-date').value;
-        if (dateFilter === 'today') {
-          const startOfToday = new Date();
-          startOfToday.setHours(0, 0, 0, 0);
-          query = query.gte('created_at', startOfToday.toISOString());
-        } else if (dateFilter === 'month') {
-          const startOfMonth = new Date();
-          startOfMonth.setDate(1);
-          startOfMonth.setHours(0, 0, 0, 0);
-          query = query.gte('created_at', startOfMonth.toISOString());
-        }
-
-        if (filter !== 'all') {
-          if (filter === 'pending') {
-            // handle cases where status is null or explicitly 'pending'
-            query = query.or('status.eq.pending,status.is.null');
-          } else {
-            query = query.eq('status', filter);
+        const res = await fetch(`/api/admin/appointments?status=${filter}&dateFilter=${dateFilter}`, {
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`
           }
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Failed to fetch appointments.');
         }
-        
-        const { data, error } = await query;
-        if (error) throw error;
-        
+        const data = await res.json();
         appointmentsList = data || [];
         
         // Calculate Stat numbers for summary cards
@@ -551,10 +540,15 @@
 
     // Update statistics on top of page
     async function updateStatsSummary() {
+      if (!sessionToken) return;
       try {
-        // Fetch stats counts
-        const { data, error } = await supabaseClient.from('appointments').select('status');
-        if (error) throw error;
+        const res = await fetch('/api/admin/appointments?status=all&dateFilter=all', {
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`
+          }
+        });
+        if (!res.ok) throw new Error('API error');
+        const data = await res.json();
 
         let pendingCount = 0;
         let confirmedCount = 0;
@@ -577,7 +571,7 @@
 
     // Load Doctors List and Availability
     async function loadDoctors(isBackground = false) {
-      if (!supabaseClient) return;
+      if (!sessionToken) return;
  
       const tableBody = document.getElementById('doctors-table-body');
       const loading = document.getElementById('doctors-loading');
@@ -588,13 +582,16 @@
       }
       
       try {
-        const { data, error } = await supabaseClient
-          .from('doctors')
-          .select('*')
-          .order('display_order', { ascending: true });
-          
-        if (error) throw error;
-        
+        const res = await fetch('/api/admin/doctors', {
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`
+          }
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Failed to fetch doctors.');
+        }
+        const data = await res.json();
         doctorsList = data || [];
         
         if (doctorsList.length === 0) {
@@ -613,7 +610,7 @@
                 <td>
                   <div style="display: flex; gap: 12px; align-items: center;">
                     <label class="switch-container">
-                      <input type="checkbox" class="switch-input" ${switchChecked} onchange="toggleDoctorAvailability('${doc.id}', this.checked)">
+                      <input type="checkbox" class="switch-input" ${switchChecked} onchange="toggleDoctorAvailability('${doc.name}', this.checked)">
                       <span class="switch-slider"></span>
                       <span class="switch-status-text ${isAvail ? '' : 'off'}">${statusText}</span>
                     </label>
@@ -627,33 +624,37 @@
           }).join('');
           
           tableBody.innerHTML = rowsHtml;
-          // Re-create icons since we injected dynamic lucide classes
           lucide.createIcons();
         }
       } catch (err) {
         console.error("Error loading doctors:", err);
-        tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: red;">Failed to retrieve doctors list. Please check if 'is_available' column is added to 'doctors' table.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: red;">Failed to retrieve doctors list: ${err.message}</td></tr>`;
       } finally {
         loading.style.display = 'none';
       }
     }
 
     // Toggle Doctor Availability in Database
-    async function toggleDoctorAvailability(docId, checked) {
-      if (!supabaseClient) return;
+    async function toggleDoctorAvailability(docName, checked) {
+      if (!sessionToken) return;
 
       try {
-        const { error } = await supabaseClient
-          .from('doctors')
-          .update({ is_available: checked })
-          .eq('id', docId);
-
-        if (error) throw error;
+        const res = await fetch('/api/admin/doctors', {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name: docName, is_available: checked })
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Failed to update availability.');
+        }
         
-        // Refresh doctors page to reflect labels properly
         loadDoctors();
       } catch (err) {
-        alert("Failed to update availability. Details: " + err.message + "\n\nMake sure the 'is_available' column (type: boolean) exists in your 'doctors' table in Supabase.");
+        alert("Failed to update availability. Details: " + err.message);
         loadDoctors(); // Reset checkboxes
       }
     }
@@ -693,15 +694,18 @@
       submitBtn.textContent = 'Saving...';
       
       try {
-        const { error } = await supabaseClient
-          .from('appointments')
-          .update({
-            token_number: tokenVal,
-            status: 'confirmed'
-          })
-          .eq('id', apptId);
-          
-        if (error) throw error;
+        const res = await fetch('/api/admin/appointments', {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id: apptId, status: 'confirmed', token_number: tokenVal })
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Failed to save token.');
+        }
         
         alert("Token assigned and booking confirmed!");
         closeTokenModal();
@@ -720,12 +724,18 @@
       
       if (confirm("Are you sure you want to cancel this booking request?")) {
         try {
-          const { error } = await supabaseClient
-            .from('appointments')
-            .update({ status: 'cancelled' })
-            .eq('id', apptId);
-            
-          if (error) throw error;
+          const res = await fetch('/api/admin/appointments', {
+            method: 'PATCH',
+            headers: {
+              'Authorization': `Bearer ${sessionToken}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: apptId, status: 'cancelled' })
+          });
+          if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(errData.error || 'Failed to cancel appointment.');
+          }
           
           alert("Appointment cancelled.");
           closeTokenModal();
@@ -759,12 +769,16 @@
     async function deleteSingleAppointment(apptId) {
       if (confirm("Are you sure you want to permanently delete this patient booking record from database storage? This action cannot be undone.")) {
         try {
-          const { error } = await supabaseClient
-            .from('appointments')
-            .delete()
-            .eq('id', apptId);
-            
-          if (error) throw error;
+          const res = await fetch(`/api/admin/appointments?deleteType=single&id=${apptId}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${sessionToken}`
+            }
+          });
+          if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(errData.error || 'Failed to delete record.');
+          }
           
           alert("Patient booking deleted from database storage.");
           loadBookings();
@@ -789,31 +803,29 @@
     async function handleBulkDelete() {
       const period = document.getElementById('delete-period-select').value;
       let confirmMsg = "";
-      let query = supabaseClient.from('appointments').delete();
       
       if (period === 'today') {
         confirmMsg = "Are you sure you want to delete ALL of today's bookings?";
-        const startOfToday = new Date();
-        startOfToday.setHours(0, 0, 0, 0);
-        query = query.gte('created_at', startOfToday.toISOString());
       } else if (period === 'month') {
         confirmMsg = "Are you sure you want to delete ALL of this month's bookings?";
-        const startOfMonth = new Date();
-        startOfMonth.setDate(1);
-        startOfMonth.setHours(0, 0, 0, 0);
-        query = query.gte('created_at', startOfMonth.toISOString());
       } else {
         confirmMsg = "Are you sure you want to delete ALL booking records in the entire database?";
-        // A direct delete query needs a condition to be executed, we target everything
-        query = query.neq('id', '00000000-0000-0000-0000-000000000000');
       }
       
       if (confirm(confirmMsg + "\n\nThis will permanently delete these records from database storage. This action is irreversible!")) {
         const confirmSecond = confirm("FINAL WARNING: Click OK to execute permanent data removal.");
         if (confirmSecond) {
           try {
-            const { error } = await query;
-            if (error) throw error;
+            const res = await fetch(`/api/admin/appointments?deleteType=${period}`, {
+              method: 'DELETE',
+              headers: {
+                'Authorization': `Bearer ${sessionToken}`
+              }
+            });
+            if (!res.ok) {
+              const errData = await res.json();
+              throw new Error(errData.error || 'Failed to bulk delete.');
+            }
             
             alert("Selected booking records successfully deleted from database storage.");
             closeDeleteModal();
@@ -853,18 +865,24 @@
       submitBtn.textContent = 'Adding...';
       
       try {
-        const { error } = await supabaseClient
-          .from('doctors')
-          .insert([{
+        const res = await fetch('/api/admin/doctors', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${sessionToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
             name: name,
             department: dept,
             education: edu,
             description: desc,
-            display_order: parseInt(order) || 99,
-            is_available: true
-          }]);
-          
-        if (error) throw error;
+            display_order: parseInt(order) || 99
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.error || 'Failed to add doctor.');
+        }
         
         alert(`Successfully added ${name} to the doctor registry!`);
         closeAddDoctorModal();
@@ -884,12 +902,16 @@
       
       if (confirm(`Are you sure you want to permanently delete ${name} from the registry?\n\nThis will remove them from the website booking selectors immediately!`)) {
         try {
-          const { error } = await supabaseClient
-            .from('doctors')
-            .delete()
-            .eq('id', docId);
-            
-          if (error) throw error;
+          const res = await fetch(`/api/admin/doctors?id=${docId}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${sessionToken}`
+            }
+          });
+          if (!res.ok) {
+            const errData = await res.json();
+            throw new Error(errData.error || 'Failed to delete doctor.');
+          }
           
           alert("Doctor successfully deleted from the registry.");
           loadDoctors();
