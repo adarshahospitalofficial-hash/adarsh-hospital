@@ -83,7 +83,11 @@ const ALLOWED_SERVICES = new Set([
   'Laboratory / Diagnostics',
   'Radiology / Ultrasound / CT Scan',
   'Cardiology / ECG / ECHO / TMT',
-  'Obstetrics & Gynaecology Care'
+  'Obstetrics & Gynaecology Care',
+  'Dialysis Centre',
+  'General Medicine',
+  'General Surgery',
+  'Paediatrics & Child Care'
 ]);
 
 module.exports = async (req, res) => {

@@ -640,10 +640,14 @@
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/rajesh%20bhakta.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         } else if (nameLower.includes("bhagwan")) {
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/bhagwan.jpeg" alt="${doc.name}" class="dept-card-img" />`;
+        } else if (nameLower.includes("ismail")) {
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/physician.jpeg" alt="${doc.name}" class="dept-card-img" />`;
+        } else if (nameLower.includes("shiva kumar") || nameLower.includes("shivakumar")) {
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/surgeon.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         } else if (nameLower.includes("nataraj r. rao") || nameLower.includes("nataraj rao")) {
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         } else if (nameLower.includes("anita n. rao") || nameLower.includes("anitha n. rao") || nameLower.includes("anita rao") || nameLower.includes("anitha rao")) {
-          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/co-founder.png" alt="${doc.name}" class="dept-card-img" />`;
+          cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/co-founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         }
 
         grid.innerHTML += `
