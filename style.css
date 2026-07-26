@@ -158,20 +158,20 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   justify-content: center;
 }
 .logo-img {
-  width: 64px;
-  height: 64px;
+  width: 76px;
+  height: 76px;
   object-fit: contain;
 }
 .logo-letter {
-  width: 64px;
-  height: 64px;
+  width: 76px;
+  height: 76px;
   border-radius: 12px;
   background: var(--gradient-cta);
   color: #fff;
   display: grid;
   place-items: center;
   font-weight: 700;
-  font-size: 1.65rem;
+  font-size: 1.95rem;
   font-family: 'Poppins', sans-serif;
   box-shadow: var(--shadow-card);
 }
