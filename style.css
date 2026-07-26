@@ -162,6 +162,10 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   height: 96px;
   object-fit: contain;
 }
+.site-header .logo-img {
+  width: 120px;
+  height: 120px;
+}
 .logo-letter {
   width: 96px;
   height: 96px;
@@ -1016,6 +1020,10 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
     width: 50px;
     height: 50px;
     font-size: 1.35rem;
+  }
+  .site-header .logo-img {
+    width: 65px;
+    height: 65px;
   }
   .logo-name {
     font-size: 1rem;
