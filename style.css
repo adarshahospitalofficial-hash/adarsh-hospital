@@ -2533,57 +2533,44 @@ body::after {
   vertical-align: middle;
 }
 
-/* Collaboration Badge in Dialysis Section */
-.collab-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--secondary) 0%, #ffffff 100%);
-  border: 1px solid var(--border);
-  padding: 8px 18px;
-  border-radius: 99px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-card);
-  animation: pulse-border 2s infinite ease-in-out;
-}
-.collab-badge span {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-.collab-badge-text {
+/* Collaboration Blinking Text in Dialysis Section */
+.collab-text-blinking {
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--primary);
-  letter-spacing: 0.5px;
+  font-size: 0.95rem;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
+  margin-top: -12px;
+  margin-bottom: 20px;
+  display: block;
+  animation: blink-colors 3s infinite ease-in-out;
 }
-@keyframes pulse-border {
+
+@keyframes blink-colors {
   0%, 100% {
-    box-shadow: var(--shadow-card);
-    border-color: var(--border);
+    color: var(--primary); /* Deep Navy */
+    opacity: 1;
+  }
+  25% {
+    color: var(--accent); /* Pink/Magenta */
+    opacity: 0.85;
   }
   50% {
-    box-shadow: 0 0 12px oklch(63% .24 350 / 0.25);
-    border-color: var(--accent);
+    color: oklch(69% .16 70); /* Warm Gold/Amber */
+    opacity: 1;
+  }
+  75% {
+    color: oklch(60% .18 140); /* Vibrant Green */
+    opacity: 0.85;
   }
 }
 
 @media (max-width: 575px) {
-  .collab-badge {
-    padding: 6px 12px;
+  .collab-text-blinking {
+    font-size: 0.78rem;
+    margin-top: -8px;
     margin-bottom: 16px;
-    gap: 6px;
-  }
-  .collab-badge-text {
-    font-size: 0.72rem;
-    letter-spacing: 0.2px;
-  }
-  .collab-badge span {
-    width: 6px;
-    height: 6px;
+    letter-spacing: 0.4px;
   }
 }
 
