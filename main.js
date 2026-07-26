@@ -369,61 +369,37 @@
   let supabaseClient = null;
 
   async function initSupabase() {
-    if (typeof supabase === 'undefined') {
-      console.log("Supabase library not loaded. Using local fallback data.");
-      setupLocalFormFallback();
-      return;
-    }
-
     try {
-      const configRes = await fetch('/api/config');
-      const config = await configRes.json();
-      let supabaseUrl = config.SUPABASE_URL;
-      const supabaseKey = config.SUPABASE_ANON_KEY;
-
-      if (!supabaseUrl || !supabaseKey) {
-        console.log("Supabase settings not configured in environment. Using local fallback data.");
-        setupLocalFormFallback();
-        return;
-      }
-
-      if (supabaseUrl.startsWith('/')) {
-        supabaseUrl = window.location.origin + supabaseUrl;
-      }
-
-      supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-      console.log("Supabase client initialized successfully!");
-      
-      // Load data dynamically from Supabase
-      loadDepartments();
-      loadPackages();
+      // Load data dynamically from secure API routes
+      await loadDepartments();
+      await loadPackages();
       setupSupabaseForm();
-      loadAvailableDoctors();
+      await loadAvailableDoctors();
       
       // Auto-update available doctors list every 15 seconds in the background
       setInterval(loadAvailableDoctors, 15000);
     } catch (err) {
-      console.error("Error initializing Supabase client:", err);
+      console.error("Error during API data initialization:", err);
       setupLocalFormFallback();
     }
   }
 
-  // Fallback for form submit when Supabase is not connected
+  // Fallback for form submit when API is not connected
   function setupLocalFormFallback() {
     const form = document.querySelector('.contact-form');
     if (form) {
       form.onsubmit = (e) => {
         e.preventDefault();
-        alert('This is a static demo form — connect it to a backend or form service (or configure Supabase in config.js) to receive submissions.');
+        alert('This is a static demo form — connect it to a backend or form service to receive submissions.');
       };
     }
     populateStaticDoctors();
   }
 
-  // Handle form submission to Supabase
+  // Handle form submission to Vercel API proxy
   function setupSupabaseForm() {
     const form = document.querySelector('.contact-form');
-    if (!form || !supabaseClient) return;
+    if (!form) return;
 
     form.onsubmit = async (e) => {
       e.preventDefault();
@@ -527,11 +503,6 @@
 
   // Load available doctors for selection
   async function loadAvailableDoctors() {
-    if (!supabaseClient) {
-      populateStaticDoctors();
-      return;
-    }
-
     const doctorSelect = document.querySelector('#form_preferred_doctor');
     if (!doctorSelect) return;
 
@@ -540,30 +511,13 @@
 
     let doctors = null;
     try {
-      const { data, error } = await supabaseClient
-        .from('doctors')
-        .select('name, is_available')
-        .eq('is_available', true)
-        .order('name', { ascending: true });
-
-      if (error) throw error;
-      doctors = data;
+      const res = await fetch('/api/available-doctors');
+      if (!res.ok) throw new Error('API error');
+      doctors = await res.json();
     } catch (err) {
-      console.warn("Failed to query 'is_available' from doctors table, falling back to all doctors. Error:", err);
-      // Fallback: Query all doctors regardless of availability
-      try {
-        const { data, error } = await supabaseClient
-          .from('doctors')
-          .select('name')
-          .order('name', { ascending: true });
-        
-        if (error) throw error;
-        doctors = data;
-      } catch (fallbackErr) {
-        console.warn("Failed to load doctors entirely from Supabase, loading fallback list:", fallbackErr);
-        populateStaticDoctors();
-        return;
-      }
+      console.warn("Failed to load available doctors from API, loading fallback list:", err);
+      populateStaticDoctors();
+      return;
     }
 
     doctorSelect.innerHTML = '<option value="" disabled selected>Select preferred doctor</option>';
@@ -602,17 +556,13 @@
     `;
   }
 
-  // Load Departments and Doctors from Supabase
+  // Load Departments and Doctors from secure API proxy
   async function loadDepartments() {
-    if (!supabaseClient) return;
-    
     try {
-      const { data: doctors, error } = await supabaseClient
-        .from('doctors')
-        .select('*')
-        .order('display_order', { ascending: true });
-        
-      if (error) throw error;
+      const res = await fetch('/api/doctors');
+      if (!res.ok) throw new Error('API error');
+      const doctors = await res.json();
+      
       if (!doctors || doctors.length === 0) return;
 
       const grid = document.querySelector('#departments .grid');
@@ -665,21 +615,17 @@
         `;
       });
     } catch (err) {
-      console.warn("Failed to load departments from Supabase, keeping static html content:", err);
+      console.warn("Failed to load departments from API, keeping static html content:", err);
     }
   }
 
-  // Load checkup packages from Supabase
+  // Load checkup packages from secure API proxy
   async function loadPackages() {
-    if (!supabaseClient) return;
-
     try {
-      const { data: packages, error } = await supabaseClient
-        .from('packages')
-        .select('*')
-        .order('price', { ascending: false });
+      const res = await fetch('/api/packages');
+      if (!res.ok) throw new Error('API error');
+      const packages = await res.json();
 
-      if (error) throw error;
       if (!packages || packages.length === 0) return;
 
       const grid = document.querySelector('#packages .grid');
@@ -707,7 +653,7 @@
         `;
       });
     } catch (err) {
-      console.warn("Failed to load packages from Supabase, keeping static html content:", err);
+      console.warn("Failed to load packages from API, keeping static html content:", err);
     }
   }
 
