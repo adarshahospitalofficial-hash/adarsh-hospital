@@ -234,6 +234,29 @@ h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   max-width: 100% !important;
   padding: 0 40px !important;
 }
+.hero-cta-bottom-right {
+  position: absolute;
+  bottom: 32px;
+  right: 40px;
+  z-index: 10;
+  pointer-events: auto;
+}
+@media (max-width: 991px) {
+  .hero-cta-bottom-right {
+    bottom: 20px;
+    right: 24px;
+  }
+}
+@media (max-width: 575px) {
+  .hero-cta-bottom-right {
+    bottom: 16px;
+    right: 16px;
+  }
+  .hero-cta-bottom-right .btn {
+    padding: 10px 18px !important;
+    font-size: 0.85rem !important;
+  }
+}
 .hero-text {
   max-width: 100%;
   width: 100%;
@@ -2508,6 +2531,44 @@ body::after {
   width: 15px;
   height: 15px;
   vertical-align: middle;
+}
+
+/* Collaboration Badge in Dialysis Section */
+.collab-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--secondary) 0%, #ffffff 100%);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  animation: pulse-border 2s infinite ease-in-out;
+}
+.collab-badge span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.collab-badge-text {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+@keyframes pulse-border {
+  0%, 100% {
+    box-shadow: var(--shadow-card);
+    border-color: var(--border);
+  }
+  50% {
+    box-shadow: 0 0 12px oklch(63% .24 350 / 0.25);
+    border-color: var(--accent);
+  }
 }
 
 
