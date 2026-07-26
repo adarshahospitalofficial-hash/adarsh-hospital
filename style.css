@@ -1624,6 +1624,11 @@ body::after {
 .dept-detail-grid.reverse {
   grid-template-columns: 1fr 1.2fr;
 }
+.dept-detail-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
 .dept-detail-content .eyebrow {
   color: var(--accent);
 }
