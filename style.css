@@ -2571,5 +2571,21 @@ body::after {
   }
 }
 
+@media (max-width: 575px) {
+  .collab-badge {
+    padding: 6px 12px;
+    margin-bottom: 16px;
+    gap: 6px;
+  }
+  .collab-badge-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.2px;
+  }
+  .collab-badge span {
+    width: 6px;
+    height: 6px;
+  }
+}
+
 
 
