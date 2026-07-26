@@ -269,7 +269,6 @@
     
     // Session State
     let sessionToken = sessionStorage.getItem('admin-token') || null;
-    let currentUser = null;
     try {
       currentUser = JSON.parse(sessionStorage.getItem('admin-user')) || null;
     } catch(e) {}
