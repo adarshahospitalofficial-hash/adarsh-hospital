@@ -49,6 +49,23 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/maternity-gynaecology-koppa",
+      "destination": "/maternity-koppa",
+      "permanent": true
+    },
+    {
+      "source": "/dialysis-centre-koppa",
+      "destination": "/dialysis-koppa",
+      "permanent": true
+    },
+    {
+      "source": "/laboratory-pathology-koppa",
+      "destination": "/laboratory-koppa",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/db/:path*",
