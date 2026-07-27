@@ -648,7 +648,7 @@
         const isFeatured = index === 1; // Middle item of 3
         const listItems = (pkg.features || []).map(f => `<li>${f}</li>`).join('');
         const displayPrice = pkg.price ? pkg.price.replace('?', '₹') : '';
-        const displayLocation = pkg.location ? pkg.location.replace(/[^\x00-\x7F]+/g, ' · ').replace('ADARSH HOSPITAL', 'Adarsha Hospital') : 'Adarsha Hospital · Koppa 577126';
+        const displayLocation = pkg.location ? pkg.location.replace(/[^\x00-\x7F]+/g, ' · ').replace('ADARSH HOSPITAL', 'Adarsh Hospital') : 'Adarsh Hospital · Koppa 577126';
         
         grid.innerHTML += `
           <div class="pkg-card ${isFeatured ? 'featured' : ''}">

@@ -1,12 +1,12 @@
-# Adarsha Hospital — Static Site Clone
+# Adarsh Hospital — Static Site Clone
 
-This is a static HTML/CSS reconstruction of https://adarsha-hospital.lovable.app/,
+This is a static HTML/CSS reconstruction of https://adarsh-hospital.lovable.app/,
 built from the page's visible content and structure.
 
 ## Important note on images
 My environment can't reach `lovable.app` or its image CDN directly, so the
 images in `index.html` are **hotlinked** to the original site's asset URLs
-(e.g. `https://adarsha-hospital.lovable.app/assets/hero-mother-child-Q0XY1HyI.jpg`).
+(e.g. `https://adarsh-hospital.lovable.app/assets/hero-mother-child-Q0XY1HyI.jpg`).
 They'll display fine as long as the person viewing this has an internet
 connection and those assets stay live. If you want a fully offline copy:
 
