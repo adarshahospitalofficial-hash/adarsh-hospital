@@ -140,12 +140,17 @@
     const loadQueue = [];
     const mobile = isMobile();
 
-    // Step 1: Every 4th frame for quick low-res scan (or mobile playback)
-    for (let i = 5; i <= frameCount; i += 4) {
-      loadQueue.push(i);
-    }
+    if (mobile) {
+      // Step 1: Every 8th frame for light bandwidth/CPU load on mobile devices
+      for (let i = 9; i <= frameCount; i += 8) {
+        loadQueue.push(i);
+      }
+    } else {
+      // Step 1: Every 4th frame for quick low-res scan (or mobile playback)
+      for (let i = 5; i <= frameCount; i += 4) {
+        loadQueue.push(i);
+      }
 
-    if (!mobile) {
       // Step 2: Every 2nd frame for medium resolution
       for (let i = 3; i <= frameCount; i += 4) {
         loadQueue.push(i);
@@ -162,7 +167,7 @@
       loadQueue.push(frameCount);
     }
 
-    const MAX_CONCURRENT_LOADS = 4;
+    const MAX_CONCURRENT_LOADS = mobile ? 2 : 4;
     let activeLoads = 0;
     let queueIndex = 0;
 
@@ -315,7 +320,8 @@
   // Mobile Autoplay loop setup
   const getMobileFrames = () => {
     const list = [1];
-    for (let i = 5; i <= frameCount; i += 4) {
+    // Sync with optimized background loading (every 8th frame)
+    for (let i = 9; i <= frameCount; i += 8) {
       list.push(i);
     }
     if (!list.includes(frameCount)) {
