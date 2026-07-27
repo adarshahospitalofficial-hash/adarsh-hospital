@@ -1,0 +1,37 @@
+# Adarsh Hospital
+
+> Adarsh Hospital is a leading NABH-accredited multispecialty healthcare centre in Koppa, Chikkamagaluru, Karnataka. Established in 2003, it has served over 15,000 patients with advanced diagnostics, laparoscopic surgery, 24/7 emergency response, and intensive critical care.
+
+## Core Information
+- **Website**: https://adarsh-hospital.in
+- **Address**: Ambedkar Road, Upperpet, Koppa – 577126, Karnataka, India
+- **Phone**: +91 63609 93646, +91 70199 48944, +91 94485 86099
+- **Email**: adarshhospkoppa@gmail.com
+- **Accreditation**: NABH Accredited (since 2018)
+- **Established**: 2003
+- **Primary Founders**: Dr. Nataraj R. Rao (Obstetrics & Gynaecology), Dr. Anitha N. Rao (Anesthesiology)
+
+## Medical Specialists & Doctors
+- **Dr. Ismail** (MBBS, MD) – Internal Medicine
+- **Dr. Shiva Kumar** (MBBS, MS) – General Surgery & Emergency Care
+- **Dr. Nataraj R. Rao** (MBBS, MD, DNB) – Obstetrics & Gynaecology (KMC Reg: 31199)
+- **Dr. Anitha N. Rao** (MBBS, MD, DA, DNB) – Anesthesia & Critical Care (KMC Reg: 35287)
+- **Dr. Sudha** (MBBS, DOMS) – Ophthalmology
+- **Dr. Bhagwan B. K.** (BDS, MDS) – Dental & Maxillofacial Surgery
+- **Dr. Rajesh Bhakta** (MBBS, MD) – Laparoscopic Surgery
+- **Dr. Sania Sabahi** (MBBS, MD) – Radiology & Diagnostics
+
+## Clinical Departments & Services
+- [Cardiology Services](https://adarsh-hospital.in/cardiology-koppa): Non-invasive diagnostics (ECG, 2D Echo, TMT) and consultations.
+- [Dialysis Care (Koppa)](https://adarsh-hospital.in/dialysis-koppa): Advanced renal replacement therapy, 4-bed unit in collaboration with Lions Seva Trust.
+- [Dialysis Care (Chikkamagaluru)](https://adarsh-hospital.in/dialysis-care-chikkamagaluru): Nephrology support and dialysis care.
+- [Maternity & Gynaecology](https://adarsh-hospital.in/maternity-koppa): Prenatal, delivery, postnatal, PCOD/PCOS, and infertility management.
+- [Paediatrics](https://adarsh-hospital.in/paediatrics-koppa): Neonatal care, immunizations, and general child healthcare.
+- [NICU & Nursery Care](https://adarsh-hospital.in/nicu-vs-nursery-care-koppa): Critical neonatal care and newborn nursery guides.
+- [General Surgery & Laparoscopy](https://adarsh-hospital.in/general-surgery-laparoscopy-koppa): Minimally invasive keyhole and general open surgical procedures.
+- [Radiology & Diagnostics](https://adarsh-hospital.in/radiology-diagnostics-koppa): Ultrasound scans, digital X-rays, high-resolution CT scans.
+- [Laboratory Medicine](https://adarsh-hospital.in/laboratory-koppa): Pathology, biochemistry, clinical testing (Shalini Diagnostics division).
+- [Emergency & Trauma](https://adarsh-hospital.in/emergency-care-koppa): 24/7 trauma care, ambulance, and critical emergency response.
+
+## Health Packages & Pricing
+- [Health Checkup Packages](https://adarsh-hospital.in/packages): Comprehensive packages including Executive, Master, Cardiac, Diabetic, Women, Pediatric, and basic checkups.
