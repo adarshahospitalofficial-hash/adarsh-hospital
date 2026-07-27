@@ -2617,5 +2617,152 @@ body::after {
   display: inline-block;
 }
 
+/* Insurance & Cashless Section */
+.insurance-section {
+  padding: 80px 0;
+  background-color: var(--background);
+}
+.insurance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 40px;
+}
+.insurance-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.insurance-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-soft);
+}
+.insurance-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-cta);
+}
+.insurance-card.gov-scheme::before {
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+}
+.insurance-card h3 {
+  font-size: 1.5rem;
+  color: var(--navy-dark);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.insurance-card h3 i, .insurance-card h3 svg {
+  color: var(--accent);
+}
+.insurance-card.gov-scheme h3 i, .insurance-card.gov-scheme h3 svg {
+  color: #16a34a;
+}
+.insurance-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+.insurance-badge.gov {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
+.insurance-badge.tpa {
+  background: rgba(233, 42, 157, 0.12);
+  color: var(--accent);
+}
+.insurance-list {
+  margin: 20px 0;
+  padding-left: 0;
+}
+.insurance-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+  color: var(--foreground);
+  line-height: 1.5;
+}
+.insurance-list li i, .insurance-list li svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: #16a34a;
+}
+.insurance-list.tpa-list li i, .insurance-list.tpa-list li svg {
+  color: var(--accent);
+}
+.partner-logos-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  margin-top: 28px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.partner-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+.partner-logo-tag {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--navy-dark);
+  transition: all 0.2s ease;
+}
+.partner-logo-tag:hover {
+  background: var(--secondary);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.insurance-info-box {
+  background: var(--muted);
+  border-left: 4px solid var(--accent);
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+.insurance-info-box.gov {
+  border-left-color: #16a34a;
+}
+.insurance-info-box p {
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .insurance-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .insurance-card {
+    padding: 24px;
+  }
+}
+
+
 
 
