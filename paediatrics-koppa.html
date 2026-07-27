@@ -5,10 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Paediatric & Child Care in Koppa | ADARSH HOSPITAL</title>
 <meta name="description" content="Vaccinations, newborn checkups & child healthcare at ADARSH HOSPITAL's paediatrics department in Koppa, Chikkamagaluru." />
-<link rel="stylesheet" href="/style.css?v=3" />
+<!-- Canonical & SEO Meta Tags -->
+<link rel="canonical" href="https://adarsh-hospital.in/paediatrics-koppa" />
+<meta property="og:title" content="Paediatric & Child Care in Koppa | ADARSH HOSPITAL" />
+<meta property="og:description" content="Vaccinations, newborn checkups & child healthcare at ADARSH HOSPITAL" />
+<meta property="og:url" content="https://adarsh-hospital.in/paediatrics-koppa" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://adarsh-hospital.in/db/storage/v1/object/public/assets/hospital-exterior.jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Paediatric & Child Care in Koppa | ADARSH HOSPITAL" />
+<meta name="twitter:description" content="Vaccinations, newborn checkups & child healthcare at ADARSH HOSPITAL" />
+<meta name="twitter:image" content="https://adarsh-hospital.in/db/storage/v1/object/public/assets/hospital-exterior.jpeg" />
+<link rel="stylesheet" href="/style.min.css?v=3" />
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/config.js"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Structured Data Schemas -->
+<script type="application/ld+json">
+[
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://adarsh-hospital.in"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Paediatrics",
+      "item": "https://adarsh-hospital.in/paediatrics-koppa"
+    }
+  ]
+},
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you offer immunization services?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We provide comprehensive pediatric vaccination programs in accordance with national health guidelines."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between your Neonatal ICU (NICU) and standard nursery?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our NICU is a specialized intensive care environment equipped with incubators, phototherapy, and monitoring systems for premature or critically ill newborns, while the nursery is for healthy infants."
+      }
+    }
+  ]
+}
+]
+</script>
 </head>
 <body>
 
@@ -116,6 +173,31 @@
       </div>
     </div>
 
+    
+    <!-- FAQ Section -->
+    <div style="margin-top: 50px; border-top: 1px solid var(--border); padding-top: 40px;">
+      <h3 style="color: var(--primary); margin-bottom: 25px; font-size: 1.6rem; text-align: center;">Frequently Asked Questions</h3>
+      <div class="faq-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+  
+        <div class="faq-item">
+          <details>
+            <summary style="font-weight: 600; font-size: 1.05rem; padding: 16px; cursor: pointer; user-select: none;">Do you offer immunization services?</summary>
+            <div class="faq-content" style="padding: 16px; border-top: 1px solid var(--border); color: var(--muted-foreground); line-height: 1.6;">
+              <p>We provide comprehensive pediatric vaccination programs in accordance with national health guidelines.</p>
+            </div>
+          </details>
+        </div>
+        <div class="faq-item">
+          <details>
+            <summary style="font-weight: 600; font-size: 1.05rem; padding: 16px; cursor: pointer; user-select: none;">What is the difference between your Neonatal ICU (NICU) and standard nursery?</summary>
+            <div class="faq-content" style="padding: 16px; border-top: 1px solid var(--border); color: var(--muted-foreground); line-height: 1.6;">
+              <p>Our NICU is a specialized intensive care environment equipped with incubators, phototherapy, and monitoring systems for premature or critically ill newborns, while the nursery is for healthy infants.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  
     <!-- Related Departments / Internal Linking -->
     <div style="margin-top: 60px; padding: 30px; background-color: var(--secondary); border-radius: 12px;">
       <h3 style="color: var(--primary); margin-bottom: 15px;">Other Medical Departments</h3>
@@ -198,7 +280,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-<script src="/main.js"></script>
+<script src="/main.min.js"></script>
 <script>
   const btt = document.getElementById('back-to-top');
   if (btt) {

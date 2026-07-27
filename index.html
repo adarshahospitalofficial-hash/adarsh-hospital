@@ -5,7 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ADARSH HOSPITAL — Trusted Multispecialty Care in Koppa, Chikkamagaluru</title>
 <meta name="description" content="ADARSH HOSPITAL, Koppa (Chikkamagaluru, Karnataka) — NABH Accredited Multi Specialty Hospital. Caring with Compassion. Advanced diagnostics, radiology, cardiology, and maternal care." />
-<link rel="stylesheet" href="style.css?v=3" />
+<!-- Canonical & SEO Meta Tags -->
+<link rel="canonical" href="https://adarsh-hospital.in" />
+<meta property="og:title" content="ADARSH HOSPITAL — Trusted Multispecialty Care in Koppa, Chikkamagaluru" />
+<meta property="og:description" content="ADARSH HOSPITAL, Koppa (Chikkamagaluru, Karnataka) — NABH Accredited Multi Specialty Hospital. Caring with Compassion. Advanced diagnostics, radiology, cardiology, and maternal care." />
+<meta property="og:url" content="https://adarsh-hospital.in" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://adarsh-hospital.in/db/storage/v1/object/public/assets/hospital-exterior.jpeg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ADARSH HOSPITAL — Trusted Multispecialty Care in Koppa, Chikkamagaluru" />
+<meta name="twitter:description" content="ADARSH HOSPITAL, Koppa (Chikkamagaluru, Karnataka) — NABH Accredited Multi Specialty Hospital. Caring with Compassion. Advanced diagnostics, radiology, cardiology, and maternal care." />
+<meta name="twitter:image" content="https://adarsh-hospital.in/db/storage/v1/object/public/assets/hospital-exterior.jpeg" />
+<link rel="stylesheet" href="style.min.css?v=3" />
 <!-- Supabase SDK & Config -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
@@ -17,7 +28,7 @@
 [
   {
     "@context": "https://schema.org",
-    "@type": "Hospital",
+    "@type": ["Hospital", "MedicalOrganization", "LocalBusiness", "Organization"],
     "name": "ADARSH HOSPITAL",
     "alternateName": "Adarsha Hospital",
     "url": "https://adarsh-hospital.in",
@@ -310,7 +321,7 @@
     </div>
     <div class="about-content animate-on-scroll">
       <p class="eyebrow">About Hospital</p>
-      <h2>Welcome to ADARSH HOSPITAL, Koppa</h2>
+      <h1>Welcome to ADARSH HOSPITAL, Koppa</h1>
       <p>Located in Koppa, Chikkamagaluru district of Karnataka, ADARSH HOSPITAL is a trusted, NABH-accredited multispecialty healthcare centre committed to delivering accurate diagnosis, quality treatment and warm patient care. Our team of qualified doctors, radiologists and technologists work together with modern equipment to provide dependable clinical outcomes for the malnad community.</p>
       <p>From advanced radiology and cardiology to 24×7 laboratory services and specialist consultations, patients now have access to comprehensive care without long journeys to larger cities.</p>
       <a href="#services" class="btn btn-primary">Know More</a>
@@ -1477,7 +1488,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-<script src="main.js"></script>
+<script src="main.min.js"></script>
 <script>
   // Add Back to Top functionality
   const btt = document.getElementById('back-to-top');
