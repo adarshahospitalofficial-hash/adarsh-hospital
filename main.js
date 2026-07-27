@@ -378,6 +378,8 @@
       
       // Auto-update available doctors list every 15 seconds in the background
       setInterval(loadAvailableDoctors, 15000);
+      // Auto-update doctor cards every 15 seconds in the background
+      setInterval(loadDepartments, 15000);
     } catch (err) {
       console.error("Error during API data initialization:", err);
       setupLocalFormFallback();
@@ -565,10 +567,10 @@
       
       if (!doctors || doctors.length === 0) return;
 
-      const grid = document.querySelector('#departments .grid');
+      const grid = document.querySelector('#doctors .grid');
       if (!grid) return;
 
-      grid.innerHTML = ''; // Clear skeleton loader
+      grid.innerHTML = ''; // Clear fallback or dynamic cards
       doctors.forEach(doc => {
         let cardMedia = `
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon">
@@ -600,6 +602,13 @@
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/co-founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         }
 
+        const isAvail = doc.is_available !== false; // Default to true if null/undefined
+        const availabilityBadge = `
+          <div class="availability-badge ${isAvail ? 'available' : 'unavailable'}">
+            <span class="dot"></span> ${isAvail ? 'Available Today' : 'Unavailable'}
+          </div>
+        `;
+
         grid.innerHTML += `
           <div class="dept-card">
             <div class="dept-card-icon-wrapper">
@@ -610,6 +619,7 @@
               <h3 class="dept-card-title">${doc.name}</h3>
               <p class="dept-card-edu">${doc.education}</p>
               <p class="dept-card-desc">${doc.description || ''}</p>
+              ${availabilityBadge}
             </div>
           </div>
         `;
