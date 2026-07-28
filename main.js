@@ -588,15 +588,19 @@
       const grid = document.querySelector('#doctors .grid');
       if (!grid) return;
 
-      // Ensure explicit order: 1st Dr. Nataraj, 2nd Dr. Anita, 3rd Dr. Ismail, 4th Dr. Shivakumar, then others
+      // Ensure explicit order: 1st Dr. Nataraj, 2nd Dr. Anita, 3rd Dr. Ismail, 4th Dr. Shivakumar, then other doctors
       doctors.sort((a, b) => {
         const getRank = (doc) => {
-          const n = (doc.name || '').toLowerCase();
+          const n = ((doc.name || '') + ' ' + (doc.department || '')).toLowerCase();
           if (n.includes('nataraj')) return 1;
           if (n.includes('anita') || n.includes('anitha')) return 2;
           if (n.includes('ismail')) return 3;
           if (n.includes('shiva')) return 4;
-          return 5;
+          if (n.includes('sudha') || n.includes('ophthalmology')) return 5;
+          if (n.includes('bhagwan') || n.includes('dental')) return 6;
+          if (n.includes('rajesh') || n.includes('laparoscopy')) return 7;
+          if (n.includes('sania') || n.includes('radiology')) return 8;
+          return 99;
         };
         return getRank(a) - getRank(b);
       });

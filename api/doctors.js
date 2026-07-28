@@ -69,7 +69,23 @@ module.exports = async (req, res) => {
     });
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      cachedDoctors = response.body;
+      const doctorList = Array.isArray(response.body) ? response.body : [];
+      doctorList.sort((a, b) => {
+        const getRank = (doc) => {
+          const n = ((doc.name || '') + ' ' + (doc.department || '')).toLowerCase();
+          if (n.includes('nataraj')) return 1;
+          if (n.includes('anita') || n.includes('anitha')) return 2;
+          if (n.includes('ismail')) return 3;
+          if (n.includes('shiva')) return 4;
+          if (n.includes('sudha') || n.includes('ophthalmology')) return 5;
+          if (n.includes('bhagwan') || n.includes('dental')) return 6;
+          if (n.includes('rajesh') || n.includes('laparoscopy')) return 7;
+          if (n.includes('sania') || n.includes('radiology')) return 8;
+          return 99;
+        };
+        return getRank(a) - getRank(b);
+      });
+      cachedDoctors = doctorList;
       lastFetchTime = now;
       res.status(200).json(cachedDoctors);
     } else {
