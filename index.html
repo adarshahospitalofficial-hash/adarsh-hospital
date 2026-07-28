@@ -313,7 +313,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
 </head>
 <body>
-<a href="#about" class="skip-link">Skip to main content</a>
 
 <!-- Top bar -->
 <div class="topbar">
@@ -396,10 +395,14 @@
   <div class="hero-sticky">
     <canvas id="hero-canvas"></canvas>
     <div class="hero-overlay"></div>
-      <div class="hero-cta-bottom-right">
+      <div class="hero-cta-bottom-right" style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
         <a href="tel:+916360993646" class="btn btn-primary" style="background: linear-gradient(135deg, #ff4d4d 0%, #c0392b 100%) !important; text-decoration: none; box-shadow: 0 4px 15px rgba(255, 77, 77, 0.35); padding: 14px 28px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.05rem;">
           <i data-lucide="phone" style="width: 20px; height: 20px;"></i>
           Emergency Hotline: +91 63609 93646
+        </a>
+        <a href="tel:+919448586099" class="btn btn-outline" style="background: rgba(15, 23, 42, 0.8) !important; color: #ffffff !important; border: 1.5px solid rgba(255, 255, 255, 0.5) !important; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); text-decoration: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35); padding: 12px 24px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1rem;">
+          <i data-lucide="ambulance" style="width: 20px; height: 20px; color: #ff4d4d;"></i>
+          Ambulance: +91 94485 86099
         </a>
       </div>
   </div>
@@ -669,33 +672,7 @@
     <p class="section-desc center">Meet our highly qualified team of resident specialists and consultants committed to your health and well-being.</p>
 
     <div class="grid grid-4">
-      <!-- Medicine -->
-      <div class="dept-card animate-on-scroll">
-        <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/physician.jpeg" alt="Adarsh Hospital Koppa - Dr. Ismail" class="dept-card-img" />
-        </div>
-        <div class="dept-card-content">
-          <span class="dept-badge">Medicine</span>
-          <h3 class="dept-card-title">Dr. Ismail</h3>
-          <p class="dept-card-edu">MBBS, MD</p>
-          <p class="dept-card-desc">Specialized in internal medicine, comprehensive diagnosis, and treatment of chronic illnesses.</p>
-        </div>
-      </div>
-
-      <!-- Surgery -->
-      <div class="dept-card animate-on-scroll">
-        <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/surgeon.jpeg" alt="Adarsh Hospital Koppa - Dr. Shiva Kumar" class="dept-card-img" />
-        </div>
-        <div class="dept-card-content">
-          <span class="dept-badge">Surgery</span>
-          <h3 class="dept-card-title">Dr. Shiva Kumar</h3>
-          <p class="dept-card-edu">MBBS, MS</p>
-          <p class="dept-card-desc">Expert in general, emergency, and advanced surgical procedures with a focus on patient safety.</p>
-        </div>
-      </div>
-
-      <!-- Obstetrics & Gynaecology -->
+      <!-- 1st: Dr. Nataraj R. Rao (Obstetrics & Gynaecology) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="/db/storage/v1/object/public/assets/founder.jpeg" alt="Adarsh Hospital Koppa - Dr. Nataraj R. Rao" class="dept-card-img" />
@@ -708,7 +685,7 @@
         </div>
       </div>
 
-      <!-- Anesthesia -->
+      <!-- 2nd: Dr. Anitha N. Rao (Anesthesia) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="/db/storage/v1/object/public/assets/co-founder.jpeg" alt="Adarsh Hospital Koppa - Dr. Anita N. Rao" class="dept-card-img" />
@@ -721,7 +698,33 @@
         </div>
       </div>
 
-      <!-- Ophthalmology -->
+      <!-- 3rd: Dr. Ismail (Medicine) -->
+      <div class="dept-card animate-on-scroll">
+        <div class="dept-card-icon-wrapper">
+          <img src="/db/storage/v1/object/public/assets/physician.jpeg" alt="Adarsh Hospital Koppa - Dr. Ismail" class="dept-card-img" />
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Medicine</span>
+          <h3 class="dept-card-title">Dr. Ismail</h3>
+          <p class="dept-card-edu">MBBS, MD</p>
+          <p class="dept-card-desc">Specialized in internal medicine, comprehensive diagnosis, and treatment of chronic illnesses.</p>
+        </div>
+      </div>
+
+      <!-- 4th: Dr. Shiva Kumar (Surgery) -->
+      <div class="dept-card animate-on-scroll">
+        <div class="dept-card-icon-wrapper">
+          <img src="/db/storage/v1/object/public/assets/surgeon.jpeg" alt="Adarsh Hospital Koppa - Dr. Shiva Kumar" class="dept-card-img" />
+        </div>
+        <div class="dept-card-content">
+          <span class="dept-badge">Surgery</span>
+          <h3 class="dept-card-title">Dr. Shiva Kumar</h3>
+          <p class="dept-card-edu">MBBS, MS</p>
+          <p class="dept-card-desc">Expert in general, emergency, and advanced surgical procedures with a focus on patient safety.</p>
+        </div>
+      </div>
+
+      <!-- 5th: Dr. Sudha (Ophthalmology) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v6M10 14h4"/></svg>
@@ -734,7 +737,7 @@
         </div>
       </div>
 
-      <!-- Dental -->
+      <!-- 6th: Dr. Bhagwan B. K. (Dental) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="/db/storage/v1/object/public/assets/bhagwan.jpeg" alt="Adarsh Hospital Koppa - Dr. Bhagwan B. K." class="dept-card-img" />
@@ -747,7 +750,7 @@
         </div>
       </div>
 
-      <!-- Laparoscopy -->
+      <!-- 7th: Dr. Rajesh Bhakta (Laparoscopy) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="/db/storage/v1/object/public/assets/rajesh%20bhakta.jpeg" alt="Adarsh Hospital Koppa - Dr. Rajesh Bhakta" class="dept-card-img" />
@@ -760,7 +763,7 @@
         </div>
       </div>
 
-      <!-- Radiology -->
+      <!-- 8th: Dr. Sania Sabahi (Radiology) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
           <img src="/db/storage/v1/object/public/assets/sania-sabahi.jpeg" alt="Adarsh Hospital Koppa - Dr. Sania Sabahi" class="dept-card-img" />

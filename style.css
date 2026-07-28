@@ -2765,21 +2765,7 @@ body::after {
 
 /* === Accessibility === */
 .skip-link {
-  position: absolute;
-  top: -100%;
-  left: 16px;
-  z-index: 10000;
-  background: var(--primary);
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 0 0 8px 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  transition: top 0.2s ease;
-}
-.skip-link:focus {
-  top: 0;
+  display: none !important;
 }
 a:focus-visible,
 button:focus-visible,

@@ -588,6 +588,19 @@
       const grid = document.querySelector('#doctors .grid');
       if (!grid) return;
 
+      // Ensure explicit order: 1st Dr. Nataraj, 2nd Dr. Anita, 3rd Dr. Ismail, 4th Dr. Shivakumar, then others
+      doctors.sort((a, b) => {
+        const getRank = (doc) => {
+          const n = (doc.name || '').toLowerCase();
+          if (n.includes('nataraj')) return 1;
+          if (n.includes('anita') || n.includes('anitha')) return 2;
+          if (n.includes('ismail')) return 3;
+          if (n.includes('shiva')) return 4;
+          return 5;
+        };
+        return getRank(a) - getRank(b);
+      });
+
       // Build HTML string first, then assign once to avoid DOM thrashing
       let cardsHtml = '';
       doctors.forEach(doc => {
