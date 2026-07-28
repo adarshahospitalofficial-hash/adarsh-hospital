@@ -18,6 +18,9 @@
 <meta name="twitter:description" content="Adarsh Hospital, Koppa — One of the leading NABH-accredited multispecialty hospitals in Koppa, serving 15,000+ patients since 2003 with advanced diagnostics, radiology, cardiology, and maternal care." />
 <meta name="twitter:image" content="https://adarsh-hospital.in/db/storage/v1/object/public/assets/hospital-exterior.jpeg" />
 <link rel="stylesheet" href="style.min.css?v=3" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="manifest" href="/manifest.webmanifest" />
 <!-- Config (Deferred) -->
 <script src="config.js" defer></script>
 <!-- Lucide Icons CDN (Deferred) -->
@@ -32,7 +35,7 @@
     "name": "Adarsh Hospital",
     "alternateName": "ADARSH HOSPITAL",
     "url": "https://adarsh-hospital.in",
-    "logo": "https://adarsh-hospital.in/db/storage/v1/object/public/assets/nabh-logo.jpeg",
+    "logo": "https://adarsh-hospital.in/db/storage/v1/object/public/assets/logo1.png",
     "image": "https://adarsh-hospital.in/db/storage/v1/object/public/assets/hospital-exterior.jpeg",
     "description": "NABH-accredited multispecialty hospital in Koppa, Chikkamagaluru district, Karnataka (established 2003). Providing advanced diagnostic laboratory medicine, ultrasound scans, cardiology, pediatric, and laparoscopic surgery care to the malnad community.",
     "telephone": "+91-63609-93646",
@@ -261,6 +264,43 @@
         }
       }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Adarsh Hospital",
+    "url": "https://adarsh-hospital.in",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://adarsh-hospital.in/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "EmergencyService",
+    "name": "Adarsh Hospital Emergency & Ambulance",
+    "url": "https://adarsh-hospital.in/emergency-care-koppa",
+    "telephone": "+91-63609-93646",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "servicePhone": {
+        "@type": "ContactPoint",
+        "telephone": "+91-63609-93646",
+        "contactType": "emergency",
+        "availableLanguage": ["English", "Kannada"],
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      }
+    },
+    "provider": {
+      "@type": "Hospital",
+      "name": "Adarsh Hospital"
+    }
   }
 ]
 </script>
@@ -273,6 +313,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
 </head>
 <body>
+<a href="#about" class="skip-link">Skip to main content</a>
 
 <!-- Top bar -->
 <div class="topbar">
@@ -1644,7 +1685,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-<script src="main.min.js"></script>
+<script src="main.min.js?v=3"></script>
 <script>
   // Add Back to Top functionality
   const btt = document.getElementById('back-to-top');

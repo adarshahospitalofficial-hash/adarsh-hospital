@@ -1,0 +1,30 @@
+{
+  "name": "Adarsh Hospital",
+  "short_name": "Adarsh Hospital",
+  "description": "NABH-accredited multispecialty hospital in Koppa, Chikkamagaluru. 24/7 emergency, diagnostics, cardiology, dialysis, maternity care.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#02245e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["health", "medical"],
+  "lang": "en",
+  "dir": "ltr"
+}

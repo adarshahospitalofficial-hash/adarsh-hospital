@@ -2,6 +2,16 @@
 
 > Adarsh Hospital is a leading NABH-accredited multispecialty healthcare centre in Koppa, Chikkamagaluru, Karnataka. Established in 2003, it has served over 15,000 patients with advanced diagnostics, laparoscopic surgery, 24/7 emergency response, and intensive critical care.
 
+## Allowed AI Bots
+- GPTBot (ChatGPT)
+- OAI-SearchBot
+- ChatGPT-User
+- ClaudeBot
+- anthropic-ai
+- PerplexityBot
+- Google-Extended (Gemini)
+- Microsoft CopilotBot
+
 ## Core Information
 - **Website**: https://adarsh-hospital.in
 - **Address**: Ambedkar Road, Upperpet, Koppa – 577126, Karnataka, India

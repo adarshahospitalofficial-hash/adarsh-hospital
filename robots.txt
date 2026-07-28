@@ -22,4 +22,10 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Bingbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: https://adarsh-hospital.in/sitemap.xml

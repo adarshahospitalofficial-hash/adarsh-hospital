@@ -1,13 +1,14 @@
 (function () {
   const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
+  const isMobile = () => window.innerWidth <= 768;
 
+  // Hero canvas animation — only runs on pages that have #hero-canvas
+  if (canvas) {
   const ctx = canvas.getContext('2d');
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
   const loader = document.getElementById('animation-loader');
   const heroSection = document.getElementById('home');
-  const isMobile = () => window.innerWidth <= 768;
 
   // Rewrite image assets if USE_SUPABASE_ASSETS is enabled
   function rewriteAssetUrls() {
@@ -371,8 +372,9 @@
   // Start mobile autoplay loop
   requestAnimationFrame(animateMobile);
 
-  // --- Supabase Integration ---
-  let supabaseClient = null;
+  } // end if (canvas)
+
+  // === Shared functionality — runs on ALL pages ===
 
   async function initSupabase() {
     try {
@@ -382,10 +384,20 @@
       setupSupabaseForm();
       await loadAvailableDoctors();
       
-      // Auto-update available doctors list every 15 seconds in the background
-      setInterval(loadAvailableDoctors, 15000);
-      // Auto-update doctor cards every 15 seconds in the background
-      setInterval(loadDepartments, 15000);
+      // Auto-update with Page Visibility API to pause when tab is hidden
+      let doctorInterval = setInterval(loadAvailableDoctors, 15000);
+      let deptInterval = setInterval(loadDepartments, 15000);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          clearInterval(doctorInterval);
+          clearInterval(deptInterval);
+        } else {
+          loadAvailableDoctors();
+          loadDepartments();
+          doctorInterval = setInterval(loadAvailableDoctors, 15000);
+          deptInterval = setInterval(loadDepartments, 15000);
+        }
+      });
     } catch (err) {
       console.error("Error during API data initialization:", err);
       setupLocalFormFallback();
@@ -576,7 +588,8 @@
       const grid = document.querySelector('#doctors .grid');
       if (!grid) return;
 
-      grid.innerHTML = ''; // Clear fallback or dynamic cards
+      // Build HTML string first, then assign once to avoid DOM thrashing
+      let cardsHtml = '';
       doctors.forEach(doc => {
         let cardMedia = `
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" class="dept-card-icon">
@@ -608,14 +621,14 @@
           cardMedia = `<img src="${SUPABASE_ASSETS_BUCKET_URL}/co-founder.jpeg" alt="${doc.name}" class="dept-card-img" />`;
         }
 
-        const isAvail = doc.is_available !== false; // Default to true if null/undefined
+        const isAvail = doc.is_available !== false;
         const availabilityBadge = `
           <div class="availability-badge ${isAvail ? 'available' : 'unavailable'}">
             <span class="dot"></span> ${isAvail ? 'Available Today' : 'Unavailable'}
           </div>
         `;
 
-        grid.innerHTML += `
+        cardsHtml += `
           <div class="dept-card">
             <div class="dept-card-icon-wrapper">
               ${cardMedia}
@@ -630,6 +643,7 @@
           </div>
         `;
       });
+      grid.innerHTML = cardsHtml;
     } catch (err) {
       console.warn("Failed to load departments from API, keeping static html content:", err);
     }
@@ -647,16 +661,15 @@
       const grid = document.querySelector('#packages .grid');
       if (!grid) return;
 
-      grid.innerHTML = ''; // Clear loading indicators
-      
-      // We highlight the middle card by placing 'featured' class on it
+      // Build HTML string first, then assign once to avoid DOM thrashing
+      let pkgHtml = '';
       packages.forEach((pkg, index) => {
-        const isFeatured = index === 1; // Middle item of 3
+        const isFeatured = index === 1;
         const listItems = (pkg.features || []).map(f => `<li>${f}</li>`).join('');
         const displayPrice = pkg.price ? pkg.price.replace('?', '₹') : '';
         const displayLocation = pkg.location ? pkg.location.replace(/[^\x00-\x7F]+/g, ' · ').replace('ADARSH HOSPITAL', 'Adarsh Hospital') : 'Adarsh Hospital · Koppa 577126';
         
-        grid.innerHTML += `
+        pkgHtml += `
           <div class="pkg-card ${isFeatured ? 'featured' : ''}">
             <p class="pkg-loc">${displayLocation}</p>
             <h3>${pkg.name}</h3>
@@ -668,6 +681,7 @@
           </div>
         `;
       });
+      grid.innerHTML = pkgHtml;
     } catch (err) {
       console.warn("Failed to load packages from API, keeping static html content:", err);
     }
