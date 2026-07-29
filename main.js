@@ -138,29 +138,25 @@
   }
 
   function startBackgroundLoading() {
+    if (isMobile()) {
+      return; // Do not preload other frames in background on mobile devices
+    }
     const loadQueue = [];
     const mobile = isMobile();
 
-    if (mobile) {
-      // Step 1: Every 8th frame for light bandwidth/CPU load on mobile devices
-      for (let i = 9; i <= frameCount; i += 8) {
-        loadQueue.push(i);
-      }
-    } else {
-      // Step 1: Every 4th frame for quick low-res scan (or mobile playback)
-      for (let i = 5; i <= frameCount; i += 4) {
-        loadQueue.push(i);
-      }
+    // Step 1: Every 4th frame for quick low-res scan (or mobile playback)
+    for (let i = 5; i <= frameCount; i += 4) {
+      loadQueue.push(i);
+    }
 
-      // Step 2: Every 2nd frame for medium resolution
-      for (let i = 3; i <= frameCount; i += 4) {
-        loadQueue.push(i);
-      }
+    // Step 2: Every 2nd frame for medium resolution
+    for (let i = 3; i <= frameCount; i += 4) {
+      loadQueue.push(i);
+    }
 
-      // Step 3: All remaining frames for full detail
-      for (let i = 2; i <= frameCount; i += 2) {
-        loadQueue.push(i);
-      }
+    // Step 3: All remaining frames for full detail
+    for (let i = 2; i <= frameCount; i += 2) {
+      loadQueue.push(i);
     }
 
     // Ensure last frame is loaded early
@@ -168,7 +164,7 @@
       loadQueue.push(frameCount);
     }
 
-    const MAX_CONCURRENT_LOADS = mobile ? 2 : 4;
+    const MAX_CONCURRENT_LOADS = 4;
     let activeLoads = 0;
     let queueIndex = 0;
 
@@ -318,59 +314,7 @@
   // Initial draw
   handleScroll();
 
-  // Mobile Autoplay loop setup
-  const getMobileFrames = () => {
-    const list = [1];
-    // Sync with optimized background loading (every 8th frame)
-    for (let i = 9; i <= frameCount; i += 8) {
-      list.push(i);
-    }
-    if (!list.includes(frameCount)) {
-      list.push(frameCount);
-    }
-    return list;
-  };
 
-  const mobileFramesList = getMobileFrames();
-  let mobileFrameIdx = 0;
-  let lastAutoplayTime = 0;
-  const fps = 30;
-  const fpsInterval = 1000 / fps;
-
-  function animateMobile(timestamp) {
-    if (!isMobile()) {
-      requestAnimationFrame(animateMobile);
-      return;
-    }
-
-    if (!lastAutoplayTime) lastAutoplayTime = timestamp;
-    const elapsed = timestamp - lastAutoplayTime;
-
-    if (elapsed > fpsInterval) {
-      lastAutoplayTime = timestamp - (elapsed % fpsInterval);
-
-      // Check if hero is in view
-      const rect = heroSection.getBoundingClientRect();
-      const inView = rect.bottom > 0 && rect.top < window.innerHeight;
-      if (inView) {
-        mobileFrameIdx = (mobileFrameIdx + 1) % mobileFramesList.length;
-        const currentFrame = mobileFramesList[mobileFrameIdx];
-
-        // Ensure the current frame is loaded (or loading)
-        const img = images[currentFrame - 1];
-        if (img && !img.src) {
-          img.src = getFrameUrl(currentFrame);
-        }
-
-        drawFrame(currentFrame);
-      }
-    }
-
-    requestAnimationFrame(animateMobile);
-  }
-
-  // Start mobile autoplay loop
-  requestAnimationFrame(animateMobile);
 
   } // end if (canvas)
 
