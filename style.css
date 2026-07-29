@@ -6,13 +6,13 @@
   --primary-foreground: oklch(99% 0 0); /* Soft White */
   --secondary: oklch(96% .02 250);      /* Very Soft Blue Tint (#e8f3ff) */
   --secondary-foreground: oklch(28% .11 260);
-  --accent: oklch(63% .24 350);         /* Vibrant Pink/Magenta (#e92a9d) */
+  --accent: oklch(54% .24 350);         /* Vibrant Pink/Magenta (#e92a9d) */
   --accent-foreground: oklch(99% 0 0);
   --muted: oklch(96% .01 255);          /* Muted Greyish Blue (#edf2f9) */
   --muted-foreground: oklch(50% .03 260); /* Slate Grey Text (#596475) */
   --background: oklch(100% 0 0);        /* Pure White Background */
   --foreground: oklch(22% .05 260);     /* Dark Slate Text (#0c1a32) */
-  --ring: oklch(63% .24 350);           /* Pink/Magenta ring */
+  --ring: oklch(54% .24 350);           /* Pink/Magenta ring */
 
   /* Legacy Variable Mappings for Compatibility */
   --navy: var(--primary);
@@ -25,7 +25,7 @@
 
   /* Gradients */
   --gradient-hero: linear-gradient(135deg, oklch(97% .03 250) 0%, oklch(93% .05 240) 100%);
-  --gradient-cta: linear-gradient(90deg, oklch(63% .24 350), oklch(40% .18 300)); /* Pink to Purple */
+  --gradient-cta: linear-gradient(90deg, oklch(54% .24 350), oklch(40% .18 300)); /* Pink to Purple */
 
   /* Shadows */
   --shadow-soft: 0 10px 40px -12px oklch(28% .11 260/.18);
@@ -196,7 +196,7 @@ h1, h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   background-clip: unset;
 }
 .logo-name .hero-brand-green {
-  color: #00b050;
+  color: #008037;
   background: none;
   -webkit-background-clip: unset;
   -webkit-text-fill-color: unset;
@@ -745,7 +745,7 @@ h1, h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
 .reviewer-meta {
   flex: 1;
 }
-.reviewer-meta h4 {
+.reviewer-meta h3 {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--navy-dark);
@@ -811,7 +811,7 @@ h1, h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
   height:20px;
 }
 .info-text-wrapper{display:flex;flex-direction:column;}
-.info-item h4{color:var(--primary);font-size:1rem;font-weight:600;margin-bottom:4px;}
+.info-item h3{color:var(--primary);font-size:1rem;font-weight:600;margin-bottom:4px;}
 .info-item p{color:var(--muted-foreground);font-size:0.95rem;}
 .contact-form{background:#fff;border-radius:24px;padding:36px;box-shadow:var(--shadow-card);border:1px solid var(--border);display:flex;flex-direction:column;gap:16px;}
 .contact-form h3{color:var(--primary);font-size:1.5rem;font-weight:700;margin-bottom:4px;}
@@ -829,7 +829,7 @@ h1, h2{font-size:2rem;color:var(--navy-dark);margin-bottom:12px;}
 .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{
   outline:none;
   border-color:var(--accent);
-  box-shadow:0 0 0 3px oklch(63% .24 350 / 0.15);
+  box-shadow:0 0 0 3px oklch(54% .24 350 / 0.15);
 }
 
 .privacy-disclaimer {
@@ -1303,7 +1303,7 @@ body::after {
 }
 .pkg-card.featured-pkg {
   border-color: var(--accent);
-  box-shadow: 0 10px 30px -10px oklch(63% .24 350 / 0.15);
+  box-shadow: 0 10px 30px -10px oklch(54% .24 350 / 0.15);
   transform: scale(1.02);
 }
 .pkg-card.featured-pkg:hover {
@@ -1627,7 +1627,7 @@ body::after {
 .gallery-item:hover .gallery-overlay {
   opacity: 1;
 }
-.gallery-overlay h4 {
+.gallery-overlay h3 {
   font-size: 1rem;
   margin: 0;
   font-weight: 700;
@@ -2596,7 +2596,7 @@ body::after {
 }
 .availability-badge.available {
   background-color: rgba(34, 197, 94, 0.12);
-  color: #16a34a;
+  color: #166534;
 }
 .availability-badge.available .dot {
   width: 7px;
