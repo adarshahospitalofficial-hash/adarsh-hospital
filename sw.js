@@ -1,45 +1,47 @@
 // Adarsh Hospital — Service Worker
-// Cache-First strategy for static assets, Network-First for HTML pages
+// Cache-First for static assets · Network-First for HTML · Offline fallback
 
-const CACHE_NAME = 'adarsh-hospital-v1';
-const STATIC_ASSETS = [
+const CACHE_VERSION = 'v4';
+const CACHE_NAME = 'adarsh-hospital-' + CACHE_VERSION;
+
+const PRECACHE_ASSETS = [
   '/',
   '/index.html',
+  '/offline.html',
   '/style.min.css',
   '/main.min.js',
   '/config.js',
   '/manifest.webmanifest',
-  '/assets/logo1.webp',
+  '/assets/fonts/poppins-400.woff2',
+  '/assets/fonts/poppins-600.woff2',
+  '/assets/fonts/poppins-700.woff2',
   '/assets/favicon-192x192.png',
   '/assets/favicon-512x512.png',
   '/assets/apple-touch-icon.png',
-  '/assets/emergency-care.webp',
-  '/assets/diagnostics.webp',
-  '/assets/womens-health.webp',
-  '/assets/specialist-care.webp',
 ];
 
-// Install: pre-cache static assets
+// ── Install: pre-cache critical assets ───────────────────────────────────────
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log('[SW] Pre-caching static assets');
-      // Use addAll but don't fail install if a resource is unavailable
-      return cache.addAll(STATIC_ASSETS).catch(function (err) {
-        console.warn('[SW] Pre-cache partial failure:', err);
+      console.log('[SW] Pre-caching assets (cache: ' + CACHE_NAME + ')');
+      return cache.addAll(PRECACHE_ASSETS).catch(function (err) {
+        console.warn('[SW] Pre-cache partial failure (non-fatal):', err);
       });
     })
   );
   self.skipWaiting();
 });
 
-// Activate: clean up old caches
+// ── Activate: clean up old cache versions ────────────────────────────────────
 self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then(function (cacheNames) {
       return Promise.all(
         cacheNames
-          .filter(function (name) { return name !== CACHE_NAME; })
+          .filter(function (name) {
+            return name.startsWith('adarsh-hospital-') && name !== CACHE_NAME;
+          })
           .map(function (name) {
             console.log('[SW] Deleting old cache:', name);
             return caches.delete(name);
@@ -50,51 +52,74 @@ self.addEventListener('activate', function (event) {
   self.clients.claim();
 });
 
-// Fetch: Cache-First for static assets, Network-First for HTML
+// ── Fetch ─────────────────────────────────────────────────────────────────────
 self.addEventListener('fetch', function (event) {
   const url = new URL(event.request.url);
 
-  // Skip non-GET requests and cross-origin requests (e.g. Supabase CDN, Google Fonts)
+  // Skip non-GET requests
   if (event.request.method !== 'GET') return;
+
+  // Skip cross-origin requests (Supabase CDN, unpkg Lucide, etc.)
   if (url.origin !== self.location.origin) return;
 
-  // Network-First for HTML navigation requests
+  // ── Network-First for HTML navigation ──────────────────────────────────────
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
         .then(function (response) {
-          // Cache a fresh copy
-          const copy = response.clone();
+          // Cache a fresh copy on success
+          var copy = response.clone();
           caches.open(CACHE_NAME).then(function (cache) {
             cache.put(event.request, copy);
           });
           return response;
         })
         .catch(function () {
-          // Offline fallback: serve cached version
+          // Offline: serve cached page, or offline.html as final fallback
           return caches.match(event.request).then(function (cached) {
-            return cached || caches.match('/index.html');
+            return cached || caches.match('/offline.html');
           });
         })
     );
     return;
   }
 
-  // Cache-First for all other static assets (CSS, JS, images, fonts)
+  // ── Cache-First for fonts ───────────────────────────────────────────────────
+  // Fonts never change — serve straight from cache, fetch once and store
+  if (url.pathname.startsWith('/assets/fonts/')) {
+    event.respondWith(
+      caches.match(event.request).then(function (cached) {
+        if (cached) return cached;
+        return fetch(event.request).then(function (response) {
+          var copy = response.clone();
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(event.request, copy);
+          });
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // ── Cache-First for all other same-origin assets (CSS, JS, images) ─────────
   event.respondWith(
     caches.match(event.request).then(function (cached) {
       if (cached) return cached;
 
       return fetch(event.request).then(function (response) {
-        // Only cache successful responses
+        // Only cache successful, non-opaque responses
         if (!response || response.status !== 200 || response.type === 'opaque') {
           return response;
         }
-        const copy = response.clone();
+        var copy = response.clone();
         caches.open(CACHE_NAME).then(function (cache) {
           cache.put(event.request, copy);
         });
         return response;
+      }).catch(function () {
+        // For image requests, return nothing gracefully
+        return new Response('', { status: 404 });
       });
     })
   );

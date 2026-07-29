@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>You're Offline — Adarsh Hospital Koppa</title>
+  <style>
+    :root {
+      --primary: oklch(28% .11 260);
+      --accent: oklch(63% .24 350);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: oklch(97% .02 250);
+      color: oklch(22% .05 260);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: oklch(93% .05 240);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .brand {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      opacity: 0.7;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: oklch(40% .06 260);
+      max-width: 420px;
+      margin: 0 auto 2rem;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .emergency {
+      margin-top: 2.5rem;
+      padding: 1rem 1.5rem;
+      background: oklch(97% .03 350);
+      border: 1px solid oklch(88% .08 350);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: oklch(35% .12 350);
+    }
+    .emergency strong { display: block; margin-bottom: 0.25rem; }
+    .emergency a { color: oklch(35% .12 350); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="icon">
+    <svg viewBox="0 0 24 24">
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+      <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+      <path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>
+      <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+      <line x1="12" y1="20" x2="12.01" y2="20"/>
+    </svg>
+  </div>
+  <p class="brand">Adarsh Hospital · Koppa</p>
+  <h1>You're Offline</h1>
+  <p>Please check your internet connection and try again. Some pages may be available from your cache.</p>
+  <button class="btn" onclick="window.location.reload()">Try Again</button>
+
+  <div class="emergency">
+    <strong>🚨 Medical Emergency?</strong>
+    Call us directly: <a href="tel:+918971510971">+91 89715 10971</a>
+  </div>
+</body>
+</html>
