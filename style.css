@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 
 :root{
   /* Core Colors */
@@ -2775,6 +2775,13 @@ body::after {
   white-space: nowrap;
   border: 0;
   z-index: 9999;
+}
+
+.skip-link:focus {
+  top: 0 !important;
+  display: block !important;
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 a:focus-visible,
 button:focus-visible,
