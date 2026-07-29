@@ -1,7 +1,7 @@
 // Adarsh Hospital — Service Worker
 // Cache-First for static assets · Network-First for HTML · Offline fallback
 
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v7';
 const CACHE_NAME = 'adarsh-hospital-' + CACHE_VERSION;
 
 const PRECACHE_ASSETS = [

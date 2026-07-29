@@ -29,7 +29,14 @@
   const getFrameUrl = (index) => {
     const paddedIndex = String(index).padStart(3, '0');
     if (typeof USE_SUPABASE_STORAGE !== 'undefined' && USE_SUPABASE_STORAGE) {
-      return `${SUPABASE_STORAGE_BUCKET_URL}/frame_${paddedIndex}.jpg`;
+      const isMob = isMobile();
+      // Use Supabase image transformation endpoint 'render/image' instead of 'object'
+      const baseUrl = SUPABASE_STORAGE_BUCKET_URL.replace('/object/', '/render/image/');
+      if (isMob) {
+        return `${baseUrl}/frame_${paddedIndex}.jpg?width=640&quality=70&format=webp`;
+      } else {
+        return `${baseUrl}/frame_${paddedIndex}.jpg?width=1920&quality=85&format=webp`;
+      }
     }
     return `${framesDir}/frame_${paddedIndex}.jpg`;
   };
