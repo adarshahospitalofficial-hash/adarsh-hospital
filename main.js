@@ -716,6 +716,7 @@
       const isActive = navMenu.classList.toggle('active');
       toggleBtn.classList.toggle('active');
       overlay.classList.toggle('active');
+      toggleBtn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
       
       // Prevent body scroll when menu is active
       if (isActive) {
@@ -729,6 +730,7 @@
       navMenu.classList.remove('active');
       toggleBtn.classList.remove('active');
       overlay.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
     

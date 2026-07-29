@@ -1,7 +1,7 @@
 // Adarsh Hospital — Service Worker
 // Cache-First for static assets · Network-First for HTML · Offline fallback
 
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const CACHE_NAME = 'adarsh-hospital-' + CACHE_VERSION;
 
 const PRECACHE_ASSETS = [
@@ -18,6 +18,7 @@ const PRECACHE_ASSETS = [
   '/assets/favicon-192x192.png',
   '/assets/favicon-512x512.png',
   '/assets/apple-touch-icon.png',
+  'https://unpkg.com/lucide@0.525.0'
 ];
 
 // ── Install: pre-cache critical assets ───────────────────────────────────────
@@ -59,8 +60,10 @@ self.addEventListener('fetch', function (event) {
   // Skip non-GET requests
   if (event.request.method !== 'GET') return;
 
-  // Skip cross-origin requests (Supabase CDN, unpkg Lucide, etc.)
-  if (url.origin !== self.location.origin) return;
+  // Allow same-origin and custom icon CDN requests
+  const isSelf = url.origin === self.location.origin;
+  const isCDN = url.origin === 'https://unpkg.com';
+  if (!isSelf && !isCDN) return;
 
   // ── Network-First for HTML navigation ──────────────────────────────────────
   if (event.request.mode === 'navigate') {
@@ -91,6 +94,25 @@ self.addEventListener('fetch', function (event) {
       caches.match(event.request).then(function (cached) {
         if (cached) return cached;
         return fetch(event.request).then(function (response) {
+          var copy = response.clone();
+          caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(event.request, copy);
+          });
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // ── Cache-First for all other same-origin assets (CSS, JS, images) ─────────
+  // Intercept and cache external scripts/assets matching allowed CDNs (like unpkg.com)
+  if (isCDN) {
+    event.respondWith(
+      caches.match(event.request).then(function (cached) {
+        if (cached) return cached;
+        return fetch(event.request).then(function (response) {
+          if (!response || response.status !== 200) return response;
           var copy = response.clone();
           caches.open(CACHE_NAME).then(function (cache) {
             cache.put(event.request, copy);
