@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /receptionist
+Disallow: /api/
 
 User-agent: GPTBot
 Allow: /

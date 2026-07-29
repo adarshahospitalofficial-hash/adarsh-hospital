@@ -20,11 +20,12 @@
 <link rel="stylesheet" href="style.min.css?v=3" />
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" />
 <link rel="manifest" href="/manifest.webmanifest" />
 <!-- Config (Deferred) -->
 <script src="config.js" defer></script>
 <!-- Lucide Icons CDN (Deferred) -->
-<script src="https://unpkg.com/lucide@latest" defer></script>
+<script src="https://unpkg.com/lucide@0.525.0" defer></script>
 
 <!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json">
@@ -35,7 +36,7 @@
     "name": "Adarsh Hospital",
     "alternateName": "ADARSH HOSPITAL",
     "url": "https://adarsh-hospital.in",
-    "logo": "https://adarsh-hospital.in/db/storage/v1/object/public/assets/logo1.png",
+    "logo": "https://adarsh-hospital.in/db/storage/v1/object/public/assets/logo1.webp",
     "image": "https://adarsh-hospital.in/db/storage/v1/object/public/assets/hospital-exterior.jpeg",
     "description": "NABH-accredited multispecialty hospital in Koppa, Chikkamagaluru district, Karnataka (established 2003). Providing advanced diagnostic laboratory medicine, ultrasound scans, cardiology, pediatric, and laparoscopic surgery care to the malnad community.",
     "telephone": "+91-63609-93646",
@@ -311,6 +312,8 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<link rel="alternate" hreflang="en" href="https://adarsh-hospital.in" />
+<link rel="alternate" hreflang="x-default" href="https://adarsh-hospital.in" />
 </head>
 <body>
 
@@ -334,8 +337,8 @@
         </div>
       </div>
 
-      <a href="/index.html#home" class="logo">
-        <img src="/db/storage/v1/object/public/assets/logo1.png" alt="Adarsh Hospital Koppa Logo" class="logo-img" />
+      <a href="/#home" class="logo">
+        <img src="/db/storage/v1/object/public/assets/logo1.webp" alt="Adarsh Hospital Koppa Logo" class="logo-img" />
         <div class="logo-text">
           <div class="logo-name"><span class="hero-brand-blue">Adarsh</span> <span class="hero-brand-green">Hospital</span></div>
           <div class="logo-sub">Koppa · Chikkamagaluru | ESTD. 2003</div>
@@ -350,24 +353,24 @@
           <span></span>
         </button>
         <!-- Desktop Only Appointment Button -->
-        <a href="/index.html#contact" class="btn btn-primary desktop-only-cta">Get Appointment</a>
+        <a href="/#contact" class="btn btn-primary desktop-only-cta">Get Appointment</a>
       </div>
     </div>
 
     <div class="header-bottom">
       <nav class="nav">
-        <a href="/index.html#home">Home</a>
-        <a href="/index.html#about">About</a>
-        <a href="/index.html#doctors">Doctors</a>
+        <a href="/#home">Home</a>
+        <a href="/#about">About</a>
+        <a href="/#doctors">Doctors</a>
         
         <!-- Dropdown for Departments -->
         <div class="nav-item-dropdown">
-          <a href="/index.html#departments" class="dropdown-trigger">Departments ▾</a>
+          <a href="/#departments" class="dropdown-trigger">Departments ▾</a>
           <div class="dropdown-menu">
             <a href="/laboratory-koppa">Pathology Lab in Koppa</a>
             <a href="/radiology-diagnostics-koppa">Radiology Diagnostics in Koppa</a>
             <a href="/maternity-koppa">Maternity Hospital in Koppa</a>
-            <a href="/index.html#medicine">General Medicine in Koppa</a>
+            <a href="/#medicine">General Medicine in Koppa</a>
             <a href="/general-surgery-laparoscopy-koppa">General Surgery in Koppa</a>
             <a href="/paediatrics-koppa">Paediatrics Care in Koppa</a>
             <a href="/cardiology-koppa">Cardiology Hospital in Koppa</a>
@@ -377,12 +380,12 @@
         </div>
         
         <a href="/packages.html">Packages</a>
-        <a href="/index.html#insurance">Insurance & Schemes</a>
-        <a href="/index.html#diagnostics">Diagnostics</a>
-        <a href="/index.html#faq">FAQ</a>
-        <a href="/index.html#contact">Contact</a>
+        <a href="/#insurance">Insurance & Schemes</a>
+        <a href="/#diagnostics">Diagnostics</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#contact">Contact</a>
         <!-- Mobile Only Appointment Button inside nav drawer -->
-        <a href="/index.html#contact" class="btn btn-primary mobile-only-cta">Get Appointment</a>
+        <a href="/#contact" class="btn btn-primary mobile-only-cta">Get Appointment</a>
       </nav>
     </div>
   </div>
@@ -412,7 +415,7 @@
 <section id="about" class="about">
   <div class="container about-inner">
     <div class="about-image animate-on-scroll">
-      <img src="/db/storage/v1/object/public/assets/hospital-exterior.jpeg" alt="Adarsh Hospital Koppa building exterior" />
+      <img src="/db/storage/v1/object/public/assets/hospital-exterior.jpeg" alt="Adarsh Hospital Koppa building exterior" loading="lazy" />
     </div>
     <div class="about-content animate-on-scroll">
       <p class="eyebrow">About Hospital</p>
@@ -481,7 +484,7 @@
 
     <div class="grid grid-4">
       <div class="card animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/emergency-care.png" alt="Emergency & Critical Care at Adarsh Hospital Koppa" />
+        <img src="/db/storage/v1/object/public/assets/emergency-care.webp" alt="Emergency & Critical Care at Adarsh Hospital Koppa" loading="lazy" />
         <h3>Emergency & Critical Care</h3>
         <ul>
           <li><strong>Emergency Services:</strong> 24x7 emergency care</li>
@@ -491,27 +494,27 @@
         <a href="/emergency-care-koppa" class="link-arrow">Read Details →</a>
       </div>
       <div class="card animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/diagnostics.png" alt="Advanced Diagnostics at Adarsh Hospital Koppa" />
+        <img src="/db/storage/v1/object/public/assets/diagnostics.webp" alt="Advanced Diagnostics at Adarsh Hospital Koppa" loading="lazy" />
         <h3>Advanced Diagnostics</h3>
         <ul>
           <li><strong>Laboratory:</strong> Fully automated Pathology & biochemistry</li>
           <li><strong>Radiology:</strong> High-resolution ultrasound & CT</li>
           <li><strong>Accreditation:</strong> NABH accredited clinical workflows</li>
         </ul>
-        <a href="/laboratory-pathology-koppa" class="link-arrow">Read Details →</a>
+        <a href="/laboratory-koppa" class="link-arrow">Read Details →</a>
       </div>
       <div class="card animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/womens-health.png" alt="Maternal & Women's Health at Adarsh Hospital Koppa" />
+        <img src="/db/storage/v1/object/public/assets/womens-health.webp" alt="Maternal & Women's Health at Adarsh Hospital Koppa" loading="lazy" />
         <h3>Maternal & Women's Health</h3>
         <ul>
           <li><strong>Maternity & OT:</strong> Safe birth monitoring</li>
           <li><strong>Obstetric Support:</strong> Prenatal care panels</li>
           <li><strong>Gynaecologist:</strong> Specialized consultations</li>
         </ul>
-        <a href="/maternity-gynaecology-koppa" class="link-arrow">Read Details →</a>
+        <a href="/maternity-koppa" class="link-arrow">Read Details →</a>
       </div>
       <div class="card animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/specialist-care.png" alt="Specialist & Surgical Care at Adarsh Hospital Koppa" />
+        <img src="/db/storage/v1/object/public/assets/specialist-care.webp" alt="Specialist & Surgical Care at Adarsh Hospital Koppa" loading="lazy" />
         <h3>Specialist & Surgical Care</h3>
         <ul>
           <li><strong>Outpatient:</strong> Outpatient consultations</li>
@@ -675,7 +678,7 @@
       <!-- 1st: Dr. Nataraj R. Rao (Obstetrics & Gynaecology) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/founder.jpeg" alt="Adarsh Hospital Koppa - Dr. Nataraj R. Rao" class="dept-card-img" />
+          <img src="/db/storage/v1/object/public/assets/founder.jpeg" alt="Adarsh Hospital Koppa - Dr. Nataraj R. Rao" class="dept-card-img" loading="lazy" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Obstetrics & Gynaecology</span>
@@ -688,7 +691,7 @@
       <!-- 2nd: Dr. Anitha N. Rao (Anesthesia) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/co-founder.jpeg" alt="Adarsh Hospital Koppa - Dr. Anita N. Rao" class="dept-card-img" />
+          <img src="/db/storage/v1/object/public/assets/co-founder.jpeg" alt="Adarsh Hospital Koppa - Dr. Anita N. Rao" class="dept-card-img" loading="lazy" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Anesthesia</span>
@@ -701,7 +704,7 @@
       <!-- 3rd: Dr. Ismail (Medicine) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/physician.jpeg" alt="Adarsh Hospital Koppa - Dr. Ismail" class="dept-card-img" />
+          <img src="/db/storage/v1/object/public/assets/physician.jpeg" alt="Adarsh Hospital Koppa - Dr. Ismail" class="dept-card-img" loading="lazy" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Medicine</span>
@@ -714,7 +717,7 @@
       <!-- 4th: Dr. Shiva Kumar (Surgery) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/surgeon.jpeg" alt="Adarsh Hospital Koppa - Dr. Shiva Kumar" class="dept-card-img" />
+          <img src="/db/storage/v1/object/public/assets/surgeon.jpeg" alt="Adarsh Hospital Koppa - Dr. Shiva Kumar" class="dept-card-img" loading="lazy" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Surgery</span>
@@ -740,7 +743,7 @@
       <!-- 6th: Dr. Bhagwan B. K. (Dental) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/bhagwan.jpeg" alt="Adarsh Hospital Koppa - Dr. Bhagwan B. K." class="dept-card-img" />
+          <img src="/db/storage/v1/object/public/assets/bhagwan.jpeg" alt="Adarsh Hospital Koppa - Dr. Bhagwan B. K." class="dept-card-img" loading="lazy" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Dental</span>
@@ -753,7 +756,7 @@
       <!-- 7th: Dr. Rajesh Bhakta (Laparoscopy) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/rajesh%20bhakta.jpeg" alt="Adarsh Hospital Koppa - Dr. Rajesh Bhakta" class="dept-card-img" />
+          <img src="/db/storage/v1/object/public/assets/rajesh%20bhakta.jpeg" alt="Adarsh Hospital Koppa - Dr. Rajesh Bhakta" class="dept-card-img" loading="lazy" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Laparoscopy</span>
@@ -766,7 +769,7 @@
       <!-- 8th: Dr. Sania Sabahi (Radiology) -->
       <div class="dept-card animate-on-scroll">
         <div class="dept-card-icon-wrapper">
-          <img src="/db/storage/v1/object/public/assets/sania-sabahi.jpeg" alt="Adarsh Hospital Koppa - Dr. Sania Sabahi" class="dept-card-img" />
+          <img src="/db/storage/v1/object/public/assets/sania-sabahi.jpeg" alt="Adarsh Hospital Koppa - Dr. Sania Sabahi" class="dept-card-img" loading="lazy" />
         </div>
         <div class="dept-card-content">
           <span class="dept-badge">Radiology</span>
@@ -792,12 +795,12 @@
         <h2>Laboratory Department</h2>
         <p>Our state-of-the-art laboratory provides comprehensive clinical testing under stringent quality control. We cover a complete spectrum of pathological investigations to assist in precise diagnosis and therapeutic monitoring.</p>
         <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
-          <a href="/laboratory-pathology-koppa" class="btn btn-primary">Read Details →</a>
+          <a href="/laboratory-koppa" class="btn btn-primary">Read Details →</a>
           <a href="#contact" class="btn btn-outline">Request a Test</a>
         </div>
       </div>
       <div class="dept-detail-image animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/diagnostics.png" alt="Adarsh Hospital Koppa - Pathology Laboratory Diagnostics" class="img-responsive rounded shadow-card" width="500" height="400" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/diagnostics.webp" alt="Adarsh Hospital Koppa - Pathology Laboratory Diagnostics" class="img-responsive rounded shadow-card" width="500" height="400" loading="lazy" />
       </div>
     </div>
   </div>
@@ -835,7 +838,7 @@
         <h2>Maternal & Women's Health</h2>
         <p>Led by senior obstetrician Dr. Nataraj R. Rao, our obstetrics and gynaecology service provides dedicated maternal supervision, pelvic scanning, hormonal profile audits, infertility workups, and cancer screens.</p>
         <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;">
-          <a href="/maternity-gynaecology-koppa" class="btn btn-primary">Read Details →</a>
+          <a href="/maternity-koppa" class="btn btn-primary">Read Details →</a>
           <a href="#contact" class="btn btn-outline">Consult Gynecologist</a>
         </div>
       </div>
@@ -851,7 +854,7 @@
   <div class="container">
     <div class="dept-detail-grid reverse">
       <div class="dept-detail-image animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/physician.jpeg" alt="Adarsh Hospital Koppa - General Medicine Physician Care" class="img-responsive rounded shadow-card" onerror="this.src='/db/storage/v1/object/public/assets/specialist-care.png'; this.onerror=null;" />
+        <img src="/db/storage/v1/object/public/assets/physician.jpeg" alt="Adarsh Hospital Koppa - General Medicine Physician Care" class="img-responsive rounded shadow-card" onerror="this.src='/db/storage/v1/object/public/assets/specialist-care.webp'; this.onerror=null;" loading="lazy" />
       </div>
       <div class="dept-detail-content animate-on-scroll">
         <p class="eyebrow">Primary Care & Wellness</p>
@@ -885,7 +888,7 @@
         </div>
       </div>
       <div class="dept-detail-image animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/surgeon.jpeg" alt="Adarsh Hospital Koppa - General Surgery Operations" class="img-responsive rounded shadow-card" onerror="this.src='/db/storage/v1/object/public/assets/specialist-care.png'; this.onerror=null;" width="500" height="400" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/surgeon.jpeg" alt="Adarsh Hospital Koppa - General Surgery Operations" class="img-responsive rounded shadow-card" onerror="this.src='/db/storage/v1/object/public/assets/specialist-care.webp'; this.onerror=null;" width="500" height="400" loading="lazy" />
       </div>
     </div>
   </div>
@@ -896,7 +899,7 @@
   <div class="container">
     <div class="dept-detail-grid reverse">
       <div class="dept-detail-image animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/paediatrician.jpeg" alt="Adarsh Hospital Koppa - Paediatrics and Child Care Clinic" class="img-responsive rounded shadow-card" style="aspect-ratio: 1/1; object-fit: cover;" onerror="this.src='/db/storage/v1/object/public/assets/diagnostics.png'; this.onerror=null;" width="500" height="500" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/paediatrician.jpeg" alt="Adarsh Hospital Koppa - Paediatrics and Child Care Clinic" class="img-responsive rounded shadow-card" style="aspect-ratio: 1/1; object-fit: cover;" onerror="this.src='/db/storage/v1/object/public/assets/diagnostics.webp'; this.onerror=null;" width="500" height="500" loading="lazy" />
       </div>
       <div class="dept-detail-content animate-on-scroll">
         <p class="eyebrow">Compassionate Child Care</p>
@@ -925,7 +928,7 @@
         </div>
       </div>
       <div class="dept-detail-image animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/specialist-care.png" alt="Adarsh Hospital Koppa - Cardiology Lab Testing" class="img-responsive rounded shadow-card" width="500" height="400" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/specialist-care.webp" alt="Adarsh Hospital Koppa - Cardiology Lab Testing" class="img-responsive rounded shadow-card" width="500" height="400" loading="lazy" />
       </div>
     </div>
   </div>
@@ -937,8 +940,8 @@
     <div class="dept-detail-grid reverse">
       <div class="dept-detail-image animate-on-scroll">
         <div class="dialysis-images-container" style="display: flex; flex-direction: column; gap: 20px;">
-          <img src="/db/storage/v1/object/public/assets/dialysis%20Centre.jpeg" alt="Adarsh Hospital Koppa - Advanced Dialysis Centre Treatment Area" class="img-responsive rounded shadow-card" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;" onerror="this.src='/db/storage/v1/object/public/assets/specialist-care.png'; this.onerror=null;" width="500" height="280" loading="lazy" />
-          <img src="/db/storage/v1/object/public/assets/dialysis%20Centre1.jpeg" alt="Adarsh Hospital Koppa - Dialysis Station and Equipment" class="img-responsive rounded shadow-card" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;" onerror="this.src='/db/storage/v1/object/public/assets/diagnostics.png'; this.onerror=null;" width="500" height="280" loading="lazy" />
+          <img src="/db/storage/v1/object/public/assets/dialysis%20Centre.jpeg" alt="Adarsh Hospital Koppa - Advanced Dialysis Centre Treatment Area" class="img-responsive rounded shadow-card" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;" onerror="this.src='/db/storage/v1/object/public/assets/specialist-care.webp'; this.onerror=null;" width="500" height="280" loading="lazy" />
+          <img src="/db/storage/v1/object/public/assets/dialysis%20Centre1.jpeg" alt="Adarsh Hospital Koppa - Dialysis Station and Equipment" class="img-responsive rounded shadow-card" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;" onerror="this.src='/db/storage/v1/object/public/assets/diagnostics.webp'; this.onerror=null;" width="500" height="280" loading="lazy" />
         </div>
       </div>
       <div class="dept-detail-content animate-on-scroll">
@@ -960,7 +963,7 @@
   <div class="container">
     <div class="diagnostics-header-flex animate-on-scroll">
       <div class="diagnostics-logo-wrapper">
-        <img src="/db/storage/v1/object/public/assets/shalini_diagnostics_logo.jpeg" alt="Adarsh Hospital Koppa - Shalini Diagnostics Logo" class="diagnostics-logo" />
+        <img src="/db/storage/v1/object/public/assets/shalini_diagnostics_logo.jpeg" alt="Adarsh Hospital Koppa - Shalini Diagnostics Logo" class="diagnostics-logo" loading="lazy" />
       </div>
       <div class="diagnostics-header-text">
         <p class="eyebrow">Diagnostic Division</p>
@@ -1056,28 +1059,28 @@
         </div>
       </div>
       <div class="gallery-item animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/emergency-care.png" alt="Adarsh Hospital Koppa - Emergency Services Wing" width="400" height="300" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/emergency-care.webp" alt="Adarsh Hospital Koppa - Emergency Services Wing" width="400" height="300" loading="lazy" />
         <div class="gallery-overlay">
           <h4>Emergency Services</h4>
           <p>Equipped for 24x7 trauma, critical support, and resuscitation.</p>
         </div>
       </div>
       <div class="gallery-item animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/diagnostics.png" alt="Adarsh Hospital Koppa - Advanced Pathology Lab" width="400" height="300" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/diagnostics.webp" alt="Adarsh Hospital Koppa - Advanced Pathology Lab" width="400" height="300" loading="lazy" />
         <div class="gallery-overlay">
           <h4>Pathology Laboratory</h4>
           <p>High-precision biochemistry, hematology, and hormone assays.</p>
         </div>
       </div>
       <div class="gallery-item animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/womens-health.png" alt="Adarsh Hospital Koppa - Maternal Ward" width="400" height="300" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/womens-health.webp" alt="Adarsh Hospital Koppa - Maternal Ward" width="400" height="300" loading="lazy" />
         <div class="gallery-overlay">
           <h4>Women's Health & Maternity</h4>
           <p>Private, hygienic monitoring wards and delivery suites.</p>
         </div>
       </div>
       <div class="gallery-item animate-on-scroll">
-        <img src="/db/storage/v1/object/public/assets/specialist-care.png" alt="Adarsh Hospital Koppa - Consultation Rooms" width="400" height="300" loading="lazy" />
+        <img src="/db/storage/v1/object/public/assets/specialist-care.webp" alt="Adarsh Hospital Koppa - Consultation Rooms" width="400" height="300" loading="lazy" />
         <div class="gallery-overlay">
           <h4>Specialist Consulting Suite</h4>
           <p>Comfortable outpatient consulting chambers for clinical evaluations.</p>
@@ -1621,7 +1624,7 @@
   <div class="container footer-inner">
     <div class="footer-brand">
       <a href="#home" class="logo">
-        <img src="/db/storage/v1/object/public/assets/logo1.png" alt="Adarsh Hospital Koppa Logo" class="logo-img" />
+        <img src="/db/storage/v1/object/public/assets/logo1.webp" alt="Adarsh Hospital Koppa Logo" class="logo-img" />
         <div class="logo-text">
           <div class="logo-name">Adarsh Hospital</div>
         </div>
@@ -1636,7 +1639,7 @@
         <li><a href="#doctors">Doctors</a></li>
         <li><a href="#laboratory">Laboratory</a></li>
         <li><a href="packages.html">Packages</a></li>
-        <li><a href="/index.html#insurance">Insurance & Schemes</a></li>
+        <li><a href="/#insurance">Insurance & Schemes</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="/sitemap.xml" target="_blank">Sitemap</a></li>
       </ul>
@@ -1647,7 +1650,7 @@
         <li><a href="/laboratory-koppa">Pathology Lab in Koppa</a></li>
         <li><a href="/radiology-diagnostics-koppa">Radiology Diagnostics in Koppa</a></li>
         <li><a href="/maternity-koppa">Maternity Hospital in Koppa</a></li>
-        <li><a href="/index.html#medicine">General Medicine in Koppa</a></li>
+        <li><a href="/#medicine">General Medicine in Koppa</a></li>
         <li><a href="/general-surgery-laparoscopy-koppa">General Surgery in Koppa</a></li>
         <li><a href="/paediatrics-koppa">Paediatrics Care in Koppa</a></li>
         <li><a href="/cardiology-koppa">Cardiology Hospital in Koppa</a></li>
@@ -1688,7 +1691,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-<script src="main.min.js?v=5"></script>
+<script src="main.min.js?v=5" defer></script>
 <script>
   // Add Back to Top functionality
   const btt = document.getElementById('back-to-top');
@@ -1724,6 +1727,15 @@
       }
     });
   });
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) { console.log('SW registered:', reg.scope); })
+        .catch(function(err) { console.log('SW error:', err); });
+    });
+  }
 </script>
 </body>
 </html>
